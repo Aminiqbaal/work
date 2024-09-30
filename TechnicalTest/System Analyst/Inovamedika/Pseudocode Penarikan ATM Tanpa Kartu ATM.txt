@@ -1,0 +1,21 @@
+START
+INPUT "Pilih Bahasa"
+INPUT "Jenis Transaksi"
+INPUT "Tarik Tunai"
+INPUT "Kode Transaksi Aplikasi Mobile"
+IF (Kode Transaksi benar) THEN
+    INPUT "Masukkan Nomor HP"
+	IF (Nomor HP benar) THEN 
+    		IF (Jumlah uang tersedia) THEN
+        		OUTPUT "Uang keluar"
+        		OUTPUT "Berikan struk"
+    		ELSE
+        		OUTPUT "Jumlah uang tidak tersedia"
+    		ENDIF
+	ELSE
+    		OUTPUT "Nomor HP salah"
+	ENDIF
+ELSE
+    	OUTPUT "Kode Transaksi salah"
+ENDIF
+END

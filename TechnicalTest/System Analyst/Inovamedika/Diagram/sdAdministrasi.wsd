@@ -1,0 +1,49 @@
+@startuml "Administrasi"
+
+title "Administrasi"
+
+
+actor User as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant Registration as msRegistration
+database Registration as dbRegistration
+participant JanjtTemu as msJanjtTemu
+database JanjtTemu as dbJanjtTemu
+end box
+
+== Pendaftaran Pasien ==
+user -> fe++ : user mengisi form \npendaftaran pasien
+fe-> msRegistration ++: POST form data\n/v1/daftar-pasien
+msRegistration ->dbRegistration++ : check Registration user
+dbRegistration-->msRegistration--: return data
+msRegistration-->fe--: return data
+fe->user-- : pasien sudah terdaftar
+
+== Melihat Penjadwalan Janji Temu ==
+user -> fe++ : user memilih menu \nPenjadwalan Janji Temu
+fe-> msJanjtTemu ++: GET all data\n/v1/janji-temu
+msJanjtTemu ->dbJanjtTemu++ : get data
+dbJanjtTemu-->msJanjtTemu--: return data
+msJanjtTemu-->fe--: return data
+fe->user --: data janji temu dengan \ndokter spesialis ditampilkan
+
+== Penjadwalan Janji Temu ==
+user -> fe++ : user mengisi form \Penjadwalan Janji Temu
+fe-> msJanjtTemu ++: POST form data\n/v1/janji-temu
+note over msJanjtTemu
+    by:
+    - pasiendId
+    - noRM
+    - userId (by dokter_spesialis from poliklinikId)
+    - kamarId (optional jika ranap)
+    - kasurId (optional jika ranap)
+    - poliklinikId
+end note
+msJanjtTemu ->dbJanjtTemu++ : post data
+dbJanjtTemu-->msJanjtTemu--: return data
+msJanjtTemu-->fe--: return data
+fe->user : janji temu dengan dokter spesialis\n "nama dokter" telah diajukan
+
+@enduml

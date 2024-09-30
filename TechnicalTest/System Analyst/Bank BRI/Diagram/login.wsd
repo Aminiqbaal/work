@@ -1,0 +1,36 @@
+@startuml "Login"
+
+title "Login"
+
+
+actor User as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant Member as msMember
+database Member as dbMember
+end box
+participant "Authentication \nServer" as AuthServer
+
+user -> fe++ : user fill login form
+fe-> msMember ++: POST Email & password\n/v1/members/check
+note over msMember
+    by:
+    - email
+    - password
+end note
+msMember->AuthServer ++: get retrive key
+AuthServer-->msMember --: return retrive key
+msMember ->dbMember++ : check Member user
+alt user data found
+    dbMember-->msMember: return data
+    msMember-->fe--: return data
+    fe->user --: the user has entered the system \nand displays the dashboard page
+else user data not found
+    dbMember-->msMember--++: return data
+    msMember-->fe--++: return data
+    fe->user --: error message "please enter your \nemail and password correctly"
+
+end
+
+@enduml

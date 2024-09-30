@@ -1,0 +1,35 @@
+@startuml "Manajemen Kamar dan Tempat Tidur Pasien"
+
+title "Manajemen Kamar dan Tempat Tidur Pasien"
+
+
+actor Perawat as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant "Rawat Inap" as msRaNap
+database "Rawat Inap" as dbRaNap
+end box
+
+== Cek Ketersediaan Kamar == 
+user -> fe++ : user memilih modul Kamar
+fe-> msRaNap ++: GET all data kamar\n/v1/daftar-kamar-pasien
+msRaNap ->dbRaNap++ : get data semua kamar
+dbRaNap-->msRaNap--: return data
+msRaNap-->fe--: return data
+fe->user --: menampilkan semua \ndata kamar
+
+== Memindah Kamar Pasien ==
+user -> fe++ : user memilih Kamar \nyang sudah terisi pasien
+fe->msRaNap++: POST pindah kamar pasien\n/v1/update-kamar-pasien
+note over msRaNap
+    by:
+    - pasiendId
+    - kamarId
+    - kasurId
+end note
+msRaNap -> dbRaNap++: update data kamar
+dbRaNap-->msRaNap--: return data
+msRaNap-->fe--: return data
+fe->user: data berhasil di ubah
+@enduml

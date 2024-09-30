@@ -1,0 +1,27 @@
+@startuml "Login"
+
+title "Login"
+
+
+actor User as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant Authentication as msAuthentication
+database Authentication as dbAuthentication
+end box
+user -> fe++ : user memasukkan \nNIP & password
+fe-> msAuthentication ++: POST NIP & password\n/v1/auth-login
+msAuthentication ->dbAuthentication++ : check authentication user
+alt user data found
+    dbAuthentication-->msAuthentication: return data
+    msAuthentication-->fe--: return data
+    fe->user --: user sudah masuk\n sistem SIM Klinik
+else user data not found
+    dbAuthentication-->msAuthentication--++: return data
+    msAuthentication-->fe--++: return data
+    fe->user --: error message "harap masukkan \nNIP dan pasword dengan benar"
+
+end
+
+@enduml

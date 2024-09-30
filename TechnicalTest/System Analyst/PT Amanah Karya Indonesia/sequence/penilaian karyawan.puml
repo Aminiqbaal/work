@@ -1,0 +1,40 @@
+@startuml penilaian karyawan
+title Penilaian Karyawan
+
+actor Actor as act
+boundary "FE\nWEB" as fe
+box Microcervices #LightBlue
+participant "Employee" as Employee
+database Employee as dbEmployee
+end box
+
+== Get List Data Employee Assessment for Manager/Lead and Employee ==
+act->fe--++: open menu "Employee Assessment"
+group #LightGreen NEW
+    fe -> Employee ++: GET list data Employees Assessment\n/v1/employee/assessment
+end
+Employee->dbEmployee++ : get data Employee Assessment
+dbEmployee-->Employee-- : response data
+Employee --> fe -- : response data
+fe -> act --: show list data Employees Assessment
+
+== Input Data Employee Assessment for Manager/Lead ==
+act->fe--++: click CTA "Add" on employee choosen
+group #LightGreen NEW
+    fe -> Employee ++: POST data Employees \n/v1/employee/add-assessment/
+end
+Employee->dbEmployee++ : post data Employees Assessment
+dbEmployee-->Employee-- : response data
+Employee --> fe -- : response data
+fe -> act --: show message "data Employees Assessment added"
+
+== Update Data Assessment for Manager/Lead ==
+act->fe--++: click CTA "Add"
+group #LightGreen NEW
+    fe -> Employee ++: POST data Employees \n/v1/update-employee
+end
+Employee->dbEmployee++ : post data Employees
+dbEmployee-->Employee-- : response data
+Employee --> fe -- : response data
+fe -> act --: show message "data Employees updated"
+@enduml

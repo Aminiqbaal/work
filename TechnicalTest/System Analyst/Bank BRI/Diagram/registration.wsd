@@ -1,0 +1,41 @@
+@startuml "Registration"
+
+title "Registration"
+
+
+actor User as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant Member as msMember
+database Member as dbMember
+end box
+' participant "Authentication \nServer" as AuthServer
+
+user -> fe++ : user fill form registration \n& click submit
+fe-> msMember ++: POST form registration\n/v1/registration
+note over msMember
+    by:
+    - email
+    - name
+    - address
+    - phoneNumber
+    - password
+    - photo
+    - ktp
+end note
+' msMember->AuthServer ++: get retrive key
+' AuthServer-->msMember --: return retrive key
+msMember ->dbMember++ : store data
+alt success
+    dbMember-->msMember: response data
+    msMember-->fe--: return data
+    fe->user --: registration success
+else failed
+    dbMember-->msMember--++: return data
+    msMember-->fe--++: return data
+    fe->user --: error message "please complete \nthe registration form correctly"
+
+end
+
+@enduml

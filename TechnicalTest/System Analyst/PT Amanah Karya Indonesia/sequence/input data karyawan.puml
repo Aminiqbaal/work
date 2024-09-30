@@ -1,0 +1,40 @@
+@startuml data karyawan
+title Data Karyawan
+
+actor Actor as act
+boundary "FE\nWEB" as fe
+box Microcervices #LightBlue
+participant "Employee" as Employee
+database Employee as dbEmployee
+end box
+
+== Get List Data Employee for HR ==
+act->fe--++: open menu "Employee"
+group #LightGreen NEW
+    fe -> Employee ++: GET list data Employees \n/v1/employee/all
+end
+Employee->dbEmployee++ : get data Employees
+dbEmployee-->Employee-- : response data
+Employee --> fe -- : response data
+fe -> act --: show list data Employees
+
+== Input Data Employee for HR ==
+act->fe--++: click CTA "Add"
+group #LightGreen NEW
+    fe -> Employee ++: POST data Employees \n/v1/employee
+end
+Employee->dbEmployee++ : post data Employees
+dbEmployee-->Employee-- : response data
+Employee --> fe -- : response data
+fe -> act --: show message "data Employees added"
+
+== Update Data Employee for Employee ==
+act->fe--++: click CTA "Add"
+group #LightGreen NEW
+    fe -> Employee ++: POST data Employees \n/v1/employee/add
+end
+Employee->dbEmployee++ : post data Employees
+dbEmployee-->Employee-- : response data
+Employee --> fe -- : response data
+fe -> act --: show message "data Employees updated"
+@enduml

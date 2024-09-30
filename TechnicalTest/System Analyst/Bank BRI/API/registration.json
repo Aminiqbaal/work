@@ -1,0 +1,43 @@
+Method /POST
+Endpoint 
+    {{host}}ms/members/v1/members/registration
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+    Body
+    {
+        "nama": "sukijan",
+        "email": "user@example.com",
+        "phoneNumber": "08123456789",
+        "password": "password123",
+        "photo": "base64-encoded-image",
+        "ktp": "base64-encoded-image"
+    }
+      
+RESP
+{
+    "status": true,
+    "code": "RU001",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "message": "Registration successful",
+        "userId": "12345"
+    }
+}
+
+{
+    "status": true,
+    "code": "RU002",
+    "message": null,
+    "errorMessage": "Registration failed",
+    "errorData": {
+        "errorTitle": "Registration Failed",
+        "errorDesc": "Please check your email/password"
+    },
+    "data": null
+}

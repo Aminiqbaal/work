@@ -1,0 +1,56 @@
+@startuml "Login"
+
+title "Login"
+
+
+actor User as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant Member as msMember
+database Member as dbMember
+participant Loan as msLoan
+database Loan as dbLoan
+end box
+database Redis as Redis
+
+user -> fe++ : login
+note over fe
+    by:
+    - email
+    - password
+    - biometrics (optional)
+end note
+fe-> msMember ++: get data karyawan\n/v1/member/check
+msMember ->dbMember++ : check member
+dbMember-->msMember--: return data
+msMember ->msLoan++ : get data peminjaman karyawan\nprivate/members-loans
+msLoan -> dbLoan ++: get data
+dbLoan --> msLoan --: return data
+msLoan --> msMember --: return data
+msMember -> Redis ++: store data
+Redis --> msMember --: ACK
+msMember --> fe --: show data peminjaman karyawan
+fe -> user --: show data peminjaman karyawan
+
+== re-login ==
+user -> fe++ : login
+fe-> msMember ++: get data karyawan\n/v1/check-members
+msMember ->dbMember++ : check member
+dbMember-->msMember--: return data
+msMember -> Redis ++: get data peminjaman karyawan
+alt data found at redist
+    Redis --> msMember : return data
+    msMember --> fe --: return data
+    fe -> user --: show data peminjaman karyawan
+else data not found at redist
+    Redis --> msMember --++: return data
+    msMember ->msLoan++: get data peminjaman karyawan\nprivate/members-loans
+    msLoan -> dbLoan ++: get data
+    dbLoan --> msLoan --: return data
+    msLoan --> msMember --: return data
+    msMember --> fe --++: return data
+    fe -> user --: show data peminjaman karyawan
+end
+
+@enduml

@@ -1,0 +1,354 @@
+<mxfile host="65bd71144e">
+    <diagram id="4DjcE3TNSECqQmiv6cZa" name="Page-1">
+        <mxGraphModel dx="746" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="4">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="75" y="89" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="Pasien" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="45" y="69" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Daftar" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="185" y="54" width="70" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Jadwal Dokter" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="185" y="99" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="3" target="5">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="85" y="105" as="sourcePoint"/>
+                        <mxPoint x="195" y="74" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="Biaya Pengobatan" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="185" y="9" width="130" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Rekam&amp;nbsp;&lt;div&gt;Medis&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="317" y="169" width="104" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="3" target="7">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="85" y="111" as="sourcePoint"/>
+                        <mxPoint x="195" y="124" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="3" target="8">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="95" y="121" as="sourcePoint"/>
+                        <mxPoint x="205" y="134" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="Dokter" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="45" y="319" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="20" target="11">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="85" y="105" as="sourcePoint"/>
+                        <mxPoint x="195" y="74" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="Mengelola&amp;nbsp;&lt;div&gt;data&lt;/div&gt;&lt;div&gt;&amp;nbsp;obat&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="377.5" y="369" width="90" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="28" target="11">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="274" as="sourcePoint"/>
+                        <mxPoint x="675" y="164" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="Perawat" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="746" y="21" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="17" target="15">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="217" y="234" as="sourcePoint"/>
+                        <mxPoint x="85" y="349" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="Pengelolaan&amp;nbsp;&lt;div&gt;Tindakan Medis&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="511" y="159" width="125" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="8" target="17">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="350" y="274" as="sourcePoint"/>
+                        <mxPoint x="605" y="114" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="18">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="Hasil Pemeriksaan Pasien" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="115" y="289" width="190" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="8" target="20">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="300" y="210" as="sourcePoint"/>
+                        <mxPoint x="464" y="126" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="21">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="21" y="-4" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="Tampilan lengkap riwayat medis pasien" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="185" y="329" width="230" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="8" target="23">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="285" y="284" as="sourcePoint"/>
+                        <mxPoint x="262" y="329" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="25" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="24">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="25" y="-42" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="23" target="11">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="125" y="314" as="sourcePoint"/>
+                        <mxPoint x="85" y="349" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="34" target="33">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="559" y="112" as="sourcePoint"/>
+                        <mxPoint x="605" y="114" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" value="Penulisan&amp;nbsp;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;resep obat pasien&lt;/span&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="125" y="366" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="13" target="28">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="371" y="239" as="sourcePoint"/>
+                        <mxPoint x="318" y="339" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="29">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="31" value="Manajemen Kamar&lt;div&gt;&lt;div&gt;dan Tempat Tidur&lt;/div&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="538.75" y="69" width="122.5" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="31" target="15">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="559" y="112" as="sourcePoint"/>
+                        <mxPoint x="605" y="114" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="33" value="Staf&lt;br&gt;Farmasi" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="746" y="176" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="Inventaris obat dan&lt;div&gt;pengelolaan persediaan&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="395" y="229" width="155" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Pemberian obat kepada&amp;nbsp;&lt;div&gt;pasien dan pencatatan.&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="465" y="289" width="180" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="35" target="33">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="630" y="244" as="sourcePoint"/>
+                        <mxPoint x="735" y="269" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="13" target="34">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="405" y="410" as="sourcePoint"/>
+                        <mxPoint x="288" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="38" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="37">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="13" target="35">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="415" y="420" as="sourcePoint"/>
+                        <mxPoint x="298" y="410" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="39">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" value="Staf&lt;div&gt;Administrasi&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="746" y="366" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="Registrasi&amp;nbsp;&lt;div&gt;Pasien&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="525" y="429" width="125" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="42" target="45">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="475" y="393" as="sourcePoint"/>
+                        <mxPoint x="383.18045189531506" y="477.31711037119146" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="44" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="43">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="45" value="Pendaftaran pasien&amp;nbsp;&lt;div&gt;baru dan pembaruan&lt;/div&gt;&lt;div&gt;data pasien lama.&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="205" y="409" width="155" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="Pembuatan kartu&amp;nbsp;&lt;div&gt;identitas pasien.&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="222.5" y="476" width="155" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="42" target="46">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="539" y="466" as="sourcePoint"/>
+                        <mxPoint x="436" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="48" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="47">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="49" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="42" target="41">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="535" y="439" as="sourcePoint"/>
+                        <mxPoint x="585" y="389" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="50" value="Penjadwalan Janji Temu" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="509" width="125" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="50" target="41">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="660" y="459" as="sourcePoint"/>
+                        <mxPoint x="695" y="459" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="52" value="Penjadwalan janji temu untuk dokter&amp;nbsp;&lt;div&gt;dan spesialis.&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="519" width="125" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="50" target="52">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="539" y="466" as="sourcePoint"/>
+                        <mxPoint x="436" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="54" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="53">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="55" value="Pengelolaan&amp;nbsp;&lt;div&gt;daftar tunggu.&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="405" y="564" width="106" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="50" target="55">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="542" y="544" as="sourcePoint"/>
+                        <mxPoint x="424" y="554" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="57" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="56">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="58" value="Staf&lt;div&gt;Keuangan&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="746" y="536" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="59" value="Manajemen Billing&amp;nbsp;&lt;div&gt;dan Keuangan&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="589" width="125" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="59" target="58">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="624" y="520" as="sourcePoint"/>
+                        <mxPoint x="695" y="459" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="61" value="Pembuatan tagihan&amp;nbsp;&lt;div&gt;dan pengelolaan&amp;nbsp;&lt;div&gt;pembayaran pasien.&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="596" width="148.5" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="62" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="59" target="61">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="542" y="544" as="sourcePoint"/>
+                        <mxPoint x="424" y="554" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="63" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="62">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="64" value="&lt;div&gt;Laporan keuangan&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;dan pelacakan&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;pembayaran tertunda.&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="656" width="220" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="59" target="64">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="532" y="654" as="sourcePoint"/>
+                        <mxPoint x="429" y="663" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="66" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="65">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="8" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="67" value="Melihat resep&amp;nbsp;&lt;div&gt;obat pasien&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="550" y="349" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;entryX=0;entryY=0.3333333333333333;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="67" target="33">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="655" y="319" as="sourcePoint"/>
+                        <mxPoint x="695" y="269" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="69" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="13" target="67">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="405" y="410" as="sourcePoint"/>
+                        <mxPoint x="288" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="70" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="69">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="-4" y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="71" value="Informasi ketersediaan&lt;div&gt;kamar dan tempat tidur.&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="305" y="94" width="155" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="72" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="31" target="71">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="672" y="-17" as="sourcePoint"/>
+                        <mxPoint x="545" y="9" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="73" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="72">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="18" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="74" value="Penugasan tempat tidur&amp;nbsp;&lt;div&gt;pasien rawat inap.&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="285" y="39" width="155" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="75" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=classic;startFill=1;dashed=1;" edge="1" parent="1" source="31" target="74">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="576" y="81" as="sourcePoint"/>
+                        <mxPoint x="450" y="111" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="76" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="75">
+                    <mxGeometry x="0.3046" y="1" relative="1" as="geometry">
+                        <mxPoint x="18" y="-2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

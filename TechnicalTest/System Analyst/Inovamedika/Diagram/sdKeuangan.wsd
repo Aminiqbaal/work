@@ -1,0 +1,46 @@
+@startuml "Keuangan"
+
+title "Keuangan"
+
+
+actor Keuangan as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant "Filter" as msFilter
+participant "Pembayaran" as msPembayaran
+database "Pembayaran" as dbPembayaran
+end box
+
+== Get all Laporan keuangan ==
+user -> fe++ : user klik menu pembayaran
+fe-> msPembayaran ++: Get all data\n/v1/laporan-pembayaran
+msPembayaran ->dbPembayaran++ : save data
+dbPembayaran-->msPembayaran--: return data
+msPembayaran-->fe--: return data
+fe->user --: pasien sudah diperiksa
+
+== Get menu filter ==
+user -> fe++ : klik button filter
+fe-> msFilter ++: Get menu filter\n/v1/filters
+' note over msFilter
+'     by:
+'     - paymentStatus
+'     - date
+' end note
+msFilter-->fe--: return data
+fe->user-- : menampilkan menu filter
+
+== filter by pembayaran tertunda ==
+user -> fe++ : user melakukan filter by \nkolom pembayaran
+fe-> msPembayaran ++: POST filter pembayaran\n/v1/laporan-pembayaran
+note over msPembayaran
+    by:
+    - statusPembayaran
+    - tglPembayaran
+end note
+msPembayaran ->dbPembayaran++ : post data
+dbPembayaran-->msPembayaran--: return data
+msPembayaran-->fe--: return data
+fe->user : laporan pembayaran \nberhasil terfilter
+@enduml

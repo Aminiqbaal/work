@@ -1,0 +1,48 @@
+@startuml "Pemeriksaan Pasien"
+
+title "Pemeriksaan Pasien"
+
+
+actor Actor as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant "Pemeriksaan \nPasien" as msPemeriksaan
+database "Pemeriksaan \nPasien" as dbPemeriksaan
+end box
+
+== Pemeriksaan Pasien oleh Dokter==
+user -> fe++ : user mengisi formulir \nPemeriksaan pasien
+fe-> msPemeriksaan ++: POST form data\n/v1/periksa-pasien
+note over msPemeriksaan
+    by:
+    - pasiendId
+    - noRM
+    - tglBerobat
+    - kamarId (optional jika ranap)
+    - kasurId (optional jika ranap)
+    - poliklinikId
+    - obatId
+end note
+msPemeriksaan ->dbPemeriksaan++ : save data
+dbPemeriksaan-->msPemeriksaan--: return data
+msPemeriksaan-->fe--: return data
+fe->user --: pasien sudah diperiksa
+
+== Tindakan Medis oleh Perawat ==
+user -> fe++ : user mengisi formulir \nTindakan Medis
+fe-> msPemeriksaan ++: POST form data\n/v1/tindakan-pasien
+note over msPemeriksaan
+    by:
+    - pasiendId
+    - noRM
+    - tglBerobat
+    - kamarId (optional jika ranap)
+    - kasurId (optional jika ranap)
+    - poliklinikId
+end note
+msPemeriksaan ->dbPemeriksaan++ : save data
+dbPemeriksaan-->msPemeriksaan--: return data
+msPemeriksaan-->fe--: return data
+fe->user : tindakan medis pasien \nssudah dilaksanakan
+@enduml

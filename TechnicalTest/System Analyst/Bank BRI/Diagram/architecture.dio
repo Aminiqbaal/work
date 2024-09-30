@@ -1,0 +1,66 @@
+<mxfile host="65bd71144e">
+    <diagram id="DopLbvSaxykqregoes8u" name="Page-1">
+        <mxGraphModel dx="878" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="11" style="edgeStyle=none;html=1;startArrow=none;startFill=0;" edge="1" parent="1" source="2" target="14">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="181.65583004767961" y="291.27973000934446" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="Mobile App" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image;image=img/lib/active_directory/cell_phone.svg;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="100" width="21" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="16" target="2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="279.9999999999999" y="125" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" style="edgeStyle=none;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="16" target="19">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="312.9999999999999" y="125" as="sourcePoint"/>
+                        <mxPoint x="460" y="125" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=none;html=1;startArrow=none;startFill=0;" edge="1" parent="1" source="16" target="23">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="296.4999999999999" y="150" as="sourcePoint"/>
+                        <mxPoint x="296.5" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" style="edgeStyle=none;html=1;startArrow=none;startFill=0;" edge="1" parent="1" source="23" target="21">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="296.7578810171965" y="288.9986966336687" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=none;html=1;startArrow=none;startFill=0;" edge="1" parent="1" source="14" target="12">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="177.74005794247296" y="333.7521288704604" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="Cloud Storage&lt;br&gt;(AWS S3)" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image;image=img/lib/active_directory/internet_cloud.svg;" vertex="1" parent="1">
+                    <mxGeometry x="95.5" y="410" width="50" height="31.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="edgeStyle=none;html=1;fontColor=#000000;startArrow=none;startFill=0;" edge="1" parent="1" source="14" target="12">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;font style=&quot;background-color: rgb(255, 255, 255);&quot; color=&quot;#000000&quot;&gt;Notification Server&lt;br&gt;(SMS / Email)&lt;/font&gt;" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.email_service;fillColor=#ECECEC;strokeColor=#5E5E5E;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="96.91000000000001" y="250" width="47.19" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="&lt;font color=&quot;#000000&quot; style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;API Gateway&lt;/font&gt;" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.internetGateway;fillColor=#ECECEC;strokeColor=#5E5E5E;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="260.85999999999996" y="93.6" width="71.29" height="62.8" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Authentication Server" style="sketch=0;aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/mscae/Security_Center.svg;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="100" width="36" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Loan Processing&lt;br&gt;Service" style="sketch=0;aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/mscae/Log.svg;" vertex="1" parent="1">
+                    <mxGeometry x="276.5" y="400.75" width="45" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Database&lt;br&gt;(PostgreSQL)" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/databases/Azure_Database_PostgreSQL_Server.svg;" vertex="1" parent="1">
+                    <mxGeometry x="272.51" y="250" width="48" height="64" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

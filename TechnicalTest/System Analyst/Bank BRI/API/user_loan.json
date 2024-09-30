@@ -1,0 +1,94 @@
+// Method /GET
+// Endpoint 
+//     {{host}}ms/members/v1/members/loan
+// REQ
+//     Header
+//     Authorization: Bearer jwt-token
+//     X-localization: {{LANGUAGE}}
+//     Content-Type:application/json
+//     x-api-Key: {{API_KEY}}
+//     channel: {{CHANNEL}}
+// RESP
+{
+    "status": true,
+    "code": "LU001",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "loans": [
+            {
+                "loanId": "1",
+                "amount": 5000000,
+                "remaining": 5000000,
+                "tenure": 12,
+                "status": {
+                    "statusId" : "1",
+                    "description" : "approved" || "diterima"
+                },
+                "createdAt": "2023-06-01T00:00:00Z",
+                "updateAt": "2023-06-01T00:00:00Z"
+            },
+            {
+                "loanId": "2",
+                "amount": 15000000,
+                "remaining": 15000000,
+                "tenure": 12,
+                "status": {
+                    "statusId" : "2",
+                    "description" : "rejected" || "ditolak"
+                },
+                "createdAt": "2023-06-01T00:00:00Z",
+                "updateAt": "2023-06-01T00:00:00Z"
+            },
+            {
+                "loanId": "3",
+                "amount": 5000000,
+                "remaining": 5000000,
+                "tenure": 12,
+                "status": {
+                    "statusId" : "3",
+                    "description" : "pending" || "menunggu"
+                },
+                "createdAt": "2023-06-01T00:00:00Z",
+                "updateAt": "2023-06-01T00:00:00Z"
+            },
+            {
+                "loanId": "4",
+                "amount": 5000000,
+                "remaining": 0,
+                "tenure": 12,
+                "status": {
+                    "statusId" : "4",
+                    "description" : "paid off" || "lunas"
+                },
+                "createdAt": "2023-06-01T00:00:00Z",
+                "updateAt": "2023-06-01T00:00:00Z"
+            },
+            {
+                "loanId": "4",
+                "amount": 5000000,
+                "remaining": 1000000,
+                "tenure": 12,
+                "status": {
+                    "statusId" : "4",
+                    "description" : "not yet paid off" || "belum lunas"
+                },
+                "createdAt": "2023-06-01T00:00:00Z",
+                "updateAt": "2023-06-01T00:00:00Z"
+            }
+        ]
+    }
+}
+
+{
+    "status": true,
+    "code": "LU002",
+    "message": null,
+    "errorMessage": "Registration failed",
+    "errorData": {
+        "errorTitle": "Registration Failed",
+        "errorDesc": "Please check your email/password"
+    },
+    "data": null
+}

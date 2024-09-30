@@ -1,0 +1,100 @@
+@startuml "Loan"
+
+title "Loan"
+
+
+actor User as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant Loan as msLoan
+database Loan as dbLoan
+participant Member as msMember
+end box
+
+== List Loan ==
+user -> fe++ : user click button "loan"
+fe-> msLoan ++: GET list loan\n/v1/list-loan? userId={userId}
+note over msLoan
+    by:
+    - userId
+    - loanId
+    - statusLoanId
+end note
+msLoan ->dbLoan++ : add Loan by userId
+dbLoan-->msLoan--: return data
+msLoan-->fe--: return data
+fe->user --: Display list loan data from the user
+
+== Add Loan ==
+user -> fe++ : user click button "add loan"
+fe-> msLoan ++: POST add loan\n/v1/add-loan
+note over msLoan
+    by:
+    - loanId
+    - userId
+    - amount
+    - tenure
+end note
+msLoan->msMember++:Get private user detail by userId
+msMember-->msLoan--: return data
+msLoan ->dbLoan++ : add Loan by userId
+alt amount submission <= 12000000
+    dbLoan-->msLoan: return data
+    msLoan-->fe--: return data
+    fe->user --: Display list loan data from the user and show \nmessage "loan application has been submitted"
+else amount submission > 12000000
+    dbLoan-->msLoan--++: return data
+    msLoan-->fe--++: return data
+    fe->user --: displays an error message \n"maximum loan application is Rp.12000000 \nplease check the loan application form again"
+end
+
+== Edit Loan ==
+user -> fe++ : user click button "Edit"
+note left fe
+    can change if the application 
+    status has not been approved
+end note
+fe-> msLoan ++: POST add loan\n/v1/update-loan
+note over msLoan
+    by:
+    - loanId
+    - userId
+    - amount
+    - tenure
+end note
+msLoan->msMember++:Get private user detail by userId
+msMember-->msLoan--: return data
+msLoan ->dbLoan++ : update Loan by loanId
+alt amount submission <= 12000000
+    dbLoan-->msLoan: return data
+    msLoan-->fe--: return data
+    fe->user --: Display list loan data from the user and show \nmessage "loan application has been updated"
+else amount submission > 12000000
+    dbLoan-->msLoan--++: return data
+    msLoan-->fe--++: return data
+    fe->user --: displays an error message \n"maximum loan application is Rp.12000000 \nplease check the loan application form again"
+end
+
+== Pay Loan ==
+user -> fe++ : user click button "Pay"
+fe-> msLoan ++: POST add loan\n/v1/pay-loan
+note over msLoan
+    by:
+    - loanId
+    - userId
+    - amount
+end note
+msLoan->msMember++:Get private user detail by userId
+msMember-->msLoan--: return data
+msLoan ->dbLoan++ : update Loan by loanId
+alt paid off
+    dbLoan-->msLoan: return data
+    msLoan-->fe--: return data
+    fe->user --: Display list loan data from the user and show message \n"loan application status has been updated to ""PAID"""
+else outstanding bills
+    dbLoan-->msLoan--++: return data
+    msLoan-->fe--++: return data
+    fe->user --: Display list loan data from the user and show message \n"loan application status has been updated ""OUTSTANDING BILLS""
+end
+@enduml

@@ -1,0 +1,53 @@
+@startuml "Data Madicine"
+
+title "Data Madicine"
+
+
+actor user as user
+boundary "FE" as fe
+
+box Microservices #LightBlue
+participant "Filter" as msFilter
+participant "Madicine" as msMadicine
+database "Madicine" as dbMadicine
+end box
+
+== Get all Data Madicine ==
+user -> fe++ : user klik menu Madicine Stock
+fe-> msMadicine ++: Get all data\n/v1/madicine
+msMadicine ->dbMadicine++ : get data
+dbMadicine-->msMadicine--: return data
+msMadicine-->fe--: return data
+fe->user --: menampilkan data Madicine
+
+== Get menu filter ==
+user -> fe++ : klik button filter
+fe-> msFilter ++: Get menu filter\n/v1/filters?transaction-madicine
+' note over msFilter
+'     by:
+'     - paymentStatus
+'     - date
+' end note
+msFilter-->fe--: return data
+fe->user-- : menampilkan menu filter
+
+== get all transaksi farmasi ==
+user -> fe++ : user klik menu \nMadicine transaaction
+fe-> msMadicine ++: Get all data\n/v1/transaction-madicine
+msMadicine ->dbMadicine++ : get data
+dbMadicine-->msMadicine--: return data
+msMadicine-->fe--: return data
+fe->user --: menampilkan data \nMadicine Transaction
+
+== get transaksi farmasi filter by no Rekam Medis ==
+user -> fe++ : user melakukan filter by \nno Rekan Medis
+fe-> msMadicine ++: GET filter Madicine\n/v1/transaction-madicine?noRM
+note over msMadicine
+    by:
+    - noRM
+end note
+msMadicine ->dbMadicine++ : get data
+dbMadicine-->msMadicine--: return data
+msMadicine-->fe--: return data
+fe->user : laporan Madicine \nberhasil terfilter
+@enduml

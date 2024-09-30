@@ -1,0 +1,55 @@
+Method /POST
+Endpoint 
+    {{host}}ms-loan/v1/update-loan
+REQ
+    Header
+    Authorization: Bearer jwt-token
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+    Body
+    {
+        "member":{
+            "userId":1,
+            "nama": "sukijan",
+            "email": "user@example.com",
+            "phoneNumber": "08123456789",
+            "password": "password123",
+            "photo": "base64-encoded-image",
+            "ktp": "base64-encoded-image"
+        },
+        "loan" : {
+            "loanId": 1,
+            "amount": 10000000,
+            "tenure": 12,
+        }
+    }
+RESP
+{
+    "status": true,
+    "code": "AL001",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "message": "Loan application submitted",
+        "loan" : {
+            "loanId": 1,
+            "amount": 10000000,
+            "tenure": 12,
+        }
+    }
+}
+
+{
+    "status": true,
+    "code": "LU002",
+    "message": null,
+    "errorMessage": "Loan application not submitted",
+    "errorData": {
+        "errorTitle": "Loan application not submitted",
+        "errorDesc": "Please check your loan application"
+    },
+    "data": null
+}
