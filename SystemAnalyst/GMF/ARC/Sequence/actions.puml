@@ -1,0 +1,143 @@
+@startuml arc
+title "Flow Process Actions"
+
+actor user
+boundary "Actions Page" as actions
+boundary "Edit Actions Page" as edit_actions
+boundary "Add Actions Page" as add_actions
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+activate user
+user -> actions : click "Actions Page"
+activate actions
+actions -> api : Get data
+deactivate actions
+activate api
+api -> arc : Get data
+deactivate api
+activate arc
+api <- arc : Response data
+deactivate arc
+note right of api
+    Get field {
+    }
+    from table ""
+endnote
+activate api
+alt Success
+    actions  <- api : return "Success"
+    activate actions
+    user <- actions  : Show data "actions" page
+    deactivate actions
+else else
+    actions  <- api : return message error
+    deactivate api
+    activate actions
+    user <- actions  : show the message error
+    deactivate actions
+end
+deactivate api
+group filter by keywoard
+    user -> actions : click button "Search"
+    activate actions
+    actions -> api : Get data
+    deactivate actions
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : response data
+    note right of api
+        Get field {
+        }
+        from table ""
+    endnote
+    deactivate arc
+    activate api
+    alt Success
+        actions  <- api : return "Success"
+        activate actions
+        user <- actions  : Show data "actions" page with filter
+        deactivate actions
+    else else
+        actions  <- api : return message error
+        deactivate api
+        activate actions
+        user <- actions  : show the message error
+        deactivate actions
+    end
+    deactivate api
+    user -> actions : Click button "Clear"
+    activate actions
+    user <- actions : Show data "actions" page without filter
+    deactivate actions
+end
+group export
+    user -> actions : Click button "Export"
+    activate actions
+    user <- actions : Download file export and click save
+    deactivate actions
+end
+group edit
+    user -> actions : Click button "edit"
+    activate actions
+    actions -> edit_actions : call page
+    deactivate actions
+    activate edit_actions
+    user <- edit_actions : show page "edit actions"
+    note right of user
+        if click "save" data will be saved
+        else click "cancel" data does'nt save
+    endnote
+    user -> edit_actions : fill the page "edit actions" and "click" save or "cancel"
+    edit_actions -> actions : data will be updated
+    deactivate edit_actions
+    activate actions
+    user <- actions : show page "Actions"
+    deactivate actions
+end
+group delete
+    user -> actions : Click button "delete"
+    activate actions
+    actions <- user : show pop up "Are you sure you want to delete this data?"
+    note right of user
+        if click "yes" data will be deleted
+        else click "no" data does'nt deleted
+    endnote
+    alt Yes
+        user -> actions : Click yes
+        actions -> api : post data with parameter input
+        deactivate actions
+        activate api
+        api -> arc : post data
+        deactivate
+        activate arc
+        api <- arc : response data
+        deactivate arc
+        activate api
+        alt Success
+            actions  <- api : return "Data was deleted"
+            activate actions
+            user <- actions  : Show data "actions" page and show message "Data was deleted"
+            deactivate actions
+        else else
+            actions  <- api : return message error
+            deactivate api
+            activate actions
+            user <- actions  : show the message error
+            deactivate actions
+        end
+        user <- actions  : Show data "actions" page with filter
+    else No
+        user -> actions : Click no
+        activate actions
+        user <- actions : Show data "actions" page show message "Data does'nt deleted"
+        deactivate actions
+    end
+    deactivate actions
+end
+@enduml

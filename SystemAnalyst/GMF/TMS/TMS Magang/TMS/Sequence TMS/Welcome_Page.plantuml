@@ -1,0 +1,131 @@
+@startuml
+
+title "Flow Process Welcome Page"
+
+actor User as u
+boundary "Welcome Page" as ui
+entity "API" as api
+database "DB" as db
+
+autonumber
+
+note right of u
+User in "Welcome" Page
+end note
+u -> ui: Click "Home" Icon
+activate ui
+ui -> u: Show Side Navbar
+deactivate
+
+group Search
+u -> ui: Fill Data into "Search" Field
+activate ui
+u -> ui: Click "Search" Button
+ui -> ui: Filter Data of Value input Search
+ui -> u: Reload Display Data
+deactivate
+end
+
+group Tools Data
+u -> ui: Click "Tools Data" Button
+activate ui
+ui -> api: Request Data
+deactivate
+activate api
+api -> db: Get Data
+deactivate
+activate db
+note right of db
+Get Field(
+    "id_tools"
+    "id_status"
+    "id_part_number"
+    "tools_number"
+    "serial_number"
+    "reg_number"
+    "tools_description"
+    "barcode_number"
+    "id_location"
+    "id_store"
+) from table "m_tools"
+end note
+db -> api: Response Data
+deactivate
+activate api
+api -> ui: Return JSON
+deactivate
+activate ui
+ui -> u: Show "Tools Data" Page with List
+deactivate
+end
+
+group Borrowing List
+u -> ui: Click "Borrowing List" Button
+activate ui
+ui -> api: Request Data
+deactivate
+activate api
+api -> db: Get Data
+deactivate
+activate db
+note right of db
+Get Field(
+    "id_request_tools"
+    "id_tools"
+    "personnel_unit"
+    "personnel_number"
+    "personnel_name"
+    "act_return"
+    "no_bpp"
+    "pickup_method"
+    "borrow_date"
+    "est_return"
+    "booking"
+    "status"
+)
+end note
+db -> api: Response Data
+deactivate
+activate api
+api -> ui: Return JSON
+deactivate
+activate ui
+ui -> u: Show "Borrowing List" Page with List
+deactivate
+end
+
+group Print
+u -> ui: Click "Print" Button
+activate ui
+ui -> api: Request Data
+note right of api
+Tools & Equipment Borrowing
+Column (
+    "Log Number"
+    "Name & ID Number"
+    "Aircraft Reg or ESN"
+    "Unit"
+    "Date"
+    "Reference"
+    "Note"
+    "Borrower"
+    "Tool Store Keeper"
+)
+end note
+deactivate
+activate api
+api -> ui: Response Data\nand Show Print Layout
+deactivate
+activate ui
+ui -> u: Show "Print" Layout
+deactivate
+end
+
+group Master Data
+u -> ui: Click "Master Data" Button
+activate ui
+ui -> u: Show "Master Data" Page
+deactivate
+end
+
+@enduml

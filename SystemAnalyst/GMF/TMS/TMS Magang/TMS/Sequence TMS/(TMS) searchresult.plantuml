@@ -1,0 +1,129 @@
+@startuml SP Document
+title "Flow Process Search Result"
+
+actor "User" as user
+boundary "Search Result" as ui
+control "api" as api
+database "DB" as DB_SP
+
+autonumber
+user -> ui : User input part/tools name
+activate ui 
+user -> ui : Click "Search Result" Button
+ui -> api : Request Data
+activate api
+api -> DB_SP : Get Data
+note right of DB_SP
+ get field ("reg_number")
+    table "m_tools"
+
+ get field ("part_number"
+ "part_description")
+    table "m_part_number"
+
+ get field ("store")
+    table "m_store"
+
+end note
+
+
+activate DB_SP
+DB_SP -> api : Response Data
+deactivate DB_SP
+api -> api : Concat description with group by m_tools
+deactivate DB_SP
+alt "success"
+api -> ui : Return "Success"
+ui -> user : Display "Search Result"
+deactivate ui
+else "else"
+api --> ui : return message error
+deactivate api
+activate ui 
+ui --> user : show the message error
+deactivate ui 
+end
+
+group "Onclick sort item list item"
+user --> ui : user click "sort list for items"
+activate ui 
+ui --> api : request data
+activate api 
+api --> DB_SP : get data
+activate DB_SP
+note right of DB_SP
+get field ("tools_number"
+"reg_number"
+"model"
+"serial_number")
+    table "m_tools"
+
+get field ("part_number"
+"part_description")
+    table "m_part_number"
+
+get field ("store")
+    table "m_store"
+
+get field ("location")
+    table "m_location"
+
+get field ("manufacture")
+    table "m_manufacture"
+
+get field ("status")
+    table "request_tools"
+
+sort data from seleted category
+end note
+DB_SP --> api : response data 
+deactivate DB_SP
+api --> ui : return JSON
+deactivate api 
+ui --> user : show "Sorted item" in search results
+deactivate ui 
+end 
+
+
+
+group "Details tool data"
+user --> ui : User click "Data" from "Search Result" page
+activate ui
+ui --> api : request data
+activate api 
+api --> DB_SP : get data 
+activate DB_SP
+note right of DB_SP
+get field ("tools_number"
+"reg_number"
+"model"
+"serial_number")
+    table "m_tools"
+
+get field ("part_number"
+"part_description")
+    table "m_part_number"
+
+get field ("store")
+    table "m_store"
+
+get field ("location")
+    table "m_location"
+
+get field ("manufacture")
+    table "m_manufacture"
+
+get field ("status")
+    table "request_tools"
+end note 
+
+DB_SP --> api : response data 
+deactivate DB_SP
+api -> api : Concat description with group by m_tools
+api --> ui : Return JSON
+deactivate api 
+ui --> user : show "Detail tool data" section
+deactivate ui 
+end 
+
+@enduml

@@ -1,0 +1,68 @@
+@startuml TA
+title "Flow Process Report CAPEX"
+
+actor user
+boundary "Dashboard" as dashboard
+boundary "Report" as report
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+
+user -> dashboard : Click menu "Report"
+activate user
+activate dashboard
+dashboard -> report : Call page
+deactivate dashboard
+activate report
+report -> user : Show "Report" page
+user -> report : Filter field "Years", "No. PPI", "Status PPI", "Direktorat", \n"Dinas", "Bidang" or choose one of the filters
+report -> api : Post data with parameter input
+deactivate report
+activate api
+api -> DB_TA : Post data
+deactivate api
+activate DB_TA
+DB_TA -> api : Response data
+note right of api
+    Get field {
+    "years", "no_request",
+    "id_type_invest", "cba",
+    "responsible_nopeg", "description"
+    "io", "status", "id_status",
+    "department", "nopeg",
+    "department_to", "nopeg_to",
+    "created_at", "created_by"
+    }
+    from table "realization_invest"
+
+    Get field {
+    "id_realization_invest",
+    "id_budget_investation"
+    "amount", "amount_submission",
+    "internal", "note"
+    "created_at", "created_by"
+    }
+    from table "realization_invest_item"
+endnote
+deactivate DB_TA
+activate api
+alt Success
+    report  <- api : return "Success"
+    activate report
+    user <- report  : Show data "Summary" page with filter
+    deactivate report
+else else
+    report  <- api : return message error
+    deactivate api
+    activate report
+    user <- report  : show the message error
+    deactivate report
+end
+
+
+@enduml

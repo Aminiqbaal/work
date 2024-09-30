@@ -1,0 +1,111 @@
+@startuml arc
+title "Flow Process Dashboard"
+
+actor user
+boundary "Dashboard Page" as dashboard
+boundary "Dasboard Report Total Page" as dashboard_report_total
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+activate user
+user -> dashboard : click "dashboard"
+activate dashboard
+dashboard -> api : Get data
+deactivate dashboard
+activate api
+api -> arc : Get data
+deactivate api
+activate arc
+api <- arc : response data
+note right of api
+    Get field {
+    }
+    from table ""
+endnote
+deactivate arc
+activate api
+alt Success
+    dashboard  <- api : return "Success"
+    activate dashboard
+    user <- dashboard  : Show data "Dashboard" page
+    deactivate dashboard
+else else
+    dashboard  <- api : return message error
+    deactivate api
+    activate dashboard
+    user <- dashboard  : show the message error
+    deactivate dashboard
+end
+deactivate api
+
+group Report Total
+    user -> dashboard : Click "Report Total"
+    activate dashboard
+    dashboard -> dashboard_report_total :  call page
+    deactivate dashboard
+    activate dashboard_report_total
+    dashboard_report_total -> api : Get data
+    deactivate dashboard_report_total
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : Response data
+    note right of api
+        Get field {
+        }
+        from table ""
+    endnote
+    deactivate arc
+    activate api
+    alt Success
+        dashboard  <- api : return "Success"
+        activate dashboard
+        user <- dashboard  : Show data "Dasboard Report Total" page
+        deactivate dashboard
+    else else
+        dashboard  <- api : return message error
+        deactivate api
+        activate dashboard
+        user <- dashboard  : show the message error
+        deactivate dashboard
+    end
+    deactivate api
+
+    group filter by operator
+        user -> dashboard_report_total : click button "Select Operator"
+        activate dashboard_report_total
+        dashboard_report_total -> api : Get data
+        deactivate dashboard_report_total
+        activate api
+        api -> arc : Get data
+        deactivate api
+        activate arc
+        api <- arc : response data
+        deactivate arc
+        activate api
+        alt Success
+            dashboard  <- api : return "Success"
+            activate dashboard
+            user <- dashboard  : Show data "Dasboard Report Total" page with filter
+            deactivate dashboard
+        else else
+            dashboard  <- api : return message error
+            deactivate api
+            activate dashboard
+            user <- dashboard  : show the message error
+            deactivate dashboard
+        end
+        deactivate api
+    end
+    group export
+    user -> dashboard_report_total : click button "Export"
+    activate dashboard_report_total
+    user <- dashboard_report_total : export data
+    deactivate dashboard_report_total
+    end
+end
+@enduml

@@ -1,0 +1,129 @@
+@startuml borrow_list
+title Flow Process Borrow List
+
+actor user
+boundary "Home" as home
+boundary "Borrowing List" as borrow_list
+control "API" as api
+database "DB_TMS" as DB_TMS
+
+autonumber
+
+====
+user -> home : User click "borrowing list" menu
+activate home
+home -> borrow_list : Call Page
+deactivate home
+activate borrow_list
+borrow_list -> api : Request data
+deactivate borrow_list
+activate api
+api -> DB_TMS : Get data
+deactivate api
+activate DB_TMS
+note left  of DB_TMS
+    Get field{
+        "id_borrow", "act_return",
+        "borrow_date", "bpp_number",
+        "est_return", "key_number"
+        "part_number", "personal_name",
+        "personal_number", "personal_unit",
+        "pickup_method", "serial_number",
+        "status", "tool_description",
+        "tool_number", "ac_reg", "store",
+        "jobcard", "transcation_store",
+        "personal_email",
+    }
+    from table "trx_borrow"
+endnote
+DB_TMS -> api : Response data
+deactivate DB_TMS
+
+activate api
+alt Success
+    borrow_list <- api : return "Success"
+    activate borrow_list
+    user <- borrow_list : show message "Success" \ngo to previous page\n&reload page
+    deactivate borrow_list
+else else
+    borrow_list <- api : return message error
+    deactivate api
+    activate borrow_list
+    user <- borrow_list : show the message error
+    deactivate borrow_list
+end
+
+group onClick field "Filter"
+    user -> borrow_list : fill Filter Search "status", "bpp_number", "personal_name", \n"ac_reg", "jobcard", "store", "borrow_date", "est_return"
+    activate borrow_list
+    borrow_list -> borrow_list : Filter data with parameter input \non field "search"
+    borrow_list -> user : Display data
+    deactivate borrow_list
+end
+
+group onClick field "Search"
+    user -> borrow_list : Click "Search Tools"
+    activate borrow_list
+    borrow_list -> borrow_list : Hide & Show \nHeader Table
+    borrow_list -> user : Display \n"Hide & Show Header table"
+    user -> borrow_list : fill field Search "status", "bpp_number", "personal_name", \n"ac_reg", "jobcard", "store", "borrow_date", "est_return"
+    borrow_list -> borrow_list : Filter data with parameter input \non field "search"
+    borrow_list -> user : Display data
+    deactivate borrow_list
+end
+
+group onClick field "Detail"
+    user -> borrow_list : Click "Detail" on list data
+    activate borrow_list
+    borrow_list -> api : Request data
+    deactivate borrow_list
+    activate api
+    api -> DB_TMS : Get data
+    note left  of DB_TMS
+        Get field{
+            "ac_reg", "act_return",
+            "borrow_date", "bpp_number",
+            "created_at", "created_by",
+            "est_return", "id_borrow",
+            "jobcard", "key_number",
+            "next_due_date", "part_number",
+            "personal_email", "personal_name",
+            "personal_number", "personal_unit",
+            "pickup_method", "serial_number",
+            "status", "store", "tool_description",
+            "tool_number", "transcation_store",
+            "updated_at", "updated_by"
+            }
+        from table "trx_borrow"
+
+        Get field{
+            "link_missing_broken",
+            }
+        from table "missing_broken"
+    endnote
+    deactivate api
+    activate DB_TMS
+    api <- DB_TMS : Response data
+    deactivate DB_TMS
+    activate api
+    alt Success
+        borrow_list <- api : return "Success"
+        activate borrow_list
+        user <- borrow_list : show message "Success" \ngo to previous page\n&reload page
+        deactivate borrow_list
+    else else
+        borrow_list <- api : return message error
+        deactivate api
+        activate borrow_list
+        user <- borrow_list : show the message error
+        deactivate borrow_list
+    end
+    group onClick field "Print"
+        user -> borrow_list : Click "Print"
+        activate borrow_list
+        borrow_list -> user : show pop up Print Document \n"TOOLS & EQUIPMENT \nBORROWING"
+        deactivate borrow_list
+    end
+end
+
+@enduml

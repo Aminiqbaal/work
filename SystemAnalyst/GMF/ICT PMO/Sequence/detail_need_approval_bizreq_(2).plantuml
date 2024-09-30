@@ -1,0 +1,175 @@
+@startuml PMO IT
+title "Flow Process Detail Need Approval (Bizreq) (2)"
+
+actor "user" as user #Yellow
+' boundary "Need Approval Menu" as ui
+boundary "Detail Page" as ui2
+control "api" as api
+database "DB_PMO_IT" as DB_PMO_IT
+
+autonumber
+group onClick button "Save"
+    user -> ui2 : click button "Save"
+    activate ui2
+    ui2 -> api : post data value button
+    deactivate ui2
+    activate api
+    api -> DB_PMO_IT : insert & update
+    deactivate api
+    activate DB_PMO_IT
+    note left of DB_PMO_IT
+        Insert or Update field "request_number", "it_background", "goals_objective",
+        "current_condition", "future_process", "id_status"
+        "benefit_kualitatif", "benefit_kuantitatif",
+        "reason_for_urgency", "solution_proposed",
+        "budget", "budget_type"
+        from table "request_project"
+
+        Insert field "description", "value",
+        "quantity", "totalValue"
+        from table "benefit_quantitative"
+
+        Insert or Update field "title", "url" from table "reference"
+
+        Insert or Update field "risk_hazard", "impact", "mitigation" from table "risk"
+
+        Insert or Update all field from table "m_status"
+
+        filter by id_request_project
+    end note
+    api <- DB_PMO_IT : response data
+    deactivate DB_PMO_IT
+    activate api
+    alt Success
+        ui2 <- api : return "Success" & reload page
+        activate ui2
+        user <- ui2 : show message "Success"
+        deactivate ui2
+    else else
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show message error
+        deactivate ui2
+    end
+end
+
+group onClick button "Submit"
+    user -> ui2 : click button "Submit"
+    activate ui2
+    ui2 -> api : post data with parameter id_request_project
+    deactivate ui2
+    activate api
+    api -> DB_PMO_IT : insert or update
+    deactivate api
+    activate DB_PMO_IT
+    note left of DB_PMO_IT
+        Insert or Update field "request_number", "it_background", "goals_objective",
+        "current_condition", "future_process", "id_status", "ict_number",
+        "benefit_kualitatif", "benefit_kuantitatif",
+        "reason_for_urgency", "solution_proposed",
+        "budget", "budget_type"
+        from table "request_project"
+
+        Insert or Update field "title", "url" from table "reference"
+
+        Insert or Update field "risk_hazard", "impact", "mitigation" from table "risk"
+
+        Insert or Update field "name", "present_title",  "reason", "date_reason" from table "remark_log"
+
+        Insert or Update all field from table "m_status"
+
+        Insert or Update all field from table "m_project_type"
+
+        Insert or Update field "review_status", "reason", "business_implemantation", "it_solution",
+        from table "fill_by_it"
+
+        filter by id_request_project
+    end note
+    api <- DB_PMO_IT : response data
+    deactivate DB_PMO_IT
+    activate api
+    alt Success
+        ui2 <- api : return "Success" & reload page
+        activate ui2
+        user <- ui2 : show message "Success"
+        deactivate ui2
+    else else
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show message error
+        deactivate ui2
+    end
+end
+
+group onClick button "Approve"
+    user -> ui2 : click button "Approve"
+    activate ui2
+    ui2 -> api : put data value button
+    deactivate ui2
+    activate api
+    api -> DB_PMO_IT : update
+    deactivate api
+    activate DB_PMO_IT
+    note left of DB_PMO_IT
+        Update field "id_status"
+        from table "request_project"
+    end note
+    api <- DB_PMO_IT : response data
+    deactivate DB_PMO_IT
+    activate api
+    alt Success
+        ui2 <- api : return "Success" & reload page
+        activate ui2
+        user <- ui2 : show message "Success"
+        deactivate ui2
+    else else
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show message error
+        deactivate ui2
+    end
+end
+
+group onClick button "Reject / Revise"
+    user -> ui2 : Click button "Reject / Revise"
+    activate ui2
+    ui2 -> user : Show pop up "Reject / Revise form"
+    deactivate ui2
+    user -> ui2 : Fill data
+    activate ui2
+    user -> ui2 : click button "Confirm"
+    ui2 -> api : put data value button
+    deactivate ui2
+    activate api
+    api -> DB_PMO_IT : insert or update
+    deactivate api
+    activate DB_PMO_IT
+    note left of DB_PMO_IT
+        Update field "date_reason",
+        "reason"
+        from table "remark_log"
+
+        Update field "status"
+        from table "request_project"
+    end note
+    api <- DB_PMO_IT : response data
+    deactivate DB_PMO_IT
+    activate api
+    alt Success
+        ui2 <- api : return "Success" & reload page
+        activate ui2
+        user <- ui2 : show message "Success"
+        deactivate ui2
+    else else
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show message error
+        deactivate ui2
+    end
+end
+
+@enduml

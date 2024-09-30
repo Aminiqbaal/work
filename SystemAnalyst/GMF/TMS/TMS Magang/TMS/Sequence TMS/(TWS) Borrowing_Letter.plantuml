@@ -1,0 +1,62 @@
+@startuml SP Document
+title "Flow Process Print Tools & Equipment Borrowing Letter"
+
+actor "User" as user #Yellow
+boundary "See Letter" as ui
+control "api" as api
+database "DB" as DB_SP
+
+autonumber
+note right of user
+user in menu "Welcome page" then click button "Print"
+end note
+
+user -> ui : Click button / Action Button "Print"
+activate ui
+ui -> api : Request Data with \nparameter m_tools
+activate api
+api -> DB_SP : Get Data with \nparameter m_tools
+activate DB_SP
+note right of DB_SP
+ get field ("personel_name"
+ "personel_number"
+ "personel_unit"
+ "borrow_date")
+    table "request_tools"
+get field ("reg_number")
+table "m_tools"
+    filter field "m_tools" = value of m_tools
+end note
+DB_SP -> api : Response data 
+deactivate DB_SP
+api -> DB_SP : Get Data with \nparameter m_tools
+activate DB_SP
+note right of DB_SP
+
+ get field ("tools_number"
+ "serial_number"
+ "reg_number"
+ "tools_description"
+ "barcode_number")
+    table "m_tools"
+
+ get field ("part_number"
+ "part_description")
+ table "m_part_number"
+
+ get field ("est_return"
+ "borrow_date")
+ table "request_tools"
+ filter field "m_tools" = value of m_tools
+
+end note
+note right of DB_SP
+user fill note if wanted
+end note
+DB_SP -> api : Response Data
+deactivate DB_SP
+api -> ui : Return JSON
+deactivate api
+ui -> user : Display "Tools & Equipment Borrowing Letter"
+deactivate ui
+@enduml

@@ -1,0 +1,80 @@
+@startuml PMO IT
+title "Flow Process Detail Need Approval (Bizreq) (1)"
+
+actor "user" as user #Yellow
+boundary "Need Approval Menu" as ui
+boundary "Detail Page" as ui2
+control "api" as api
+database "DB_PMO_IT" as DB_PMO_IT
+
+autonumber
+user -> ui : Click Detail at row (table)
+activate ui
+ui -> ui2 : Transfer data with data selected
+deactivate ui
+activate ui2
+ui2 -> ui2 : Hide all button
+ui2 -> api : request data with parameter id_request
+deactivate ui2
+activate api
+api -> DB_PMO_IT : Get data
+deactivate api
+activate DB_PMO_IT
+note left of DB_PMO_IT
+    Get field "requestNumber", "itBackground", "goalsAndObjective",
+    "currentProcess", "futureProcess", "id_status", "ictNumber",
+    "benefitQualitative", "reasonForUrgency", "solutionProposed",
+    "budget", "budgetType"
+    from table "request_project"
+    
+    Insert field "description", "value",
+    "quantity", "totalValue"
+    from table "benefit_quantitative"
+
+    Get field "title", "url" from table "reference"
+
+    Get field "risk_hazard", "impact", "mitigation" from table "risk"
+
+    Get field "name", "present_title",  "reason", "date_reason" from table "remark_log"
+
+    Get all field from table "m_status"
+
+    Get all field from table "m_project_type"
+
+    Get field "review_status", "reason", "business_implemantation", "it_solution",
+    from table "fill_by_it"
+
+    filter by id_request_project
+end note
+api <- DB_PMO_IT : response data
+deactivate DB_PMO_IT
+
+activate api
+api -> ui2 : return json
+deactivate api
+activate ui2
+ui2 -> ui2 : Show button if
+note right of ui2
+    if login as user & not yet submit
+    show button "save" & button "submit"
+    if login as sm user & not yet click anything button & user has been submit
+    show button "reject", button "revise", & button "approve"
+    if login as sm user & click both of 3 button "reject", "revise" or "approve"
+    not show anything button
+    if login as vp user & not yet click anything button & sm user has been approve
+    show button "reject", button "revise", & button "approve"
+    if login as vp user & click both of 3 button "reject", "revise" or "approve"
+    not show anything button
+    if login as pmo & vp user has been approve
+    show button "submit"
+    if login as sm TDI/TDO
+    show button "submit"
+    if login as Manager TDI/TDO
+    show button "submit"
+    if login as PMO & Manager Has been submit
+    show button "Move to Project"
+endnote
+ui2 -> user : Display
+deactivate ui2
+
+@enduml

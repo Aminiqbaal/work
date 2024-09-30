@@ -1,0 +1,121 @@
+@startuml 
+title Flow Process Tools Data 
+
+actor "User" as user
+boundary "Tools Data" as ui
+control "api" as api
+database "DB" as DB_SP
+
+autonumber
+
+note right of user 
+user in "Welcome" Page then 
+click "Tools Data" button
+end note 
+user --> ui : user in "Welcome" Page
+activate ui 
+user --> ui : user click "Tools Data" button
+ui --> api : request data 
+activate api 
+api --> DB_SP : get data 
+activate DB_SP
+note right of DB_SP
+
+get field ("tools_number"
+"reg_number"
+"tools_description")
+    table "m_tools"
+
+get field ("part_number")
+    table "m_part_number"
+
+get field ("store")
+    table "m_store"
+
+get field ("location")
+    table "m_location"
+
+get field ("est_return"
+"borrow_date")
+    table "request_tools"
+end note
+
+DB_SP --> api : response data
+api --> api : get all data to be showed
+api --> ui : return JSON
+ui --> user : Show "Tools Data" list
+
+group "Onclick DropDown button"
+user --> ui : User click drop down icon from data
+ui --> api : Request data from database
+api --> DB_SP : Get data from DB
+note right of DB_SP
+
+get field ("model"
+"serial_number")
+    table "m_tools"
+
+get field ("manufacture")
+    table "m_manufacture"
+end note
+
+DB_SP --> api : Response data
+deactivate DB_SP
+api --> ui : return JSON 
+deactivate api 
+deactivate ui 
+ui --> user : show "Drop Down" menu 
+end
+
+group "Onclick Transaction Button"
+user --> ui : User click "Trolley" icon
+activate ui 
+ui --> api : Request data
+activate api 
+api --> DB_SP : Get data
+activate DB_SP
+note right of DB_SP 
+Show New Table and get data from DB_SP
+
+get field ("no_bpp"
+"personel_number"
+"personel_name"
+"personel_unit"
+"borrow_date"
+"act_return")
+    table "request_tools"
+
+get field ("reg_number")
+    table "m_tools"
+
+get field ("store")
+    table "m_store"
+
+end note 
+DB_SP --> api : Response Data
+deactivate DB_SP
+api --> ui : return JSON
+deactivate api 
+ui --> user : Insert new transaction table
+deactivate ui 
+end
+
+group "Onclick QR Code"
+user --> ui : User click on QR Code 
+activate ui 
+ui --> api : Request data
+activate api 
+api --> DB_SP : Get data from DB 
+activate DB_SP
+note right of DB_SP 
+
+get field ("tools_number")
+    table "m_tools"
+end note 
+DB_SP --> api : response data
+deactivate DB_SP
+api --> ui : return JSON
+deactivate api 
+ui --> user : Zoom in QR Code and show "Tool Number"
+deactivate ui 
+end

@@ -1,0 +1,128 @@
+@startuml arc
+title "Flow Process Old Component"
+
+actor user
+boundary "Old Component" as old_component
+boundary "Add Old Component" as add_old_component
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+activate user
+user -> old_component : click "old_component Page"
+activate old_component
+old_component -> api : Get data
+deactivate old_component
+activate api
+api -> arc : Get data
+deactivate api
+activate arc
+api <- arc : Response data
+deactivate arc
+note right of api
+    Get field {
+    }
+    from table ""
+endnote
+activate api
+alt Success
+    old_component  <- api : return "Success"
+    activate old_component
+    user <- old_component  : Show data "old_component" page
+    deactivate old_component
+else else
+    old_component  <- api : return message error
+    deactivate api
+    activate old_component
+    user <- old_component  : show the message error
+    deactivate old_component
+end
+deactivate api
+group filter by keywoard
+    user -> old_component : click button "Search"
+    activate old_component
+    old_component -> api : Get data
+    deactivate old_component
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : response data
+    note right of api
+        Get field {
+        }
+        from table ""
+    endnote
+    deactivate arc
+    activate api
+    alt Success
+        old_component  <- api : return "Success"
+        activate old_component
+        user <- old_component  : Show data "old_component" page with filter
+        deactivate old_component
+    else else
+        old_component  <- api : return message error
+        deactivate api
+        activate old_component
+        user <- old_component  : show the message error
+        deactivate old_component
+    end
+    deactivate api
+    user -> old_component : Click button "Clear"
+    activate old_component
+    user <- old_component : Show data "old_component" page without filter
+    deactivate old_component
+end
+group export
+    user -> old_component : Click button "Export"
+    activate old_component
+    user <- old_component : Download file export and click save
+    deactivate old_component
+end
+group add old component
+    user -> old_component : Click button "add"
+    activate old_component
+    old_component -> add_old_component : call page
+    deactivate old_component
+    activate add_old_component
+    user <- add_old_component : show page "add old component"
+    note right of user
+        if click "save" data will be saved
+        else click "cancel" data does'nt save
+    endnote
+    user -> add_old_component : fill the page "add old component" and "click" save or "cancel"
+    add_old_component -> old_component : data will be updated
+    deactivate add_old_component
+    activate old_component
+    user <- old_component : show page "old_component"
+    deactivate old_component
+end
+group filter by operator
+    user -> old_component : click button "Select Operator"
+    activate old_component
+    old_component -> api : Get data
+    deactivate old_component
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : response data
+    deactivate arc
+    activate api
+    alt Success
+        old_component  <- api : return "Success"
+        activate old_component
+        user <- old_component  : Show data "old_component" page with filter
+        deactivate old_component
+    else else
+        old_component  <- api : return message error
+        deactivate api
+        activate old_component
+        user <- old_component  : show the message error
+        deactivate old_component
+    end
+    deactivate api
+end
+@enduml

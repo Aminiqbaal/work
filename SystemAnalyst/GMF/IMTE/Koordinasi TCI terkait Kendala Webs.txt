@@ -1,0 +1,11 @@
+Koordinasi TCI terkait Kendala Website IMTE (Server Developmnet)
+1. Proses Kalibrasi terlalu lama 30 menit
+2. Outgoing Kalibari terlalu lama 30 menit
+3. Harusnya user dan admin role TC doang yang bisa masuk, namun Temen Hangar masuk dan merubah TMS
+4. Perlu nopeg dari Unit TC
+	1 Admin : SM Cablibration, TCY 1 - Production Planning Control, TCY 2 - Calibration Engineering, Manager TCY 3
+	2. User : Personel TCY-3
+5. Pindah dari development ke Production
+6. Module Shop Floor lama karena load datanya
+7. Setelah Take job muncul notice success/not
+8. Closing job juga terlalu lama loadingnya

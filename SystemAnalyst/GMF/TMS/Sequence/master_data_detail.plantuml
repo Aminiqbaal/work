@@ -1,0 +1,155 @@
+@startuml
+
+actor user
+boundary "Master Data Detail" as master_data
+boundary "Popup Add Tools" as add_tool
+boundary "Popup Add Tools on List" as add_tool_varian
+boundary "Popup Add Tools Effectivity" as add_tool_effectivity
+control "API" as api
+database "DB_TMS" as DB_TMS
+
+autonumber
+
+====
+
+group Add Tools
+    user -> master_data : User click "Plus" icon
+    activate master_data
+    master_data -> add_tool : Call page
+    deactivate master_data
+    activate add_tool
+    add_tool -> user : Show form "Add Tools"
+    deactivate add_tool
+    user -> add_tool : User click submit
+    activate add_tool
+    add_tool -> api : Post data with parameter input
+    deactivate add_tool
+    activate api
+    api -> DB_TMS : Post data
+    deactivate api
+    activate DB_TMS
+    note left of DB_TMS
+        Insert field {
+            "category", "tool_number", 
+            "tool_description", "id_part_number"
+        }
+        from table "tool"
+        
+        Insert field {
+            "id_part_number", "link_file", 
+            "link_image", "part_price"  
+        }
+        from table "part_number"
+    endnote
+    DB_TMS -> api : Response data
+    deactivate DB_TMS
+    activate api
+    alt Success
+        add_tool <- api : return "Success"
+        activate add_tool
+        user <- add_tool : show message "Success" \ngo to previous page\n&reload page
+        deactivate add_tool
+    else else
+        add_tool <- api : return message error
+        deactivate api
+        activate add_tool
+        user <- add_tool : show the message error
+        deactivate add_tool
+    end
+end
+
+group onClick field "Search"
+    user -> master_data : fill field "search"
+    activate master_data
+    master_data -> master_data : Filter data with parameter input \non field "search"
+    master_data -> user : Display data
+    deactivate master_data
+end
+
+group Add Tools Variant
+    user -> master_data : User click "Add Variant"
+    activate master_data
+    master_data -> add_tool_varian : Call page
+    deactivate master_data
+    activate add_tool_varian
+    add_tool_varian -> user : Show form "Add Tools on List"
+    user -> add_tool_varian : User fill Form "Add Tools on List" & Click "Submit Variant"
+    add_tool_varian -> api : Post data with parameter input
+    deactivate add_tool_varian
+    activate api
+    api -> DB_TMS : Post data
+    deactivate api
+    activate DB_TMS
+    note left of DB_TMS
+        Insert field {
+            "serial_number", "tool_number",
+            "model", "location", "category"
+            "manufacture_id", "store_id",
+        }
+        from table "tools"
+
+        Insert field {
+            "id_store", "store",
+        }
+        from table "store"
+
+        Insert field {
+            "id_manufacture", "manufacture",
+        }
+        from table "manufacture"
+    endnote
+    DB_TMS -> api : Response data
+    deactivate DB_TMS
+    activate api
+    alt Success
+        add_tool_varian <- api : return "Success"
+        activate add_tool_varian
+        user <- add_tool_varian : show message "Success" \ngo to previous page\n&reload page
+        deactivate add_tool_varian
+    else else
+        add_tool_varian <- api : return message error
+        deactivate api
+        activate add_tool_varian
+        user <- add_tool_varian : show the message error
+        deactivate add_tool_varian
+    end
+end
+
+group Add Tools Effectivity
+    user -> master_data : User click "Add Tools Effectivity"
+    activate master_data
+    master_data -> add_tool_effectivity : Call page
+    deactivate master_data
+    activate add_tool_effectivity
+    add_tool_effectivity -> user : Show form "add_tool_effectivity"
+    user -> add_tool_effectivity : User fill Form "add_tool_effectivity" & Click "Submit Effectifity"
+    add_tool_effectivity -> api : Post data with parameter input
+    deactivate add_tool_effectivity
+    activate api
+    api -> DB_TMS : Post data
+    deactivate api
+    activate DB_TMS
+    note left of DB_TMS
+        Insert field {
+            "tool_effectifity", "part_number_id"
+        }
+        from table "tool_effectifity"
+    endnote
+    DB_TMS -> api : Response data
+    deactivate DB_TMS
+    activate api
+    alt Success
+        add_tool_effectivity <- api : return "Success"
+        activate add_tool_effectivity
+        user <- add_tool_effectivity : show message "Success" \ngo to previous page\n&reload page
+        deactivate add_tool_effectivity
+    else else
+        add_tool_effectivity <- api : return message error
+        deactivate api
+        activate add_tool_effectivity
+        user <- add_tool_effectivity : show the message error
+        deactivate add_tool_effectivity
+    end
+end
+
+@enduml

@@ -1,0 +1,72 @@
+@startuml arc
+title "Flow Process Login"
+
+actor user
+boundary "Login Page" as ui
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+
+note right of user
+    input :
+    Email*
+    Password*
+end note
+user -> ui : click login
+activate ui
+
+ui -> api : post data \n with parameter \n (all input)
+activate api
+api -> arc : connect
+activate arc
+alt connect
+    api -> arc : validate username & password
+    alt match
+        api <- arc : return "Success"
+        api -> arc : get()
+        note left arc
+        get field {
+            "nopeg","nama","jabatan",
+            "unit","email"
+        }
+        from view "v_tabpersonel_active"
+        filter field nopeg =
+        value of input "Username"
+        end note
+        api <- arc : response data
+        deactivate arc
+        alt exist
+            api -> api : create session() with all response data
+            ui <- api : return "Success"
+            user <- ui : go to page "Home"
+            deactivate ui
+        else
+            ui <- api : return "Not authorize"
+            deactivate api
+            activate ui
+            user <- ui : show message "You not authorize"
+            deactivate ui
+        end
+    else  else
+        api <- arc : return "Fail"
+        activate api
+        ui <- api : return "Fail"
+        deactivate api
+        activate ui
+        user <- ui : show message "Username or Password wrong"
+        deactivate ui
+    end
+else  else
+    api <- arc : not connect
+    deactivate arc
+    activate api
+    ui <- api : return "Fail"
+    deactivate api
+    activate ui
+    user <- ui : show message "arc not Connect"
+    deactivate ui
+end
+@enduml

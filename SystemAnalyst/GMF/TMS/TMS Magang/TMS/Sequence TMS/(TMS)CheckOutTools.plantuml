@@ -1,0 +1,103 @@
+@startuml 
+title Flow Process CheckOut Tools
+
+actor "User" as user
+boundary "Checkout Tools" as ui
+control "api" as api
+database "DB" as DB_SP
+
+autonumber
+
+note right of user 
+user in "Welcome" Page then 
+click "Tools Data" button
+end note 
+user --> ui : user in "Welcome" Page
+activate ui 
+user --> ui : user click "Tools Data" button
+ui --> api : request data 
+activate api 
+api --> DB_SP : get data 
+activate DB_SP
+note right of DB_SP
+
+get field ("tools_number"
+"reg_number"
+"tools_description")
+    table "m_tools"
+
+get field ("part_number")
+    table "m_part_number"
+
+get field ("store")
+    table "m_store"
+
+get field ("location")
+    table "m_location"
+
+get field ("est_return"
+"borrow_date")
+    table "request_tools"
+end note
+
+DB_SP --> api : response data
+deactivate DB_SP
+api --> api : get all data to be showed
+api --> ui : return JSON
+deactivate api 
+ui --> user : Show "Tools Data" list
+deactivate ui 
+
+group "Onclick Shopping Cart"
+user --> ui : User clicked "Shopping Cart" icon button 
+activate ui 
+ui --> api : Request data 
+activate api 
+api --> DB_SP : get data
+activate DB_SP 
+note right of DB_SP
+If there is data it will show in the menu 
+if not please input new data
+end note 
+DB_SP --> api : Response data
+api --> ui : return JSON
+ui --> user : Show Chekcout tools Step 1 page
+user --> ui : click "Next"
+ui --> api : request parameter data all input 
+api --> DB_SP : insert data 
+note right of DB_SP
+User click on personel number page 
+User input password 
+get field ("personel_number"
+"personel_name"
+"personel_unit"
+"email"
+"title")
+    table "request_tools"
+end note 
+DB_SP --> api : response data 
+api --> DB_SP : insert data
+note right of DB_SP 
+insert data
+
+get field ("job_card")
+    table "job_card"
+
+get field ("store")
+    table "m_store"
+
+get field ("borrow_date"
+"est_return")
+    table "request_tools"
+end note
+note right of DB_SP 
+User click Confirm Transaction
+end note
+DB_SP --> api : Response data
+deactivate DB_SP
+api --> api : Commit data
+api --> ui : Return JSON
+deactivate api 
+ui --> user : Show inputted data on "Tools Data" Page
+deactivate ui
+end

@@ -1,0 +1,67 @@
+@startuml TA
+title "Flow Process Master Data - Summary OPEX"
+
+actor user
+boundary "Dashboard" as dashboard
+boundary "Master Data Summary" as m_summary
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+note right of user
+    Admin (TAB) atau super
+    admin (SM TAB & VP TA)
+    bisa memilih semua dinas
+    yang dikehendaki
+endnote
+user -> dashboard : Click menu "Master Data"
+activate user
+activate dashboard
+user -> dashboard : Click sub-menu "Summary" \npada menu "Master Data"
+dashboard -> m_summary : Call page
+deactivate dashboard
+activate m_summary
+m_summary -> user : Show "Master Data Summary" page
+user -> m_summary : Click filter "Years" & Dinas
+m_summary -> api : Post data with parameter input
+deactivate m_summary
+activate api
+note right of api
+    Insert field {
+    "years","id_gl_account",
+    }
+    from table "budget"
+endnote
+api -> DB_TA : Post data
+deactivate api
+activate DB_TA
+DB_TA -> api : Response data
+note right of api
+    Get field {
+    "years","id_gl_account",
+    "id_cost_center", "total",
+    "created_at", "created_by"
+    }
+    from table "budget"
+endnote
+deactivate DB_TA
+activate api
+alt Success
+    m_summary  <- api : return "Success"
+    activate m_summary
+    user <- m_summary  : Show data "Master Data Summary" page with filter
+    deactivate m_summary
+else else
+    m_summary  <- api : return message error
+    deactivate api
+    activate m_summary
+    user <- m_summary  : show the message error
+    deactivate m_summary
+end
+
+
+@enduml

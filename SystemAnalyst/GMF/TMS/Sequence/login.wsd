@@ -1,0 +1,93 @@
+@startuml
+title "Login"
+actor user
+boundary "Login Page" as ui
+control "API" as api
+control "keycloak" as keycloak
+database ldap
+database "DB_TMS" as db
+
+autonumber
+
+====
+
+note right of user
+    input :
+    Username*
+    Password*
+end note
+user -> ui : click login
+activate ui
+
+ui -> api : post data \n with parameter \n (all input)
+deactivate ui
+activate api
+api -> ldap : connect
+activate ldap
+alt connect
+    api -> ldap : validate username & password
+    deactivate api
+    alt match
+        api <- ldap : return "Success"
+        activate api
+        api -> keycloak : get()
+        deactivate api
+        activate keycloak
+        note left keycloak
+        get field {
+            "nopeg","nama",
+            "jabatan","unit",
+            "email"
+        }
+        from view 
+        "v_tabpersonel_active"
+        filter field nopeg = 
+        value of input "Username"
+    end note
+    api <- keycloak : response data
+    deactivate keycloak
+    activate api
+
+    alt exist
+        api -> db : get data role
+        deactivate api
+        activate db
+        note right of db
+            get all field 
+            table "role"
+            end note
+            api <- db : response data role
+            deactivate db
+            activate api
+            api -> api : create session() with all response data
+            ui <- api : return "Success"
+            activate ui
+            user <- ui : go to page "Dashboard"
+            deactivate ui
+        else
+            ui <- api : return "Not authorize"
+            deactivate api
+            activate ui
+            user <- ui : show message "You not authorize"
+            deactivate ui
+        end
+    else  else
+        api <- ldap : return "Fail"
+        activate api
+        ui <- api : return "Fail"
+        deactivate api
+        activate ui
+        user <- ui : show message "Username or Password wrong"
+        deactivate ui
+    end
+else  else
+    api <- ldap : not connect
+    deactivate ldap
+    activate api
+    ui <- api : return "Fail"
+    deactivate api
+    activate ui
+    user <- ui : show message "LDAP not Connect"
+    deactivate ui
+end
+@enduml

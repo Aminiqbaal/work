@@ -1,0 +1,137 @@
+@startuml TA
+title "Flow Process Reallocation Corporate"
+
+actor user
+boundary "Dashboard" as ui
+boundary "Detail Request Reallocation Corporate" as ui1
+boundary "Create Request Reallocation Corporate" as ui2
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+
+user -> ui : Click menu "Create Request Reallocation Corporate"
+activate user
+activate ui
+ui -> ui2 : Call page
+deactivate ui
+activate ui2
+ui2 -> user : Show "Create Request Reallocation Corporate" page
+user -> ui2 : Fill the form "Create Request Reallocation Corporate"
+note right of user
+    if user click button "save",
+    so the data will be save only (status draft)
+    else user click button "submit"
+    so the data will be send to next step (to SM User)
+
+    (both save or submit the data will be show at the Need Approval Menu)
+end note
+user -> ui2 : Click "Save" or "Submit"
+
+ui2 -> api : Post data with parameter input
+
+deactivate ui2
+activate api
+note right of api
+    Insert field {
+    "years", "ta_reff",
+    "id_status", "status",
+    "department", "nopeg",
+    "department_to", "nopeg_to"
+    "created_at", "created_by"
+    }
+    from table "reallocation_budget"
+
+    Insert field {
+    "id_reallocation_budget", "id_cost_center",
+    "id_gl_account", "id_cost_center_to",
+    "id_gl_account_to", "amount"
+    "created_at", "created_by"
+    }
+    from table "reallocation_budget_item"
+endnote
+api -> DB_TA : Post data
+deactivate api
+activate DB_TA
+
+DB_TA -> api : Response data
+deactivate DB_TA
+activate api
+alt Success
+    ui2 <- api : return "Success"
+    activate ui2
+    user <- ui2 : show message "Success" go to previous page & reload page
+    deactivate ui2
+else else
+    ui2 <- api : return message error
+    deactivate api
+    activate ui2
+    user <- ui2 : show the message error
+    deactivate ui2
+end
+group Edit Request Reallocation Corporate
+    note right of user
+        If the request Reallocation Corporate has
+        not been approved by the superior,
+        the user can change the details
+    end note
+    user -> ui : Click menu "Detail Request Reallocation Corporate"
+    activate ui
+    ui -> ui1 : Call page
+    deactivate ui
+    activate ui1
+    ui1 -> user : Show "Detail Request Reallocation Corporate" page
+    user -> ui1 : Click "Edit"
+    user -> ui1 : Fill the form "Edit Request Reallocation Corporate"
+    ui1 -> api : Post data with parameter input
+    deactivate ui1
+    activate api
+    note right of api
+        Insert field {
+        "years", "ta_reff",
+        "id_status", "status",
+        "department", "nopeg",
+        "department_to", "nopeg_to",
+        "updated_at", "updated_by"
+        }
+        from table "reallocation_budget"
+
+        Insert field {
+        "id_reallocation_budget", "id_cost_center",
+        "id_gl_account", "id_cost_center_to",
+        "id_gl_account_to", "amount",
+        "updated_at", "updated_by"
+        }
+        from table "reallocation_budget_item"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        ui2 <- api : return "Success"
+        activate ui2
+        user <- ui2 : show message "Success" go to previous page & reload page
+        deactivate ui2
+    else else
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show the message error
+        deactivate ui2
+    end
+end
+group onClick button Back
+    user -> ui : click button "Back"
+    activate ui
+    user <- ui : Cancel form & go to previous page
+    deactivate ui
+end
+
+@enduml

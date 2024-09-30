@@ -1,0 +1,96 @@
+@startuml TA
+title "Flow Process Upload RKAP"
+
+actor user
+boundary "Dashboard" as ui
+boundary "Master Data  " as ui2
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+
+user -> ui : Click menu "Master Data"
+activate user
+activate ui
+user -> ui : Click menu "View Budget"
+ui -> ui2 : Call page
+deactivate ui
+activate ui2
+ui2 -> user : Show "View Budget" page
+user -> ui2 : Click button "Upload RKAP"
+ui2 -> user : Show pop up "Upload RKAP"
+user -> ui2 : Fill "Years" and document RKAP
+ui2 -> api : Post data with parameter input
+deactivate ui2
+activate api
+note right of api
+    Insert field {
+    "table_name", "id_table",
+    "id_doc_category",
+    "doc_name", "doc_link",
+    "doc_size", "doc_type",
+    "created_at", "created_by"
+    }
+    from table "file_upload"
+endnote
+api -> DB_TA : Post data
+deactivate api
+activate DB_TA
+DB_TA -> api : Response data
+deactivate DB_TA
+activate api
+alt Success
+    ui2 <- api : return "Success"
+    activate ui2
+    user <- ui2 : show message "Success" \ngo to previous page\n& reload page
+    deactivate ui2
+else else
+    ui2 <- api : return message error
+    deactivate api
+    activate ui2
+    user <- ui2 : show the message error
+    deactivate ui2
+end
+group Simulate
+    user -> ui2 : Fill field "Years", "Dinas", "Pembatasan Anggaran (%) (Opsional)"
+    activate ui2
+    user <- ui2 : show message "Data dirubah sementara, jika ingin menyimpan simulasi klik tombol save sismulate"
+    user -> ui2 : Click button "Okay"
+    user -> ui2 : Click button "Save Simulate"
+    ui2 -> api : Post data with parameter input
+    deactivate ui2
+    activate api
+    note right of api
+        Insert field {
+        "pembatasan_anggaran", "years",
+        "id_cost_center",
+        }
+        from table "budget"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        ui2 <- api : return "Success"
+        activate ui2
+        user <- ui2 : show message "Data yang anda pilih terlah dirubah secara sistem"
+        deactivate ui2
+    else else
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show the message error "Something went wrong, nothing change"
+        deactivate ui2
+    end
+
+
+end
+
+@enduml

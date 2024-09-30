@@ -1,0 +1,147 @@
+@startuml arc
+title "Flow Process ARC Swift"
+
+actor user
+boundary "ARC Swift" as arc_swift
+boundary "Add ARC Swift" as add_arc_swift
+boundary "Edit ARC Swift" as edit_arc_swift
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+activate user
+user -> arc_swift : click "ARC Swift Page"
+activate arc_swift
+arc_swift -> api : Get data
+deactivate arc_swift
+activate api
+api -> arc : Get data
+deactivate api
+activate arc
+api <- arc : Response data
+deactivate arc
+note right of api
+    Get field {
+    }
+    from table ""
+endnote
+activate api
+alt Success
+    arc_swift  <- api : return "Success"
+    activate arc_swift
+    user <- arc_swift  : Show data "ARC Swift" page
+    deactivate arc_swift
+else else
+    arc_swift  <- api : return message error
+    deactivate api
+    activate arc_swift
+    user <- arc_swift  : show the message error
+    deactivate arc_swift
+end
+deactivate api
+group filter by keywoard
+    user -> arc_swift : click button "Search"
+    activate arc_swift
+    arc_swift -> api : Get data
+    deactivate arc_swift
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : response data
+    note right of api
+        Get field {
+        }
+        from table ""
+    endnote
+    deactivate arc
+    activate api
+    alt Success
+        arc_swift  <- api : return "Success"
+        activate arc_swift
+        user <- arc_swift  : Show data "ARC Swift" page with filter
+        deactivate arc_swift
+    else else
+        arc_swift  <- api : return message error
+        deactivate api
+        activate arc_swift
+        user <- arc_swift  : show the message error
+        deactivate arc_swift
+    end
+    deactivate api
+    user -> arc_swift : Click button "Clear"
+    activate arc_swift
+    user <- arc_swift : Show data "ARC Swift" page without filter
+    deactivate arc_swift
+end
+group export
+    user -> arc_swift : Click button "Export"
+    activate arc_swift
+    user <- arc_swift : Download file export and click save
+    deactivate arc_swift
+end
+group add
+    user -> arc_swift : Click button "add"
+    activate arc_swift
+    arc_swift -> add_arc_swift : call page
+    deactivate arc_swift
+    activate add_arc_swift
+    user <- add_arc_swift : show page "Add ARC Swift"
+    note right of user
+        if click "save" data will be saved
+        else click "cancel" data does'nt save
+    endnote
+    user -> add_arc_swift : fill the page "add old component" and "click" save or "cancel"
+    add_arc_swift -> arc_swift : data will be updated
+    deactivate add_arc_swift
+    activate arc_swift
+    user <- arc_swift : show page "ARC Swift"
+    deactivate arc_swift
+end
+group filter by operator
+    user -> arc_swift : click button "Select Operator"
+    activate arc_swift
+    arc_swift -> api : Get data
+    deactivate arc_swift
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : response data
+    deactivate arc
+    activate api
+    alt Success
+        arc_swift  <- api : return "Success"
+        activate arc_swift
+        user <- arc_swift  : Show data "arc_swift" page with filter
+        deactivate arc_swift
+    else else
+        arc_swift  <- api : return message error
+        deactivate api
+        activate arc_swift
+        user <- arc_swift  : show the message error
+        deactivate arc_swift
+    end
+    deactivate api
+end
+group edit
+    user -> arc_swift : Click button "edit"
+    activate arc_swift
+    arc_swift -> edit_arc_swift : call page
+    deactivate arc_swift
+    activate edit_arc_swift
+    user <- edit_arc_swift : show page "edit ARC Swift"
+    note right of user
+        if click "save" data will be saved
+        else click "cancel" data does'nt save
+    endnote
+    user -> edit_arc_swift : fill the page "edit ARC Swift" and "click" save or "cancel"
+    edit_arc_swift -> arc_swift : data will be updated
+    deactivate edit_arc_swift
+    activate arc_swift
+    user <- arc_swift : show page "ARC Swift"
+    deactivate arc_swift
+end
+@enduml

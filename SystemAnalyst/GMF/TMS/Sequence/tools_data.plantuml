@@ -1,0 +1,189 @@
+@startuml TMS Rebuild
+title "Flow Process Borrowing Tools"
+
+actor "Person" as user #Yellow
+boundary "Tools Data Page" as ui
+boundary "Popup Borrowing Cart" as ui2
+control "api" as api
+database "DB_TMS" as DB_TMS
+control "api_SOE" as api_SOE
+control "soe_SAP_PI" as SAP_PI
+
+autonumber
+user -> ui : User click menu "Tools Data"
+activate ui
+ui -> api : Request data
+deactivate ui
+activate api
+api -> DB_TMS : Get data
+deactivate api
+activate DB_TMS
+note left of DB_TMS
+Get field "id_status", "tools_number", "id_part_number", "reg_number", "tools_description", 
+"id_store", "id_location", "id_store_transit", "model", "serial_number", "id_manufacture",
+"barcode_number"
+
+from table m_tools
+endnote
+DB_TMS -> api : Response data
+deactivate DB_TMS
+activate api
+api -> ui : Return json
+deactivate api
+activate ui
+note right of ui
+See at Metric Role
+endnote
+ui -> user : Display data
+deactivate ui 
+
+group onClick "Add to Cart"
+user -> ui : Person click "Add to Cart" Icon / Input barcode
+activate ui
+ui -> ui : Insert data to cache "request_tools"
+ui -> user : Display data with "borrowing list" notification
+deactivate ui
+end
+
+group onClick "Borrowing List"
+user -> ui : Person click "Borrowing List" icon
+activate ui
+ui -> ui2 : Call popup page
+deactivate ui
+activate ui2
+ui2 -> ui2 : Reload cache "request_tools"
+ui2 -> user : Display popup page
+deactivate ui2
+' group onClick "Close" button
+' user -> ui2 : User click "X" icon
+' activate ui2
+' ui2 -> user : Close popup & return to the previous page
+' deactivate ui2
+' end
+group Step 1
+group Input barcode tools
+user -> ui2 : Input barcode to add tools
+activate ui2
+ui2 -> ui2 : Insert data to cache "request_tools"
+ui2 -> user : Display data on "Borrowing List"
+deactivate ui2
+end
+group onClick "Delete" icon
+user -> ui2 : User click "Delete" Icon
+activate ui2
+ui2 -> ui2 : Delete data from cache "request_tools" \nfilter data with selected
+ui2 -> user : Display data on "Borrowing List"
+deactivate ui2
+end
+group onClick "Next" button
+user -> ui2 : User click "Next" button
+activate ui2
+ui2 -> user : On to the Step 2
+deactivate ui2
+end
+end
+group Step 2 borrowing data
+group onChange "User id"
+user -> ui2 : Input user id or scan user id card
+activate ui2
+ui2 -> api : Request data with parameter user id
+deactivate ui2
+activate api
+api -> api_SOE : Get data
+deactivate api
+activate api_SOE
+note left of api_SOE
+Get field "nama", "unit", "jabatan"
+from table "tabpersonnel" filter nopeg = user id value
+endnote
+api_SOE -> api : Response data
+deactivate api_SOE
+activate api
+alt Exist
+        ui2 <- api : return json
+        activate ui2
+        user <- ui2 : show data
+        deactivate ui2
+    else else 
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show message (Data not exist)
+        deactivate ui2
+end
+deactivate api
+end
+
+group onChange "Job card"
+user -> ui2 : Input jobcard & enter or scan jobcard
+activate ui2
+ui2 -> api : Request data with parameter \ninput jobcard number
+deactivate ui2
+activate api
+api -> SAP_PI : Get data
+deactivate api
+activate SAP_PI
+note left of SAP_PI
+Get field "funcloc", "plant" with parameter jobcard value
+endnote
+SAP_PI -> api : Response data
+deactivate SAP_PI
+activate api
+alt Exist
+        ui2 <- api : return json
+        activate ui2
+        user <- ui2 : show data
+        deactivate ui2
+    else else 
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show message (Data not exist)
+        deactivate ui2
+end
+deactivate api
+end
+
+user -> ui2 : User click "Submit" button & Input Password
+activate ui2
+ui2 -> api : Request data
+deactivate ui2
+activate api
+api -> DB_TMS : Get & post data
+deactivate api
+activate DB_TMS
+note left of DB_TMS
+Get field "personnel_number", "personnel_name", "personnel_unit",
+"borrow_date", "est_return" 
+from table "request_tools"
+
+Insert field "job_card"
+from table "job_card"
+
+Get field "id_store"
+from table "m_tools"
+endnote
+DB_TMS -> api : Response data
+deactivate DB_TMS
+activate api
+alt Success
+        ui2 <- api : return "Success" & reload page
+        activate ui2
+        user <- ui2 : show message "Success"
+        deactivate ui2
+    else else 
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show message error
+        deactivate ui2
+end
+group onClick "Previous" button
+user -> ui2 : User click "Previous" button
+activate ui2
+ui2 -> user : Back to the Step 1
+deactivate ui2
+end
+end
+end
+@enduml

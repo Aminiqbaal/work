@@ -1,0 +1,56 @@
+@startuml SP Document
+title "Flow Process Borrowing List"
+
+actor "User" as user
+boundary "Borrowing List" as ui
+control "api" as api
+database "DB" as DB_SP
+
+autonumber
+user -> ui : Click "Borrowing List" Button
+activate ui
+ui -> api : Request Data
+activate api
+api -> DB_SP : Get Data
+note right of DB_SP
+ get field ("no_bpp"
+ "personel_number"
+ "personel_name"
+ "personel_unit"
+ "borrow_date"
+ "est_return"
+ "act_return"
+ "status")
+    table "request_tools"
+
+ get field ("job_card")
+    table "job_card"
+
+ get field ("store")
+    table "m_store"
+end note
+
+
+activate DB_SP
+DB_SP -> api : Response Data
+deactivate DB_SP
+deactivate DB_SP
+alt "success"
+api -> ui : Return "Success"
+ui -> user : Display "Borrowing List"
+deactivate ui
+else "else"
+api --> ui : return message error
+deactivate api
+activate ui 
+ui --> user : show the message error
+deactivate ui 
+end
+group onClick "Search Tools icon"
+user -> ui : Click "Search Tools"
+activate ui
+ui -> ui : Hide & Show \nHeader Table
+ui -> user : Display \n"Hide & Show Header table"
+deactivate ui
+end
+@enduml

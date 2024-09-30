@@ -1,0 +1,13 @@
+final assembly : 
+
+sub assy yang mau dirakit s
+
+
+progress sub assy :
+
+- assy : kumpuluan dari sub asssy
+
+- sub assy : komponen terkecil
+	- name
+	- quantity
+	- desc

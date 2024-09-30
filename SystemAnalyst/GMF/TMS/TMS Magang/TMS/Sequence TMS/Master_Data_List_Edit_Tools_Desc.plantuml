@@ -1,0 +1,45 @@
+@startuml
+
+title "Flow Process Master Data List (Edit Tools Description)"
+
+actor "User" as u
+boundary "Master Data\nList" as ui2
+entity "API" as api
+database "Database" as db
+
+autonumber
+note right of u
+User in "Master Data List" Page
+end note
+
+group onClick "Edit Tools Description"
+u -> ui2: User Click "Edit" Icon\non "Tools Description" Field
+activate ui2
+u -> ui2: User Change "Tools Description" into the Field
+u -> ui2: Click "Submit" Button
+ui2 -> api: Request Data with parameter id
+activate api
+api -> db: Put Data
+note right of db
+Update Field(
+    "tools_description"
+) from table "m_tools"
+where "id_tools" = value of "id_tools"
+where "id_part_number" = value of "id_part_number"
+end note
+activate db
+db -> api: Response Data
+deactivate
+api -> api: Commit Data
+alt Success
+api -> ui2: Return JSON
+ui2 -> u: Show "Success" Message
+else Failed
+api -> ui2: Return "Fail"
+deactivate
+ui2 -> u: Show "Failed" Message
+deactivate
+end
+end
+
+@enduml

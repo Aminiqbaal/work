@@ -1,0 +1,69 @@
+@startuml arc
+title "Flow Process Analytics"
+
+actor user
+boundary "Analytics Page" as analytics
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+activate user
+user -> analytics : click "Analytics Page"
+activate analytics
+analytics -> api : Get data
+deactivate analytics
+activate api
+api -> arc : Get data
+deactivate api
+activate arc
+api <- arc : Response data
+deactivate arc
+note right of api
+    Get field {
+    }
+    from table ""
+endnote
+activate api
+alt Success
+    analytics  <- api : return "Success"
+    activate analytics
+    user <- analytics  : Show data "analytics" page
+    deactivate analytics
+else else
+    analytics  <- api : return message error
+    deactivate api
+    activate analytics
+    user <- analytics  : show the message error
+    deactivate analytics
+end
+deactivate api
+group filter by operator
+    user -> analytics : click button "Select Operator"
+    activate analytics
+    user -> analytics : click button "Select of Type Aircraft Registration"
+    analytics -> api : Get data
+    deactivate analytics
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : response data
+    deactivate arc
+    activate api
+    alt Success
+        analytics  <- api : return "Success"
+        activate analytics
+        user <- analytics  : Show data "Analytics" page with filter
+        deactivate analytics
+    else else
+        analytics  <- api : return message error
+        deactivate api
+        activate analytics
+        user <- analytics  : show the message error
+        deactivate analytics
+    end
+    deactivate api
+end
+@enduml

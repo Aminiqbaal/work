@@ -1,0 +1,115 @@
+@startuml PMO IT
+title "Flow Process Project"
+
+actor "Person" as user #Yellow
+boundary "Project Page" as ui
+boundary "Popup Create New Project" as ui2
+boundary "Popup Agreement" as ui3
+control "api" as api
+database "DB_PMO_IT" as DB_PMO_IT
+
+autonumber
+user -> ui : Click Menu "Project"
+activate ui
+ui -> api : Request data
+deactivate ui
+activate api
+api -> DB_PMO_IT : Get data
+note left of DB_PMO_IT
+Get field (
+    "request_type"
+) from table "m_request_type"
+
+Get field (
+    "projectTitle",
+    "ictNumber",
+    "status",
+    "priority",
+    "picName",
+    "picUnit"
+) from table "request_project"
+
+Get field (
+    "project_type"
+) from table "project_type"
+
+filter by role
+if role user (dinas) = dinas of request_project table (pic_unit)
+end note
+deactivate api
+activate DB_PMO_IT
+DB_PMO_IT -> api : Response data
+deactivate DB_PMO_IT
+activate api
+api -> ui : Return json
+note left of DB_PMO_IT
+if login as user, field priority from table "request_project" not show
+else login as IT Department, field priority from table "request_project" show
+end note
+deactivate api
+activate ui
+ui -> user : Display data
+deactivate ui
+
+group onClick "Search"
+user -> ui : Fill data into field "Search"
+activate ui
+user -> ui : Click "Search" Input
+ui -> ui : Filter Data with \nvalue of input search
+ui -> user : Reload display data
+deactivate ui
+end
+
+group onClick "Detail"
+user -> ui : User click button "Detail"
+activate ui
+ui -> user : Go to Detail Page
+deactivate ui
+end
+
+group onClick "Create new project PMO IT"
+user -> ui : User click button create new project
+activate ui
+ui -> ui2 : Call page
+deactivate ui
+activate ui2
+ui2 -> user : show popup Create New Project
+deactivate ui2
+user -> ui2 : User choice either BizReq or CRF
+activate ui2
+note right of ui2
+if user choice BizReq "reference_aplication" not show
+else user choice CRF "reference_aplication" show and fill the reference application
+end note
+group onClick "Back / Yes, I want to select" Button
+user -> ui2 : user click "back" Button
+ui2 -> user : return to the previous page
+else else
+user -> ui2 : user click "Yes, I want to select" Button
+ui2 -> ui3 : Call page
+deactivate ui2
+activate ui3
+ui3 -> user : show popup agreement
+deactivate ui3 
+group onClick "Back / Agree" Button
+user -> ui3 : user click "back" Button
+activate ui3
+ui3 -> ui2 : Back to page
+deactivate ui3
+activate ui2
+ui2 -> user : show page popup
+deactivate ui2
+else else
+user -> ui3 : user click "Agree" Button
+group if user choose "CRF" Button
+
+activate ui3
+ui3 -> user : Go to "Change Request" form page
+else else
+ui3 -> user : Go to "Business Requirement" form page
+deactivate ui3
+end
+end
+end
+
+@enduml

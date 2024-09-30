@@ -1,0 +1,133 @@
+@startuml
+
+title "Flow Process Add Tools"
+
+actor "User" as u
+boundary "Master Data\nPage" as ui
+entity "API" as api
+database "DB" as db
+participant "Link File" as link
+
+autonumber
+note right of u
+User in "Master Data" Page
+end note
+
+group Add Tools
+u -> ui: Click "Add" Icon
+activate ui
+group Tools Type = "General"
+note right of ui
+Field(
+    "Tools Type"
+    "Tools Part Number"
+    "Tools Description"
+    "Select Image"
+    "Select File"
+    "Tools Price"
+)
+end note
+ui -> u: Show "Add Tools" Modal\nwithout "Tools effectivity" select field
+else "Special"
+ui -> api: Request data with all parameter
+activate api
+api -> db: Get Data
+note right of db
+Get Field(
+    "id_tools_effectivity"
+    "tools_effectivity"
+)from table "m_tools_effectivity"
+end note
+activate db
+db -> api: Response Data
+deactivate
+api -> ui: Return JSON
+deactivate
+ui -> u: Show "Add Tools" Modal\nwith "Tools effectivity" select field
+deactivate
+end
+note right of u
+if(type==general){
+    Fill(
+        "Tools Type"
+        "Tools Part Number"
+        "Tools Description"
+        "Select Image"
+        "Select File"
+        "Tools Price"
+    )
+}else{
+    Fill(
+        "Tools Type"
+        "Tools Part Number"
+        "Tools Description"
+        "Select Image"
+        "Select File"
+        "Tools Effectivity"
+        "Tools Price"
+    )
+}
+end note
+u -> ui: Fill all Data input
+activate ui
+u -> ui: Click "Submit Part Number" Button
+ui -> api: Request Data
+deactivate ui
+activate api
+api -> db: Post Data
+activate db
+note right of db
+Add Field(
+    "id_tools"
+    "type"
+    "tools_number"
+    "tools_description"
+)from table "m_tools"
+end note
+db -> api: Response Data
+deactivate
+api -> db: Post Data (m_part_number)
+activate db
+db -> link: Insert file with link
+activate link
+link -> db: Stream "link_file" Field
+deactivate
+db -> link: Insert file with link
+activate link
+link -> db: Stream "link_image" Field
+deactivate
+note right of db
+Add Field(
+    "id_part_number"
+    "part_number"
+    "link_file"
+    "link_image"
+)from table "m_part_number"
+end note
+db -> api: Response Data
+deactivate
+api -> db: Post Data (m_tools_effectivity)
+activate db
+note right of db
+Add Field(
+    "id_tools_effectivity"
+)from table "m_tools"
+end note
+db -> db: Concat table "m_part_number", "m_tools_effectivity"\nwith table "m_tools"
+db -> api: Response Data
+deactivate
+api -> api: Commit
+group Success
+api -> ui: Return JSON
+activate ui
+ui -> u: Show "Success" Message
+else Failed
+api -> ui: Return "Fail"
+deactivate api
+ui -> u: Show "Failed" Message
+deactivate ui
+end
+end
+
+
+@enduml

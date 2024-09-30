@@ -1,0 +1,49 @@
+<mxfile host="65bd71144e">
+    <diagram id="w4-5MeQJi97smLrjXn2X" name="Page-1">
+        <mxGraphModel dx="816" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="10" y="190" width="160" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.laptop;" parent="1" vertex="1">
+                    <mxGeometry x="60.80000000000001" y="220" width="58.4" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#4495D1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.monitor;" parent="1" vertex="1">
+                    <mxGeometry x="68.39999999999998" y="280" width="43.2" height="47.6" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="shape=doubleArrow;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="190" y="240" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="" style="whiteSpace=wrap;html=1;strokeColor=#FFFFFF;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="533" y="35" width="287" height="470" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="Realisasi &amp;amp;&lt;br&gt;Investasi" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.database;" parent="1" vertex="1">
+                    <mxGeometry x="349.88" y="253" width="37.5" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="Application SOE" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.database;" parent="1" vertex="1">
+                    <mxGeometry x="657.75" y="170" width="37.5" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="LDAP" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.azure_active_directory;" parent="1" vertex="1">
+                    <mxGeometry x="652.75" y="60" width="47.5" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" style="edgeStyle=orthogonalEdgeStyle;shape=flexArrow;html=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="443" y="268" as="targetPoint"/>
+                        <mxPoint x="503" y="268" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" value="" style="sketch=0;aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/mscae/SAP_HANA_on_Azure.svg;" parent="1" vertex="1">
+                    <mxGeometry x="616.5" y="380" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="OLA" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.database;" parent="1" vertex="1">
+                    <mxGeometry x="657.75" y="280" width="37.5" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="Application &#10;Realisasi &amp; Investasi" style="swimlane;startSize=40;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="193" width="120" height="150" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -1,0 +1,284 @@
+@startuml TA
+title "Flow Process Request Budget OPEX"
+
+actor user
+boundary "Dashboard" as dahsboard
+boundary "Detail Request Realization" as detail_request_realization
+boundary "Create Request Realization" as create_request_realization
+boundary "Create Request Reallocation" as create_request_reallocation
+boundary "Detail Request Reallocation" as detail_request_reallocation
+boundary "Edit Request Realization" as edit_request_realization
+boundary "Edit Request Reallocation" as edit_request_reallocation
+boundary "Reallocation Budget General" as reallocation_budget_general
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+
+user -> dahsboard : Click menu "Create Request Realization"
+activate user
+activate dahsboard
+dahsboard -> create_request_realization : Call page
+deactivate dahsboard
+activate create_request_realization
+create_request_realization -> user : Show "Create Request Realization" page
+alt Overlimit Budget
+    user -> create_request_realization : Fill the form "Create Request Realization"
+    note right of user
+        if Field Amount Submission "Your request overlimit budget"
+    end note
+    user -> create_request_realization : Click button "Create Reallocation"
+    create_request_realization -> create_request_reallocation : Call page
+    deactivate create_request_realization
+    activate create_request_reallocation
+    create_request_reallocation -> user : Show "Create Request Reallocation" page
+    user -> create_request_reallocation : Fill the form "Create Request Reallocation"
+    create_request_reallocation -> api : Post data with parameter input
+    deactivate create_request_realization
+    deactivate create_request_reallocation
+    activate api
+    note right of api
+        Insert field {
+        "realization_id", "type",
+        "ta_reff", "owner_budget",
+        "status", "department",
+        "nopeg", "department_to",
+        "nopeg_to", "created_at",
+        "created_by"
+        }
+        from table "reallocation"
+        Insert field {
+        "id_reallocation", "id_gl_account",
+        "id_realizazion_item", "amount",
+        "budget_name", "remark"
+        "created_at", "created_by"
+        }
+        from table "reallocation_item"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        create_request_realization <- api : return "Success"
+        activate create_request_realization
+        user <- create_request_realization : show message "Success" \ngo to previous page\n& reload page
+        deactivate create_request_realization
+    else else
+        create_request_realization <- api : return message error
+        deactivate api
+        activate create_request_realization
+        user <- create_request_realization : show the message error
+        deactivate create_request_realization
+    end
+end
+user -> create_request_realization : Fill the form "Create Request Realization"
+activate create_request_realization
+note right of user
+    if user click button "save",
+    so the data will be save only (status draft)
+    else user click button "submit"
+    so the data will be send to next step (to SM User)
+
+    (both save or submit the data will be show at the Need
+    sApproval Menu)
+end note
+user -> create_request_realization : Click button "Save" or "Submit"
+create_request_realization -> api : Post data with parameter input
+deactivate create_request_realization
+deactivate create_request_realization
+activate api
+note right of api
+    Insert field {
+    "years", "month", "id_cost_center",
+    "no_draft", "no_request", "ta_reff",
+    "type", "responsible_nopeg",
+    "title_request", "note_request",
+    "status", "id_status",
+    "department", "nopeg",
+    "department_to", "nopeg_to",
+    "created_at", "created_by"
+    }
+    from table "realization"
+    Insert field {
+    "id_realization", "id_gl_account",
+    "amount", "amount_submission",
+    "amount_hps", "amount_correction",
+    "period_start", "period_finish",
+    "desc_pby", "remark_pby", "memo"
+    "created_at", "created_by"
+    }
+    from table "realization_item"
+endnote
+api -> DB_TA : Post data
+deactivate api
+activate DB_TA
+
+DB_TA -> api : Response data
+deactivate DB_TA
+activate api
+alt Success
+    create_request_realization <- api : return "Success"
+    activate create_request_realization
+    user <- create_request_realization : show message "Success" \ngo to previous page & reload page
+    deactivate create_request_realization
+else else
+    create_request_realization <- api : return message error
+    deactivate api
+    activate create_request_realization
+    user <- create_request_realization : show the message error
+    deactivate create_request_realization
+end
+group Edit Request Realization
+    note right of user
+        If the request realization has
+        not been approved by the superior,
+        the user can change the details
+    end note
+    user -> dahsboard : Click menu "Detail Request Realization"
+    activate dahsboard
+    dahsboard -> detail_request_realization : Call page
+    deactivate dahsboard
+    activate detail_request_realization
+    detail_request_realization -> user : Show "Detail Request Realization" page
+    user -> detail_request_realization : Click "Edit"
+    detail_request_realization -> edit_request_realization : Call Page
+    deactivate detail_request_realization
+    activate edit_request_realization
+    edit_request_realization -> user : Show "Edit Request Realization" page
+    user -> edit_request_realization : Fill the form "Edit Request Realization"
+    edit_request_realization -> api : Post data with parameter input
+    deactivate edit_request_realization
+    activate api
+    note right of api
+        Insert field {
+        "years", "month", "id_cost_center",
+        "no_draft", "no_request", "ta_reff",
+        "type", "responsible_nopeg",
+        "title_request", "note_request",
+        "status", "id_status",
+        "department", "nopeg",
+        "department_to", "nopeg_to",
+        "updated_at", "updated_by"
+        }
+        from table "realization"
+        Insert field {
+        "id_realization", "id_gl_account",
+        "amount", "amount_submission",
+        "amount_hps", "amount_correction",
+        "period_start", "period_finish",
+        "desc_pby", "remark_pby", "memo"
+        "updated_at", "updated_by"
+        }
+        from table "realization_item"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        create_request_realization <- api : return "Success"
+        activate create_request_realization
+        user <- create_request_realization : show message "Success" go to previous page & reload page
+        deactivate create_request_realization
+    else else
+        create_request_realization <- api : return message error
+        deactivate api
+        activate create_request_realization
+        user <- create_request_realization : show the message error
+        deactivate create_request_realization
+    end
+end
+group Edit Request Reallocation
+
+    user -> dahsboard : Click menu "Reallocation Budget"
+    activate dahsboard
+    user -> dahsboard : Click menu "General"
+    dahsboard -> reallocation_budget_general : Call Page
+    deactivate dahsboard
+    activate reallocation_budget_general
+    reallocation_budget_general -> user : Show "Reallocation Budget - General"
+    alt Filter
+        user -> reallocation_budget_general : Click filter "TA Reff", "No. of Request", "Type of Reallocation", "Entry Date (From)", "Entry Date (To)", "Status", "Status To", "Departemen To"
+        reallocation_budget_general -> user : Show "Reallocation Budget - General" with filter
+        deactivate reallocation_budget_general
+    else Reset Filter
+        user -> reallocation_budget_general : Click Button "Reset Filter"
+        activate reallocation_budget_general
+        reallocation_budget_general -> user : Show "Reallocation Budget - General" without filter
+        deactivate reallocation_budget_general
+    end
+    note right of user
+        If the request reallocation has
+        not been approved by the superior,
+        the user can change the details
+    end note
+
+    user -> dahsboard : Click button "Detail Request Reallocation" on field "Action"
+    activate dahsboard
+    dahsboard -> detail_request_reallocation : Call page
+    deactivate dahsboard
+    activate detail_request_reallocation
+    detail_request_reallocation -> user : Show "Detail Request Reallocation" page
+    user -> detail_request_reallocation : Click "Edit"
+    detail_request_reallocation -> edit_request_reallocation : Call Page
+    deactivate detail_request_reallocation
+    activate edit_request_reallocation
+    edit_request_reallocation -> user : Show "Edit Request Reallocation" page
+    user -> edit_request_reallocation : Fill the form "Edit Request Reallocation"
+    edit_request_reallocation -> api : Post data with parameter input
+    deactivate edit_request_reallocation
+    activate api
+    note right of api
+        Insert field {
+        "realization_id", "type",
+        "ta_reff", "owner_budget",
+        "status", "department",
+        "nopeg", "department_to",
+        "nopeg_to", "updated_at",
+        "updated_by"
+        }
+        from table "reallocation"
+        Insert field {
+        "id_reallocation", "id_gl_account",
+        "id_realizazion_item", "amount",
+        "budget_name", "remark"
+        "updated_at", "updated_by"
+        }
+        from table "reallocation_item"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        create_request_realization <- api : return "Success"
+        activate create_request_realization
+        user <- create_request_realization : show message "Success" go to previous page & reload page
+        deactivate create_request_realization
+    else else
+        create_request_realization <- api : return message error
+        deactivate api
+        activate create_request_realization
+        user <- create_request_realization : show the message error
+        deactivate create_request_realization
+    end
+end
+group Click button Back
+    user -> dahsboard : click button "Back"
+    activate dahsboard
+    user <- dahsboard : Cancel form & go to previous page
+    deactivate dahsboard
+end
+
+@enduml

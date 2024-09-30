@@ -1,0 +1,99 @@
+@startuml
+
+title "Flow Process Master Data List (Add Tools Effectivity)"
+
+actor "User" as u
+boundary "Master Data\nList" as ui2
+entity "API" as api
+database "Database" as db
+
+autonumber
+note right of u
+User in "Master Data List" Page
+end note
+
+group onClick "Add Tools Effectivity"
+u -> ui2: Click "Add Tools Effectivity" Button
+activate ui2
+ui2 -> u: Show "Add Tools Effectivity" Modal
+deactivate
+activate u
+u -> ui2: Click "Tools Effectivity" Select Field
+deactivate
+activate ui2
+ui2 -> api: Request Data with all parameter
+activate api
+api -> db: Get Data
+activate db
+note right of db
+get field(
+    "id_parts_number"
+    "id_tools_effectivity"
+)from table "m_tools"
+end note
+db -> api: Response Data
+api -> db: Get Data (tools effectivity)
+note right of db
+get field (
+    "id_tools_effectivity"
+    "id_part_number"
+    "tools_effectivity"
+)from table "m_tools_effectivity"
+end note
+db -> api: Response Data
+deactivate
+api -> api: Concat "m_tools_effectivity" with table "m_tools"
+api -> ui2: Response Data
+deactivate
+ui2 -> u: Show "Dropdown List" Tools Effectivity
+deactivate
+activate u
+u -> ui2: Choose one of the tools effectivity
+activate ui2
+u -> ui2: Click "Submit effectivity" Button
+deactivate u
+ui2 -> u: Show "Confirmation" Modal
+deactivate ui2
+
+group onClick "Yes"
+u -> ui2: : Click "Yes" Button
+activate ui2
+ui2 -> api: Request Data
+activate api
+api -> db: Post Data
+activate db
+note right of db
+Add Field(
+    "id_tools_effectivity"
+    "tools_effectivity"
+)from table "m_tools_effectivity"
+end note
+db -> api: Response Data
+api -> db: Put Data
+note right of db
+Update Field(
+    "id_tools_effectivity"
+)fromt able "m_tools"
+end note
+db -> api: Response Data
+deactivate
+api -> api: Commit
+alt Success
+api -> ui2: Return JSON
+ui2 -> u: Show "Success" Message
+else
+api -> ui2: Return "Fail"
+deactivate
+ui2 -> u: Show "Failed" Message
+deactivate
+end
+end
+group onClick "No"
+u -> ui2: Click "No" Button
+activate ui2
+ui2 -> u: Close "Confirmation" Modal
+deactivate
+end
+end
+
+@enduml

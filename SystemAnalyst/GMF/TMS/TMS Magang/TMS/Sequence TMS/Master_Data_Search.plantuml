@@ -1,0 +1,60 @@
+@startuml
+
+title "Flow Process Master Data (Search)"
+
+actor "User" as u
+boundary "Master Data" as ui1
+boundary "Master Data\nList" as ui2
+entity "API" as api
+database "Database" as db
+
+autonumber
+note right of u
+User in Master Data Page
+end note
+
+u -> ui1: User Fill Data into "Part" Number Field
+activate ui1
+ui1 -> api: Request Data with parameter id
+activate api
+api -> db: Get Data
+note right of db
+Get Field(
+    "id_part_number"
+    "part_number"
+)
+end note
+activate db
+db -> api: Response Data
+deactivate
+api -> db: Get Data
+note right of db
+Get Field(
+    "id_status"
+    "tools_number"
+    "reg_number"
+    "serial_number
+    "model"
+    "id_manufacture"
+    "id_store"
+    "id_location"
+    "type"
+    "tools_description"
+)
+end note
+activate db
+db -> api: Response Data
+deactivate
+api -> api: Concat "m_part_number" with "m_tools" table
+api -> api: Concat "m_manufacture" with "m_tools" table
+api -> api: Concat "m_store" with "m_tools" table
+api -> api: Concat "m_location" with "m_tools" table
+api -> api: Concat "m_tools_effectivity" with "m_tools" table
+api -> ui2: Return JSON
+deactivate
+activate ui2
+ui2 -> u: Show "Master Data List" Page
+deactivate
+deactivate ui1
+
+@enduml

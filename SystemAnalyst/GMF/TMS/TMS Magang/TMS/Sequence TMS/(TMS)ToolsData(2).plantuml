@@ -1,0 +1,104 @@
+@startuml 
+title Flow Process Tools Data (2)
+
+actor "User" as user
+boundary "Tools Data" as ui
+control "api" as api
+database "DB" as DB_SP
+
+autonumber
+
+note right of user 
+user in "Welcome" Page then 
+click "Tools Data" button
+end note 
+user --> ui : user in "Welcome" Page
+activate ui 
+user --> ui : user click "Tools Data" button
+ui --> api : request data 
+activate api 
+api --> DB_SP : get data 
+activate DB_SP
+note right of DB_SP
+
+get field ("tools_number"
+"reg_number"
+"tools_description")
+    table "m_tools"
+
+get field ("part_number")
+    table "m_part_number"
+
+get field ("store")
+    table "m_store"
+
+get field ("location")
+    table "m_location"
+
+get field ("est_return"
+"borrow_date")
+    table "request_tools"
+end note
+
+DB_SP --> api : response data
+deactivate DB_SP
+api --> api : get all data to be showed
+api --> ui : return JSON
+deactivate api 
+ui --> user : Show "Tools Data" list
+deactivate ui 
+
+group "Onclick Application Guide Button"
+user --> ui : User click Guide button from Tools data Page
+activate ui 
+ui --> user : Show pop up modal about Tools Data page
+deactivate ui 
+end
+
+group "Onclick Edit icon"
+user --> ui : User clicked "Edit" icon button 
+activate ui 
+ui --> api : Request data with parameter input "personel_number"
+activate api 
+api --> DB_SP : Insert data 
+activate DB_SP 
+note right of DB_SP
+get field ("personel_number")
+    table "request_tools"
+end note 
+DB_SP --> api : Response data
+api --> DB_SP : Update data 
+note right of DB_SP
+update data 
+get field ("personel_number")
+    table "request_tools"
+end note 
+DB_SP --> api : Response data
+deactivate DB_SP 
+api --> api : Commit data 
+api --> ui : Return JSON
+deactivate api 
+ui --> user : Show updated "Personel number"
+deactivate ui 
+end
+group "Onclick Select Unit"
+user --> ui : user click on "Select Unit" dropdown list
+activate ui 
+ui --> api : request data
+activate api 
+api --> DB_SP : get data 
+activate DB_SP
+note right of DB_SP 
+show unit ("A330-300"
+"B737-300"
+"B737-300C")
+With checkboxes
+end note
+DB_SP --> api : response data 
+deactivate DB_SP 
+api --> ui : return JSON
+deactivate api 
+ui --> user : Show all units and checkboxes
+deactivate ui 
+end
+

@@ -1,0 +1,42 @@
+@startuml arc
+title "Flow Process Documentation"
+
+actor user
+boundary "Documentation Page" as documentation
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+activate user
+user -> documentation : click "documentation Page"
+activate documentation
+documentation -> api : Get data
+deactivate documentation
+activate api
+api -> arc : Get data
+deactivate api
+activate arc
+api <- arc : Response data
+deactivate arc
+note right of api
+    Get field {
+    }
+    from table ""
+endnote
+activate api
+alt Success
+    documentation  <- api : return "Success"
+    activate documentation
+    user <- documentation  : Show data "Documentation" page
+    deactivate documentation
+else else
+    documentation  <- api : return message error
+    deactivate api
+    activate documentation
+    user <- documentation  : show the message error
+    deactivate documentation
+end
+deactivate api
+@enduml

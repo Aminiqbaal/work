@@ -1,0 +1,192 @@
+@startuml TA
+title "Flow Process Report OPEX"
+
+actor user
+boundary "Dashboard" as dashboard
+boundary "Report" as report
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+note right of user
+    Role - All User, Kecuali TAB, SM TAB & VP TA
+    Bisa melihat RKAP dan ringkasan dari
+    pengajuan realisasinya yang masih
+    berporgress maupun yang sudah
+    selesai di dinasnya sendiri
+
+    Role - TAB, SM TAB & VP TA
+    Bisa melihat RKAP didinasnya sendiri
+    dan ringkasan dari pengajuan
+    realisasinya yang masih berporgress
+    maupun yang sudah selesai di semua
+    dinas
+endnote
+user -> dashboard : Click menu "Report"
+activate user
+activate dashboard
+group Sub Menu Report Summary
+    user -> dashboard : Click sub-menu Report "Summary"
+    dashboard -> report : Call page
+    deactivate dashboard
+    activate report
+    report -> user : Show data "Summary" page
+    user -> report : Filter field "Years"
+    report -> api : Post data with parameter input
+    deactivate report
+    activate api
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    note right of api
+        Get field {
+        "years", "month", "id_cost_center",
+        "no_draft", "no_request", "ta_reff",
+        "type", "responsible_nopeg",
+        "title_request", "note_request",
+        "status", "id_status",
+        "department", "nopeg",
+        "department_to", "nopeg_to",
+        "created_at", "created_by"
+        }
+        from table "realization"
+
+        Get field {
+        "id_realization", "id_gl_account",
+        "amount", "amount_submission",
+        "amount_hps", "amount_correction",
+        "period_start", "period_finish",
+        "desc_pby", "remark_pby", "memo"
+        "created_at", "created_by"
+        }
+        from table "realization_item"
+    endnote
+    deactivate DB_TA
+    activate api
+    alt Success
+        report  <- api : return "Success"
+        activate report
+        user <- report  : Show data "Summary" page with filter
+        deactivate report
+    else else
+        report  <- api : return message error
+        deactivate api
+        activate report
+        user <- report  : show the message error
+        deactivate report
+    end
+end
+group Sub Menu Report View Budget
+    user -> dashboard : Click sub-menu Report "View Budget"
+    activate dashboard
+    dashboard -> report : Call page
+    deactivate dashboard
+    activate report
+    report -> user : Show data "View Budget" page
+    user -> report : Filter field "Years", "Group", & "Group Detail"
+    report -> api : Post data with parameter input
+    deactivate report
+    activate api
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    note right of api
+        Get field {
+        "years", "month", "id_cost_center",
+        "no_draft", "no_request", "ta_reff",
+        "type", "responsible_nopeg",
+        "title_request", "note_request",
+        "status", "id_status",
+        "department", "nopeg",
+        "department_to", "nopeg_to",
+        "created_at", "created_by"
+        }
+        from table "realization"
+
+        Get field {
+        "id_realization", "id_gl_account",
+        "amount", "amount_submission",
+        "amount_hps", "amount_correction",
+        "period_start", "period_finish",
+        "desc_pby", "remark_pby", "memo"
+        "created_at", "created_by"
+        }
+        from table "realization_item"
+    endnote
+    deactivate DB_TA
+    activate api
+    alt Success
+        report  <- api : return "Success"
+        activate report
+        user <- report  : Show data "View Budget" page with filter
+        deactivate report
+    else else
+        report  <- api : return message error
+        deactivate api
+        activate report
+        user <- report  : show the message error
+        deactivate report
+    end
+end
+group Sub Menu Report Personnel Summary
+    user -> dashboard : Click sub-menu Report "Personnel Summary"
+    activate dashboard
+    dashboard -> report : Call page
+    deactivate dashboard
+    activate report
+    report -> user : Show data "Personnel Summary" page
+    user -> report : Filter field "Dinas", "Month", "Years", "Type of Submnission", \n"Status", "Request By",  & "Responsible of Request"
+    report -> api : Post data with parameter input
+    deactivate report
+    activate api
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    note right of api
+        Get field {
+        "years", "month", "id_cost_center",
+        "no_draft", "no_request", "ta_reff",
+        "type", "responsible_nopeg",
+        "title_request", "note_request",
+        "status", "id_status",
+        "department", "nopeg",
+        "department_to", "nopeg_to",
+        "created_at", "created_by"
+        }
+        from table "realization"
+
+        Get field {
+        "id_realization", "id_gl_account",
+        "amount", "amount_submission",
+        "amount_hps", "amount_correction",
+        "period_start", "period_finish",
+        "desc_pby", "remark_pby", "memo"
+        "created_at", "created_by"
+        }
+        from table "realization_item"
+    endnote
+    deactivate DB_TA
+    activate api
+    alt Success
+        report  <- api : return "Success"
+        activate report
+        user <- report  : Show data "Personnel Summary" page with filter
+        deactivate report
+    else else
+        report  <- api : return message error
+        deactivate api
+        activate report
+        user <- report  : show the message error
+        deactivate report
+    end
+end
+
+
+@enduml

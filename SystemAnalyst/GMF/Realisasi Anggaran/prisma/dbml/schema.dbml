@@ -1,0 +1,574 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table approval {
+  id_approval Int [pk]
+  unique_id String [not null]
+  table_name String [not null]
+  table_id Int [not null]
+  name String [not null]
+  jabatan String [not null]
+  unit String [not null]
+  status StatusEnum [not null]
+  remark String
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  note_memo note_memo [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table budget {
+  id_budget Int [pk]
+  unique_id String [not null]
+  years Int [not null]
+  id_gl_account Int [not null]
+  id_cost_center Int [not null]
+  total Float [not null]
+  value01 Float [not null]
+  value02 Float [not null]
+  value03 Float [not null]
+  value04 Float [not null]
+  value05 Float [not null]
+  value06 Float [not null]
+  value07 Float [not null]
+  value08 Float [not null]
+  value09 Float [not null]
+  value10 Float [not null]
+  value11 Float [not null]
+  value12 Float [not null]
+  value13 Float [not null]
+  value14 Float [not null]
+  value15 Float [not null]
+  value16 Float [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  m_cost_center m_cost_center [not null]
+  m_gl_account m_gl_account [not null]
+
+  indexes {
+    (years, id_gl_account, id_cost_center) [unique]
+  }
+}
+
+Table budget_investation {
+  id_budget_investation Int [pk]
+  unique_id String [not null]
+  years Int [not null]
+  no_invest Int
+  id_cost_center Int [not null]
+  description String
+  type InvestTypeEnum
+  group_asset String
+  usefull Int
+  skala Int
+  group_invest String
+  category String
+  new Boolean
+  total Float [not null]
+  plus Float [not null]
+  minus Float [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  m_cost_center m_cost_center [not null]
+  realization_invest_item realization_invest_item [not null]
+  reallocation_invest_item reallocation_invest_item [not null]
+
+  indexes {
+    (years, no_invest, id_cost_center) [unique]
+  }
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table budget_reallocation {
+  id_budget Int [pk]
+  unique_id String [not null]
+  years Int [not null]
+  id_cost_center Int [not null]
+  id_gl_account Int [not null]
+  plus Float [not null]
+  minus Float [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  m_cost_center m_cost_center [not null]
+  m_gl_account m_gl_account [not null]
+
+  indexes {
+    (years, id_cost_center, id_gl_account) [unique]
+  }
+}
+
+Table file_upload {
+  id_file_upload Int [pk]
+  unique_id String [not null]
+  table_name String [not null]
+  id_table Int [not null]
+  id_doc_category Int [not null]
+  doc_name String [not null]
+  doc_link String [not null]
+  doc_size Float [not null]
+  doc_type String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  update_by String
+  m_doc_category m_doc_category [not null]
+
+  indexes {
+    (table_name, id_table, id_doc_category, doc_name) [unique]
+  }
+}
+
+Table m_cost_center {
+  id_cost_center Int [pk]
+  unique_id String [not null]
+  cost_center String [unique, not null]
+  description String [not null]
+  bidang String [not null]
+  dinas String [not null]
+  directorat String [not null]
+  group_dinas String [not null]
+  profit_center String [not null]
+  active Boolean [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_at DateTime
+  updated_by String
+  budget budget [not null]
+  budget_investation budget_investation [not null]
+  budget_reallocation budget_reallocation [not null]
+  realization realization [not null]
+  reallocation_budget_item_reallocation_budget_item_id_cost_centerTom_cost_center reallocation_budget_item [not null]
+  reallocation_budget_item_reallocation_budget_item_id_cost_center_toTom_cost_center reallocation_budget_item [not null]
+}
+
+Table m_doc_category {
+  id_doc_category Int [pk, increment]
+  unique_id String [not null]
+  module ModulEnum [not null]
+  doc_category String [not null]
+  description String [not null]
+  created_at DateTime
+  created_by String [not null]
+  updated_at DateTime
+  update_by String
+  file_upload file_upload [not null]
+
+  indexes {
+    (module, doc_category) [unique]
+  }
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table m_gl_account {
+  id_gl_account Int [pk]
+  unique_id String [not null]
+  gl_account Decimal [unique, not null]
+  description String [not null]
+  group_detail String [not null]
+  group_gl String [not null]
+  sap Boolean [not null]
+  active Boolean [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_at DateTime
+  updated_by String
+  budget budget [not null]
+  budget_reallocation budget_reallocation [not null]
+  realization_item realization_item [not null]
+  reallocation_budget_item_reallocation_budget_item_id_gl_accountTom_gl_account reallocation_budget_item [not null]
+  reallocation_budget_item_reallocation_budget_item_id_gl_account_toTom_gl_account reallocation_budget_item [not null]
+  reallocation_item reallocation_item [not null]
+}
+
+Table m_kurs {
+  id_kurs Int [pk]
+  unique_id String [not null]
+  years Int [unique, not null]
+  value Float [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_at DateTime
+  updated_by String
+}
+
+Table m_status {
+  id_status Int [pk, increment]
+  unique_id String [not null]
+  created_at DateTime
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  status String
+  realization realization [not null]
+  realization_invest realization_invest [not null]
+  reallocation reallocation [not null]
+  reallocation_budget reallocation_budget [not null]
+  reallocation_invest reallocation_invest [not null]
+}
+
+Table m_type_invest {
+  id_type_invest Int [pk, increment]
+  unique_id String [not null]
+  type String [unique, not null]
+  name String
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_by String
+  updated_at DateTime
+  realization_invest realization_invest [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table note_memo {
+  id Int [pk]
+  unique_id String [not null]
+  id_approval Int [not null]
+  years Int [not null]
+  dinas String [not null]
+  memo_number BigInt [not null]
+  department_to String [not null]
+  note String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  approval approval [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table realization {
+  id_realization Int [pk]
+  unique_id String [not null]
+  years Int [not null]
+  month Int [not null]
+  id_cost_center Int [not null]
+  no_draft Int [not null]
+  no_request Int
+  ta_reff Int
+  type RealizationTypeEnum [not null]
+  responsible_nopeg String [not null]
+  title_request String [not null]
+  note_request String [not null]
+  status StatusEnum [not null]
+  id_status Int [not null]
+  department String [not null]
+  nopeg String [not null]
+  department_to String [not null]
+  nopeg_to String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  m_cost_center m_cost_center [not null]
+  m_status m_status [not null]
+  realization_item realization_item [not null]
+  reallocation reallocation [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table realization_invest {
+  id_realization_invest Int [pk]
+  unique_id String [not null]
+  years Int [not null]
+  no_draft Int [not null]
+  no_request Int
+  id_type_invest Int [not null]
+  cba Boolean
+  responsible_nopeg String [not null]
+  description String
+  io Decimal
+  status StatusEnum [not null]
+  id_status Int [not null]
+  department String [not null]
+  nopeg String [not null]
+  department_to String [not null]
+  nopeg_to String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  m_status m_status [not null]
+  m_type_invest m_type_invest [not null]
+  realization_invest_item realization_invest_item [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table realization_invest_item {
+  id_realization_invest_item Int [pk]
+  unique_id String [not null]
+  id_realization_invest Int [not null]
+  id_budget_investation Int [not null]
+  amount Float
+  amount_submission Float [not null]
+  internal Boolean
+  note String
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  budget_investation budget_investation [not null]
+  realization_invest realization_invest [not null]
+  reallocation_invest_item reallocation_invest_item [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table realization_item {
+  id_realization_item Int [pk]
+  unique_id String [not null]
+  id_realization Int [not null]
+  id_gl_account Int [not null]
+  amount Float [not null]
+  amount_submission Float [not null]
+  amount_hps Float [not null]
+  amount_correction Float [not null]
+  period_start DateTime [not null]
+  period_finish DateTime [not null]
+  desc_pby String [not null]
+  remark_pby String [not null]
+  memo String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_at DateTime
+  updated_by String
+  m_gl_account m_gl_account [not null]
+  realization realization [not null]
+  reallocation_item reallocation_item [not null]
+
+  indexes {
+    (id_realization, id_gl_account) [unique]
+  }
+}
+
+Table reallocation {
+  id_reallocation Int [pk]
+  unique_id String [not null]
+  realization_id Int [not null]
+  type String [not null]
+  ta_reff Int [not null]
+  owner_budget String [not null]
+  status StatusEnum [not null]
+  id_status Int [not null]
+  department String [not null]
+  nopeg String [not null]
+  department_to String [not null]
+  nopeg_to String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_at DateTime
+  updated_by String
+  m_status m_status [not null]
+  realization realization [not null]
+  reallocation_item reallocation_item [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table reallocation_budget {
+  id_reallocation_budget Int [pk, increment]
+  unique_id String [not null]
+  years Int [not null]
+  ta_reff Int [not null]
+  id_status Int [not null]
+  status StatusEnum [not null]
+  department String [not null]
+  nopeg String [not null]
+  department_to String [not null]
+  nopeg_to String [not null]
+  created_at DateTime
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  m_status m_status [not null]
+  reallocation_budget_item reallocation_budget_item [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table reallocation_budget_item {
+  id_reallocation_budget_item Int [pk, increment]
+  unique_id String [not null]
+  id_reallocation_budget Int [not null]
+  id_cost_center Int [not null]
+  id_gl_account Int [not null]
+  id_cost_center_to Int [not null]
+  id_gl_account_to Int [not null]
+  amount Float
+  created_at DateTime
+  created_by String [not null]
+  updated_at DateTime
+  updated_by String
+  m_cost_center_reallocation_budget_item_id_cost_centerTom_cost_center m_cost_center [not null]
+  m_cost_center_reallocation_budget_item_id_cost_center_toTom_cost_center m_cost_center [not null]
+  m_gl_account_reallocation_budget_item_id_gl_accountTom_gl_account m_gl_account [not null]
+  m_gl_account_reallocation_budget_item_id_gl_account_toTom_gl_account m_gl_account [not null]
+  reallocation_budget reallocation_budget [not null]
+}
+
+Table reallocation_invest {
+  id_reallocation_invest Int [pk]
+  unique_id String [not null]
+  type String [not null]
+  ba Int [not null]
+  status StatusEnum [not null]
+  id_status Int [not null]
+  department String [not null]
+  nopeg String [not null]
+  department_to String [not null]
+  nopeg_to String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_at DateTime
+  updated_by String
+  m_status m_status [not null]
+  reallocation_invest_item reallocation_invest_item [not null]
+
+  Note: 'This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments'
+}
+
+Table reallocation_invest_item {
+  id_reallocation_invest_item Int [pk]
+  unique_id String [not null]
+  id_reallocation_invest Int [not null]
+  id_budget_investation Int [not null]
+  id_realization_invest_item Int [not null]
+  amount Float [not null]
+  description String
+  note String
+  remark String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_by String
+  updated_at DateTime
+  budget_investation budget_investation [not null]
+  realization_invest_item realization_invest_item [not null]
+  reallocation_invest reallocation_invest [not null]
+}
+
+Table reallocation_item {
+  id_reallocation_item Int [pk]
+  unique_id String [not null]
+  id_reallocation Int [not null]
+  id_gl_account Int [not null]
+  id_realizazion_item Int [not null]
+  amount Float [not null]
+  budget_name String [not null]
+  remark String [not null]
+  created_at DateTime [not null]
+  created_by String [not null]
+  updated_at DateTime
+  update_by String
+  m_gl_account m_gl_account [not null]
+  realization_item realization_item [not null]
+  reallocation reallocation [not null]
+}
+
+Table simulation {
+  id_simulation Int [pk]
+  unique_id String [not null]
+  years Int [not null]
+  simulation_budget Float
+  created_at DateTime [not null]
+  created_by String [not null]
+  update_at DateTime
+  updated_by String
+}
+
+Enum InvestTypeEnum {
+  FS
+  CBA
+}
+
+Enum ModulEnum {
+  Opex
+  Capex
+}
+
+Enum RealizationTypeEnum {
+  Uang
+  Entertainment
+  Pengadaan
+}
+
+Enum StatusEnum {
+  Progress
+  Revise
+  Reject
+  Close
+}
+
+Ref: budget.id_cost_center > m_cost_center.id_cost_center [delete: No Action]
+
+Ref: budget.id_gl_account > m_gl_account.id_gl_account [delete: No Action]
+
+Ref: budget_investation.id_cost_center > m_cost_center.id_cost_center [delete: No Action]
+
+Ref: budget_reallocation.id_cost_center > m_cost_center.id_cost_center [delete: No Action]
+
+Ref: budget_reallocation.id_gl_account > m_gl_account.id_gl_account [delete: No Action]
+
+Ref: file_upload.id_doc_category > m_doc_category.id_doc_category [delete: No Action]
+
+Ref: note_memo.id_approval > approval.id_approval [delete: No Action]
+
+Ref: realization.id_cost_center > m_cost_center.id_cost_center [delete: No Action]
+
+Ref: realization.id_status > m_status.id_status [delete: No Action]
+
+Ref: realization_invest.id_status > m_status.id_status [delete: No Action]
+
+Ref: realization_invest.id_type_invest > m_type_invest.id_type_invest [delete: No Action]
+
+Ref: realization_invest_item.id_budget_investation > budget_investation.id_budget_investation [delete: No Action]
+
+Ref: realization_invest_item.id_realization_invest > realization_invest.id_realization_invest [delete: No Action]
+
+Ref: realization_item.id_gl_account > m_gl_account.id_gl_account [delete: No Action]
+
+Ref: realization_item.id_realization > realization.id_realization [delete: No Action]
+
+Ref: reallocation.id_status > m_status.id_status [delete: No Action]
+
+Ref: reallocation.realization_id > realization.id_realization [delete: No Action]
+
+Ref: reallocation_budget.id_status > m_status.id_status [delete: No Action]
+
+Ref: reallocation_budget_item.id_cost_center > m_cost_center.id_cost_center [delete: No Action]
+
+Ref: reallocation_budget_item.id_cost_center_to > m_cost_center.id_cost_center [delete: No Action]
+
+Ref: reallocation_budget_item.id_gl_account > m_gl_account.id_gl_account [delete: No Action]
+
+Ref: reallocation_budget_item.id_gl_account_to > m_gl_account.id_gl_account [delete: No Action]
+
+Ref: reallocation_budget_item.id_reallocation_budget > reallocation_budget.id_reallocation_budget [delete: No Action]
+
+Ref: reallocation_invest.id_status > m_status.id_status [delete: No Action]
+
+Ref: reallocation_invest_item.id_budget_investation > budget_investation.id_budget_investation [delete: No Action]
+
+Ref: reallocation_invest_item.id_realization_invest_item > realization_invest_item.id_realization_invest_item [delete: No Action]
+
+Ref: reallocation_invest_item.id_reallocation_invest > reallocation_invest.id_reallocation_invest [delete: No Action]
+
+Ref: reallocation_item.id_gl_account > m_gl_account.id_gl_account [delete: No Action]
+
+Ref: reallocation_item.id_realizazion_item > realization_item.id_realization_item [delete: No Action]
+
+Ref: reallocation_item.id_reallocation > reallocation.id_reallocation [delete: No Action]

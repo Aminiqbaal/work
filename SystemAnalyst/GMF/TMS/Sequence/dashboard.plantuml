@@ -1,0 +1,108 @@
+@startuml Dashboard
+title "Flow Process Dashboard Search"
+
+actor "Person" as user #Yellow
+boundary "Dashboard Page" as dashboard
+boundary "Search Result Page" as search
+control "api" as api
+database "DB_TMS" as DB_TMS
+
+autonumber
+
+user -> dashboard : Fill data at field input
+activate dashboard
+user -> dashboard : Click button "Search"
+dashboard -> search : Call page
+deactivate dashboard
+activate search
+search -> api : Request data with \nall group parameter input "Search"
+deactivate search
+activate api
+api -> DB_TMS : Get data
+deactivate api
+activate DB_TMS
+note left of DB_TMS
+    Get field {"part_number"}
+    from table "part_number"
+
+    Get field {"store"}
+    from table "store"
+
+    Get field {"key_number", "tool_description"}
+    from table "tool"
+endnote
+DB_TMS -> api : Response data
+deactivate DB_TMS
+activate api
+alt Success
+    search <- api : return "Success"
+    activate search
+    user <- search : show message "Success" go to previous page\n& reload page
+    deactivate search
+else else
+    search <- api : return message error
+    deactivate api
+    activate search
+    user <- search : show the message error
+    deactivate search
+end
+group onClick field "Search Option"
+    user -> search : Click "Search Option"
+    activate search
+    search -> search : Hide & Show Header Table
+    search -> user : Display "Hide & Show Header table"
+    user -> search : fill field Search "category"
+    search -> search : Filter data with parameter \ninput on field "search"
+    search -> user : Display data
+    deactivate search
+end
+group on click "Details tool data"
+    user --> search : User click "Data" from "Search Result" page
+    activate search
+    search --> api : request data
+    deactivate search
+    activate api
+    api --> DB_TMS : get data
+    deactivate api
+    activate DB_TMS
+    note left of DB_TMS
+        get field ("tools_number"
+        "reg_number"
+        "model"
+        "serial_number")
+        table "m_tools"
+
+        get field ("part_number"
+        "part_description")
+        table "m_part_number"
+
+        get field ("store")
+        table "m_store"
+
+        get field ("location")
+        table "m_location"
+
+        get field ("manufacture")
+        table "m_manufacture"
+
+        get field ("status")
+        table "request_tools"
+    end note
+
+    DB_TMS --> api : response data
+    deactivate DB_TMS
+    activate api
+    alt Success
+        search <- api : return "Success"
+        activate search
+        user <- search : show message "Success" go to previous page\n& reload page
+        deactivate search
+    else else
+        search <- api : return message error
+        deactivate api
+        activate search
+        user <- search : show the message error
+        deactivate search
+    end
+end
+@enduml

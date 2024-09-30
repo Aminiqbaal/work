@@ -1,0 +1,62 @@
+@startuml 
+
+title Flow process login 
+
+actor User as user 
+boundary "Login Page" as login
+entity API as api 
+database ldap as data1
+database "DB " as data2
+
+note right of user 
+input 
+Username :
+Password : 
+end note 
+
+autonumber
+user --> login : Click login
+    activate login
+login --> api  : Post data with parameter all input
+        activate api
+api --> data1 : Connect
+alt
+            activate data1
+api --> data1 : Validate Username & Password
+alt
+data1 --> api : return "Success"
+api --> data2 : get()
+note over data2
+get field ("nopeg", "nama", "jabatan", "unit", "email")
+from view "v_tabpersonel_active"
+filter field nopeg = value of input "Username"
+end note
+                activate data2
+data2 --> api : Response data
+                deactivate data2
+api --> api : create session() with all response data
+alt
+api --> login : return "success"
+login --> user : go to "Welcome Page"
+    deactivate login
+api --> login : return "Not authorized"
+        deactivate api 
+login --> user : show message "You are not authorized"
+end
+data1 --> api : return "Fail"
+activate api
+api --> login : return "Fail"
+deactivate api
+activate login
+login --> user : show message "Username or password wrong"
+deactivate login
+end
+data1 --> api  : not connected
+            deactivate data1
+            activate api
+api --> login : return "Fail"
+deactivate api 
+activate login
+login --> user : show message "LDAP not connected"
+deactivate login
+end  

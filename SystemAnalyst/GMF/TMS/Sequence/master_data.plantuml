@@ -1,0 +1,80 @@
+@startuml
+
+actor user
+boundary "Master Data Search" as ui
+boundary "Popup Add Tools" as ui2
+entity "API" as api
+database "DB_TMS" as DB_TMS
+
+autonumber
+
+====
+note right of user
+Click menu "Master Data"
+endnote
+
+group Add Tools
+user -> ui : User click "Plus" icon
+activate ui
+user -> ui : User click submit
+ui -> ui2 : Call page
+deactivate ui
+activate ui2
+ui2 -> api : Post data with parameter input
+deactivate ui2
+activate api
+api -> DB_TMS : Post data
+deactivate api
+activate DB_TMS
+note left of DB_TMS
+Insert field "type", "id_part_number", "tools_description", "id_tools_effectivity",
+from table "m_tools"
+endnote
+DB_TMS -> api : Response data
+deactivate DB_TMS
+activate api
+alt Success
+    ui2 <- api : return "Success"
+    activate ui2
+    user <- ui2 : show message "Success" \ngo to previous page\n&reload page
+    deactivate ui2
+else else
+    ui2 <- api : return message error
+    deactivate api
+    activate ui2
+    user <- ui2 : show the message error
+    deactivate ui2
+end
+end
+
+user -> ui : Fill data at field input
+activate ui
+user -> ui : Click button "Search"
+ui -> api : Request data with \nall group parameter input "Search"
+deactivate ui
+activate api
+api -> DB_TMS : Get data
+deactivate api
+activate DB_TMS
+note left of DB_TMS
+Get field "id_part_number", "type", "tools_description", "id_tools_effectivity",
+"tools_number", "reg_number", "serial_number", "model", "id_manufacture",
+"id_store", "id_location", "id_status"
+from table "m_tools"
+
+filter "tools_number" = value of input "Tools Number" (if value not empty)
+filter "serial_number" = value of input "Serial Number" (if value not empty)
+filter "key_number" = value of input "Key Number" (if value not empty)
+filter "tools_description" = value of input "Tools Description" (if value not empty)
+filter "model" = value of input "Model" (if value not empty)
+endnote
+DB_TMS -> api : Response data
+deactivate DB_TMS
+activate api
+api -> ui : Return json
+deactivate api
+activate ui
+ui -> user : Go to Master Detail Page
+deactivate ui
+
+@enduml

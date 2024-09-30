@@ -1,0 +1,104 @@
+@startuml TA
+title "Flow Process Kurs USD"
+
+actor user
+boundary "Dashboard" as dashboard
+boundary "Kurs USD" as kurs_usd
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+
+user -> dashboard : Click menu "Kurs USD"
+activate user
+activate dashboard
+
+user -> dashboard : Click sub-menu "Kurs USD"
+dashboard -> kurs_usd : Call page
+deactivate dashboard
+activate kurs_usd
+kurs_usd -> user : Show data "Kurs USD" page
+group Add Kurs USD
+    user -> kurs_usd : Click button "Add New"
+    kurs_usd -> user : show pop up "Add New"
+    user -> kurs_usd : Fill form "Add New"
+    user -> kurs_usd : CLick Button "Save"
+    kurs_usd -> api : Post data with parameter input
+    deactivate kurs_usd
+    activate api
+    note right of api
+        Insert field {
+        "years", "value",
+        "created_at",
+        "created_by"
+        }
+        from table "m_kurs"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        kurs_usd  <- api : return "Success"
+        activate kurs_usd
+        user <- kurs_usd  : Show data "Kurs USD" page
+        deactivate kurs_usd
+    else else
+        kurs_usd  <- api : return message error
+        deactivate api
+        activate kurs_usd
+        user <- kurs_usd  : show the message error
+        deactivate kurs_usd
+    end
+    user -> kurs_usd : Click Button "Cancel"
+    activate kurs_usd
+    kurs_usd -> user : Show data "Kurs USD" page
+    deactivate kurs_usd
+end
+group Edit Kurs USD
+    user -> kurs_usd : Click Button "Edit" on field "Action"
+    activate kurs_usd
+    kurs_usd -> user : show pop up "Edit Value"
+    user -> kurs_usd : Fill form "Edit Value"
+    user -> kurs_usd : CLick Button "Save"
+    kurs_usd -> api : Post data with parameter input
+    deactivate kurs_usd
+    activate api
+    note right of api
+        Insert field {
+        "years", "value"
+        "update_at",
+        "updated_by"
+        }
+        from table "m_kurs"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        kurs_usd  <- api : return "Success"
+        activate kurs_usd
+        user <- kurs_usd  : Show data "Kurs USD" page
+        deactivate kurs_usd
+    else else
+        kurs_usd  <- api : return message error
+        deactivate api
+        activate kurs_usd
+        user <- kurs_usd  : show the message error
+        deactivate kurs_usd
+    end
+    user -> kurs_usd : Click Button "Cancel"
+    activate kurs_usd
+    kurs_usd -> user : Show data "Kurs USD" page
+    deactivate kurs_usd
+end
+@enduml

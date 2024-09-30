@@ -1,0 +1,326 @@
+@startuml TA
+title "Flow Process Request Anggaran CAPEX"
+
+actor user
+boundary "Dashboard" as ui
+boundary "Detail Pengajuan Investasi" as ui1
+boundary "Buat Pengajuan Investasi Baru" as ui2
+boundary "Buat Pengajuan Realokasi" as ui3
+boundary "Edit Realokasi" as ui4
+boundary "Detail Realokasi" as ui5
+boundary "Edit Pengajuan Investasi" as ui6
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+
+user -> ui : Click button "Buat PPI Baru"
+activate user
+activate ui
+ui -> ui2 : Call page
+deactivate ui
+activate ui2
+ui2 -> user : Show page "Buat Pengajuan Investasi Baru"
+alt Overlimit Budget
+    user -> ui2 : Fill the form "Buat Pengajuan Investasi Baru"
+    note right of user
+        if an item Field Nilai Investasi show notification
+        "Your request overlimit budget"
+    end note
+    user -> ui2 : Click button "Create Realokasi"
+    ui2 -> ui3 : Call page
+    deactivate ui2
+    activate ui3
+    ui3 -> user : Show "Buat Realokasi Baru" page
+    group Internal Dinas
+        user -> ui3 : Fill the form "Buat Realokasi Baru"
+        user -> ui3 : Click Button "Save" and "Submit"
+        ui3 -> api : Post data with parameter input
+        deactivate ui3
+        deactivate ui2
+        activate api
+        note right of api
+            Insert field {
+            "type", "ba", "status",
+            "id_status", "department",
+            "nopeg", "department_to"
+            "nopeg_to", "created_at",
+            "created_by"
+            }
+            from table "reallocation_invest"
+            Insert field {
+            "id_realization_invest",
+            "id_budget_investation"
+            "amount", "amount_submission",
+            "internal", "note"
+            "created_at", "created_by"
+            }
+            from table "reallocation_invest_item"
+        endnote
+        api -> DB_TA : Post data
+        deactivate api
+        activate DB_TA
+        DB_TA -> api : Response data
+        deactivate DB_TA
+        activate api
+        alt Success
+            ui3 <- api : return "Success"
+            activate ui3
+            user <- ui3 : show message "Success" go to previous page & reload page
+            deactivate ui3
+        else else
+            ui3 <- api : return message error
+            deactivate api
+            activate ui3
+            user <- ui3 : show the message error
+            deactivate ui3
+        end
+    end
+    group Beda Dinas
+        activate ui3
+        note right of user
+            If Reallocation Internal Dinas can't fulfill
+            then Submit Reallocation Beda Dinas
+        endnote
+        activate ui3
+        user -> ui3 : Click Button "Permintaan Realokasi Beda Dinas"
+        activate ui3
+        ui3 -> user : Show pop up "Permintaan Realokasi Beda Dinas"
+        user -> ui3 : Fill the form "Permintaan Realokasi Beda Dinas"
+        alt Submit
+            user -> ui3 : Click "Submit"
+            user <- ui3 : show message "Success" go to "Permintaan Realokasi Beda Dinas" page
+            deactivate ui3
+        else Cancel
+            user -> ui3 : Click "Cancel"
+            user <- ui3 : go to previous page
+            deactivate ui3
+        end
+        activate ui3
+        user -> ui3 : Fill the form "Buat Realokasi Baru" dengan Field Tipe Realokasi "Beda Dinas"
+        activate ui3
+        user -> ui3 : Click Button "Save" and "Submit"
+        ui3 -> api : Post data with parameter input
+        deactivate ui3
+        deactivate ui3
+        activate api
+        note right of api
+            Insert field {
+            "type", "ba", "status",
+            "id_status", "department",
+            "nopeg", "department_to"
+            "nopeg_to", "created_at",
+            "created_by"
+            }
+            from table "reallocation_invest"
+            Insert field {
+            "id_realization_invest",
+            "id_budget_investation"
+            "amount", "amount_submission",
+            "internal", "note"
+            "created_at", "created_by"
+            }
+            from table "reallocation_invest_item"
+        endnote
+        api -> DB_TA : Post data
+        deactivate api
+        activate DB_TA
+        DB_TA -> api : Response data
+        deactivate DB_TA
+        activate api
+        alt Success
+            ui3 <- api : return "Success"
+            activate ui3
+            user <- ui3 : show message "Success" go to previous page & reload page
+            deactivate ui3
+        else else
+            ui3 <- api : return message error
+            deactivate api
+            activate ui3
+            user <- ui3 : show the message error
+            deactivate ui3
+        end
+
+    end
+    note right of user
+        If user click "Save" the request just on draft
+        else user click "Submit" the request save on database
+    endnote
+    user -> ui2 : Click button "Save" & "Submit"
+    activate ui2
+    ui2 -> ui3 : Call page
+    deactivate ui2
+    activate ui3
+    ui3 -> api : Post data with parameter input
+    deactivate ui3
+    activate api
+    note right of api
+        Insert field {
+        "years", "no_request",
+        "id_type_invest", "cba",
+        "responsible_nopeg", "description"
+        "io", "status", "id_status",
+        "department", "nopeg",
+        "department_to", "nopeg_to",
+        "created_at", "created_by"
+        }
+        from table "realization_invest"
+        Insert field {
+        "id_realization_invest",
+        "id_budget_investation"
+        "amount", "amount_submission",
+        "internal", "note"
+        "created_at", "created_by"
+        }
+        from table "realization_invest_item"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> api : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        ui2 <- api : return "Success"
+        activate ui2
+        user <- ui2 : show message "Success" \ngo to previous page\n& reload page
+        deactivate ui2
+    else else
+        ui2 <- api : return message error
+        deactivate api
+        activate ui2
+        user <- ui2 : show the message error
+        deactivate ui2
+    end
+    group Edit Pengajuan Investasi
+        note right of user
+            If the Pengajuan Investasi has
+            not been approved by the superior,
+            the user can change the details
+        end note
+        user -> ui : Click menu "Detail Pengajuan Investasi"
+        activate ui
+        ui -> ui1 : Call page
+        deactivate ui
+        activate ui1
+        ui1 -> user : Show "Detail Pengajuan Investasi" page
+        user -> ui1 : Click "Edit"
+        ui1 -> ui6 : Call Page
+        deactivate ui1
+        activate ui6
+        ui6 -> user : Show "Edit Pengajuan Investasi" page
+        user -> ui6 : Fill the form "Edit Pengajuan Investasi"
+        ui6 -> api : Post data with parameter input
+        deactivate ui6
+        activate api
+        note right of api
+            Insert field {
+            "years", "no_request",
+            "id_type_invest", "cba",
+            "responsible_nopeg", "description"
+            "io", "status", "id_status",
+            "department", "nopeg",
+            "department_to", "nopeg_to",
+            "created_at", "created_by"
+            }
+            from table "realization_invest"
+            Insert field {
+            "id_realization_invest",
+            "id_budget_investation"
+            "amount", "amount_submission",
+            "internal", "note"
+            "created_at", "created_by"
+            }
+            from table "realization_invest_item"
+        endnote
+        api -> DB_TA : Post data
+        deactivate api
+        activate DB_TA
+        DB_TA -> api : Response data
+        deactivate DB_TA
+        activate api
+        alt Success
+            ui6 <- api : return "Success"
+            activate ui6
+            user <- ui6 : show message "Success" go to previous page & reload page
+            deactivate ui6
+        else else
+            ui6 <- api : return message error
+            deactivate api
+            activate ui6
+            user <- ui6 : show the message error
+            deactivate ui6
+        end
+    end
+    group Edit Reallocation
+        note right of user
+            If the Pengajuan Realokasi has
+            not been approved by the superior,
+            the user can change the details
+        end note
+        user -> ui : Click menu "Detail Pengajuan Realokasi"
+        activate ui
+        ui -> ui5 : Call page
+        deactivate ui
+        activate ui5
+        ui5 -> user : Show "Detail Pengajuan Relaokasi" page
+        user -> ui5 : Click "Edit"
+        ui5 -> ui4 : Call Page
+        deactivate ui5
+        activate ui4
+        ui4 -> user : Show "Edit Pengajuan Realokasi" page
+        user -> ui4 : Fill the form "Edit Pengajuan Realokasi"
+        ui4 -> api : Post data with parameter input
+        deactivate ui4
+        activate api
+        note right of api
+            Insert field {
+            "years", "no_request",
+            "id_type_invest", "cba",
+            "responsible_nopeg", "description"
+            "io", "status", "id_status",
+            "department", "nopeg",
+            "department_to", "nopeg_to",
+            "created_at", "created_by"
+            }
+            from table "realization_invest"
+            Insert field {
+            "id_realization_invest",
+            "id_budget_investation"
+            "amount", "amount_submission",
+            "internal", "note"
+            "created_at", "created_by"
+            }
+            from table "realization_invest_item"
+        endnote
+        api -> DB_TA : Post data
+        deactivate api
+        activate DB_TA
+        DB_TA -> api : Response data
+        deactivate DB_TA
+        activate api
+        alt Success
+            ui4 <- api : return "Success"
+            activate ui4
+            user <- ui4 : show message "Success" go to previous page & reload page
+            deactivate ui4
+        else else
+            ui4 <- api : return message error
+            deactivate api
+            activate ui4
+            user <- ui4 : show the message error
+            deactivate ui4
+        end
+    end
+    group onClick button Back
+        user -> ui : click button "Back"
+        activate ui
+        user <- ui : Cancel form & go to previous page
+        deactivate ui
+    end
+
+    @enduml

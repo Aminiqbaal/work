@@ -1,0 +1,394 @@
+@startuml TA
+title "Flow Process Approval CAPEX"
+
+actor user
+boundary "Dashboard" as dashboard
+boundary "Need Approval" as need_approval
+boundary "Detail Request & Verification" as detail_request
+boundary "Detail Reallocation Budget" as detail_reallocation
+boundary "Detail Remark" as detail_remark
+boundary "Detail Tracking Approval" as detail_tracking_approval
+entity "API" as api
+database "DB_TA" as DB_TA
+
+autonumber
+
+====
+
+
+
+user -> dashboard : Click menu "Need Approval"
+activate user
+activate dashboard
+dashboard -> need_approval : Call page
+deactivate dashboard
+activate need_approval
+need_approval -> api : Get data
+deactivate need_approval
+activate api
+note right of api
+    Get field {
+    "years", "month", "id_cost_center",
+    "no_draft", "no_request", "ta_reff",
+    "type", "responsible_nopeg",
+    "title_request", "note_request",
+    "status", "id_status",
+    "department", "nopeg",
+    "department_to", "nopeg_to",
+    "created_at", "created_by"
+    }
+    from table "realization"
+
+    Get field {
+    "id_realization", "id_gl_account",
+    "amount", "amount_submission",
+    "amount_hps", "amount_correction",
+    "period_start", "period_finish",
+    "desc_pby", "remark_pby", "memo"
+    "created_at", "created_by"
+    }
+    from table "realization_item"
+endnote
+api -> DB_TA : Get Data
+deactivate api
+activate DB_TA
+DB_TA -> api :Response data
+deactivate DB_TA
+activate api
+alt Success
+    need_approval <- api : return "Success"
+    activate need_approval
+    user <- need_approval : Show "Need Approval" page
+    deactivate need_approval
+else else
+    need_approval <- api : return message error
+    deactivate api
+    activate need_approval
+    user <- need_approval : show the message error
+    deactivate need_approval
+end
+
+alt With Filter
+    user -> need_approval : Insert filter "TA Reff", "No. of Request", "Dinas", "Type of Letter", "Entry Date (From)", "Entry Date (To)", "Status", "Status To"
+    activate need_approval
+    need_approval -> api : Post data with parameter input
+    deactivate need_approval
+    activate api
+    note right of api
+        Insert field {
+        "ta_reff", "no_request",
+        "id_cost_center", "type",
+        "created_at", "status",
+        }
+        from table "realization"
+    endnote
+    api -> DB_TA : Post data
+    deactivate api
+    activate DB_TA
+    DB_TA -> need_approval : return "Success"
+    deactivate DB_TA
+    activate need_approval
+    need_approval -> user : Show "Need Approval" page with input filter
+    deactivate need_approval
+else Without Filter
+    user -> need_approval : Click button "Reset Filter"
+    activate need_approval
+    need_approval -> user : Show "Need Approval" page without input filter
+    deactivate need_approval
+end
+user -> need_approval : Click button "v" on field "Actions" and click button "Detail"
+activate need_approval
+need_approval -> detail_request : Call page
+deactivate need_approval
+activate detail_request
+detail_request -> api : Get data
+deactivate detail_request
+activate api
+note right of api
+    Get field {
+    "years", "month", "id_cost_center",
+    "no_draft", "no_request", "ta_reff",
+    "type", "responsible_nopeg",
+    "title_request", "note_request",
+    "status", "id_status",
+    "department", "nopeg",
+    "department_to", "nopeg_to",
+    "created_at", "created_by"
+    }
+    from table "realization"
+
+    Get field {
+    "id_realization", "id_gl_account",
+    "amount", "amount_submission",
+    "amount_hps", "amount_correction",
+    "period_start", "period_finish",
+    "desc_pby", "remark_pby", "memo"
+    "created_at", "created_by"
+    }
+    from table "realization_item"
+endnote
+api -> DB_TA : Get Data
+deactivate api
+activate DB_TA
+api <- DB_TA : Response data
+deactivate DB_TA
+activate api
+alt Success
+    detail_request <- api : return "Success"
+    activate detail_request
+    user <- detail_request : how page "Detail Request & Verification"
+    deactivate detail_request
+else else
+    detail_request <- api : return message error
+    deactivate api
+    activate detail_request
+    user <- detail_request : show the message error
+    deactivate detail_request
+end
+
+group Tab Reallocation Budget
+    user -> detail_request : Click Tab "Reallocation Budget"
+    activate detail_request
+    detail_request -> detail_reallocation : Call page
+    deactivate detail_request
+    activate detail_reallocation
+    detail_reallocation -> api : Get data
+    deactivate detail_reallocation
+    activate api
+    note right of api
+        Get field {
+        "realization_id", "type",
+        "ta_reff", "owner_budget",
+        "status", "department",
+        "nopeg", "department_to",
+        "nopeg_to", "created_at",
+        "created_by"
+        }
+        from table "reallocation"
+
+        Get field {
+        "id_reallocation", "id_gl_account",
+        "id_realizazion_item", "amount",
+        "budget_name", "remark"
+        "created_at", "created_by"
+        }
+        from table "reallocation_item"
+    endnote
+    api -> DB_TA : Get data
+    deactivate api
+    activate DB_TA
+    api <- DB_TA : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        detail_reallocation <- api : return "Success"
+        activate detail_reallocation
+        user <- detail_reallocation : how page "Reallocation Budget"
+        deactivate detail_reallocation
+    else else
+        detail_reallocation <- api : return message error
+        deactivate api
+        activate detail_reallocation
+        user <- detail_reallocation : show the message error
+        deactivate detail_reallocation
+    end
+    deactivate api
+end
+
+group if user role as TAB and TAM
+    alt Take Project
+        user -> detail_request : Click button "Take Project"
+        activate detail_request
+        detail_request ->user : Project "Request Budget" Taked
+        deactivate detail_request
+        group if user role as TAB, type request pengadaan, and amount submission >10.000 USD
+            user -> detail_request : Click button "Need HPS"
+            activate detail_request
+            detail_request -> user : Pop up Upload file
+            user -> detail_request : FIll the Pop up Upload file
+            detail_request -> api : Post data with parameter input
+            deactivate detail_request
+            activate api
+            note right of api
+                Insert field {
+                "table_name", "id_table",
+                "id_doc_category",
+                "doc_name", "doc_link",
+                "doc_size", "doc_type",
+                "created_at", "created_by"
+                }
+                from table "file_upload"
+            endnote
+            api -> DB_TA : Post data
+            deactivate api
+            activate DB_TA
+            DB_TA -> api : Response data
+            deactivate DB_TA
+            activate api
+            alt Success
+                need_approval <- api : return "Success"
+                activate need_approval
+                user <- need_approval : show message "Success Upload"
+                deactivate need_approval
+            else else
+                need_approval <- api : return message error
+                deactivate api
+                activate need_approval
+                user <- need_approval : show the message error
+                deactivate need_approval
+            end
+        end
+    else Untake Project
+        user -> detail_request : Click button "Untake Project"
+        activate detail_request
+        detail_request ->user : Project "Request Budget" Untaked
+        deactivate detail_request
+    end
+end
+note right of user
+    if Approve "Request Budget" will go to the next approval step
+    else Reject "Request Budget" rejected
+    else Revisse "Request Budget" will be returned to the approval step
+    according to the revision
+endnote
+user -> detail_request : Click button "Approve", or "Reject" or "Revise"
+activate detail_request
+detail_request -> api : Post data with parameter input
+deactivate detail_request
+activate api
+note right of api
+    Insert field {
+    "table_name", "table_id",
+    "name", "jabatan", "unit",
+    "status", "remark"
+    "created_at", "created_by",
+    }
+    from table "approval"
+endnote
+api -> DB_TA : Post data
+deactivate api
+activate DB_TA
+DB_TA -> api : Response data
+deactivate DB_TA
+activate api
+alt Success
+    need_approval <- api : return "Success"
+    activate need_approval
+    user <- need_approval : show message "Success" \ngo to previous page\n& reload page
+    deactivate need_approval
+else else
+    need_approval <- api : return message error
+    deactivate api
+    activate need_approval
+    user <- need_approval : show the message error
+    deactivate need_approval
+end
+group Tab Remark
+    user -> detail_request : Click Tab "Remark"
+    activate detail_request
+    detail_request -> detail_remark : Call page
+    deactivate detail_request
+    activate detail_remark
+    detail_remark -> api : Get Data
+    deactivate detail_remark
+    activate api
+    api -> DB_TA : Get Data
+    deactivate api
+    activate DB_TA
+    api <- DB_TA : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        detail_remark <- api : return "Success"
+        activate detail_remark
+        user <- detail_remark : show page "Detail Remark"
+        deactivate detail_remark
+
+        alt Filter
+            user -> detail_remark : insert filter field "Date of Remark (From)", "Date of Remark (To)", "Status", "Status To"
+            activate detail_remark
+            detail_remark -> api : Get data with parameter input
+            deactivate detail_remark
+            note right of api
+                Insert field {
+                "status", "created_at",
+                }
+                from table "realization"
+            endnote
+            api -> DB_TA : Get data
+            activate DB_TA
+            api <- DB_TA : Response data
+            deactivate DB_TA
+            detail_remark <- api : return "Success"
+            activate detail_remark
+            user <- detail_remark : show page "Detail Remark"
+            deactivate detail_remark
+        else Without Filter
+            user -> detail_remark : click button "Reset Filter"
+            activate detail_remark
+            detail_remark -> api : Get data
+            deactivate detail_remark
+            api -> DB_TA : Get data
+            activate DB_TA
+            api <- DB_TA : Response data
+            deactivate DB_TA
+            detail_remark <- api : return "Success"
+            activate detail_remark
+            user <- detail_remark : show the message error
+            deactivate detail_remark
+        end
+    else else
+        detail_remark <- api : return message error
+        deactivate api
+        activate detail_remark
+        user <- detail_remark : show the message error
+        deactivate detail_remark
+    end
+    deactivate api
+end
+group Tab Tracking Approval
+    user -> detail_request : click Tab "Tracking Approval"
+    activate detail_request
+    detail_request -> detail_tracking_approval : Call Page
+    deactivate detail_request
+    activate detail_tracking_approval
+    detail_tracking_approval -> api : Get data
+    deactivate detail_tracking_approval
+    activate api
+    note right of api
+        Get field {
+        "table_name", "table_id", 
+        "name", "jabatan", "unit", 
+        "status", "remark", 
+        "created_at", "created_by"
+        }
+        from table "approval"
+    endnote
+    api -> DB_TA : Get data
+    deactivate api
+    activate DB_TA
+    api <- DB_TA : Response data
+    deactivate DB_TA
+    activate api
+    alt Success
+        detail_tracking_approval <- api : return "Success"
+        activate detail_tracking_approval
+        user <- detail_tracking_approval : show page "Tracking Approval"
+        deactivate detail_tracking_approval
+    else else
+        detail_tracking_approval <- api : return message error
+        deactivate api
+        activate detail_tracking_approval
+        user <- detail_tracking_approval : show the message error
+        deactivate detail_tracking_approval
+    end
+    deactivate api
+end
+group onClick button Back
+    user -> dashboard : click button "Back"
+    activate dashboard
+    user <- dashboard : Cancel form & go to previous page
+    deactivate dashboard
+end
+
+@enduml

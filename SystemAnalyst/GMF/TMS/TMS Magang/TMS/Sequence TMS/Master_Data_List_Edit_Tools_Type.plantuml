@@ -1,0 +1,52 @@
+@startuml
+
+title "Flow Process Master Data List (Edit Tools Type)"
+
+actor "User" as u
+boundary "Master Data\nList" as ui2
+entity "API" as api
+database "Database" as db
+
+autonumber
+note right of u
+User in "Master Data List" Page
+end note
+
+group onClick "Edit Tools Type"
+u -> ui2: Click "Edit" Icon in "Tools Type" Field
+activate ui2
+ui2 -> u: Show "Confirmation" Modal
+deactivate
+group onClick "Yes, change type"
+u -> ui2: Click "Yes, change type" Button
+activate ui2
+ui2 -> api: Request Data with parameter id
+activate api
+api -> db: Put Data
+activate db
+note right of db
+Update Field(
+    "type"
+) from table "m_tools"
+end note
+db -> api: Response Data
+deactivate
+alt Success
+api -> ui2: Return JSON
+ui2 -> u: Show "Success" Message
+else Failed
+api -> ui2: Return "Fail"
+deactivate
+ui2 -> u: Show "Failed" Message
+deactivate
+end
+end
+group onClick "No, i'm not sure"
+u -> ui2: Click "No, i'm not sure" Button
+activate ui2
+ui2 -> u: Close "Confirmation" Modal
+deactivate
+end
+end
+
+@enduml

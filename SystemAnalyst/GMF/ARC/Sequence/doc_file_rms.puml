@@ -1,0 +1,102 @@
+@startuml arc
+title "Flow Process Doc File RMS"
+
+actor user
+boundary "Doc File" as doc_file
+boundary "Add Doc File" as add_doc_file
+control "API" as api
+database "DB ARC" as arc
+
+autonumber
+
+====
+activate user
+user -> doc_file : click "Doc File Page"
+activate doc_file
+doc_file -> api : Get data
+deactivate doc_file
+activate api
+api -> arc : Get data
+deactivate api
+activate arc
+api <- arc : Response data
+deactivate arc
+note right of api
+    Get field {
+    }
+    from table ""
+endnote
+activate api
+alt Success
+    doc_file  <- api : return "Success"
+    activate doc_file
+    user <- doc_file  : Show data "Doc File" page
+    deactivate doc_file
+else else
+    doc_file  <- api : return message error
+    deactivate api
+    activate doc_file
+    user <- doc_file  : show the message error
+    deactivate doc_file
+end
+deactivate api
+group filter by keywoard
+    user -> doc_file : click button "Search"
+    activate doc_file
+    doc_file -> api : Get data
+    deactivate doc_file
+    activate api
+    api -> arc : Get data
+    deactivate api
+    activate arc
+    api <- arc : response data
+    note right of api
+        Get field {
+        }
+        from table ""
+    endnote
+    deactivate arc
+    activate api
+    alt Success
+        doc_file  <- api : return "Success"
+        activate doc_file
+        user <- doc_file  : Show data "Doc File" page with filter
+        deactivate doc_file
+    else else
+        doc_file  <- api : return message error
+        deactivate api
+        activate doc_file
+        user <- doc_file  : show the message error
+        deactivate doc_file
+    end
+    deactivate api
+    user -> doc_file : Click button "Clear"
+    activate doc_file
+    user <- doc_file : Show data "Doc File" page without filter
+    deactivate doc_file
+end
+group export
+    user -> doc_file : Click button "Export"
+    activate doc_file
+    user <- doc_file : Download file export and click save
+    deactivate doc_file
+end
+group add
+    user -> doc_file : Click button "add"
+    activate doc_file
+    doc_file -> add_doc_file : call page
+    deactivate doc_file
+    activate add_doc_file
+    user <- add_doc_file : show page "Add Doc File"
+    note right of user
+        if click "save" data will be saved
+        else click "cancel" data does'nt save
+    endnote
+    user -> add_doc_file : fill the page "add old component" and "click" save or "cancel"
+    add_doc_file -> doc_file : data will be updated
+    deactivate add_doc_file
+    activate doc_file
+    user <- doc_file : show page "Doc File"
+    deactivate doc_file
+end
+@enduml

@@ -1,0 +1,75 @@
+@startuml PMO IT
+title "Flow Process Create New Project (Bizreq)"
+
+actor "user" as user #Yellow
+boundary "Business Requirement Form" as ui
+control "api" as api
+database "DB_PMO_IT" as DB_PMO_IT
+
+autonumber
+note right of user
+    User click create new project
+    and then select Bizreq
+
+    Onload page get data session for field user information
+end note
+user -> ui : fill data
+activate ui
+user -> ui : click button "Save" or "Submit"
+note right of ui
+    if user click button "save",
+    so the data will be save only (status draft)
+    else user click button "submit"
+    so the data will be send to next step (to SM User)
+
+    (both save or submit the data will be show at the Need Approval Menu)
+end note
+ui -> api : post data with parameter all input
+deactivate ui
+
+activate api
+api -> DB_PMO_IT : insert data
+deactivate api
+activate DB_PMO_IT
+note left of DB_PMO_IT
+    Insert field "projectTitle","itBackground",
+    "goalsAndObjective", "currentProcess", "futureProcess",
+    "benefitQualitative", "reasonForUrgency",
+    "solutionProposed", "budget", "budgetType"
+    from table "request_project"
+
+    Insert field "title", "url"
+    from table "reference_procedure"
+
+    Insert field "description", "impact",
+    "mitigation"
+    from table "risk_hazard"
+
+    Insert field "description", "value",
+    "quantity", "totalValue"
+    from table "benefit_quantitative"
+end note
+api <- DB_PMO_IT : response data
+deactivate DB_PMO_IT
+
+activate api
+alt Success
+    ui <- api : return "Success"
+    activate ui
+    user <- ui : show message "Success" \ngo to previous page\n&reload page
+    deactivate ui
+else else
+    ui <- api : return message error
+    deactivate api
+    activate ui
+    user <- ui : show the message error
+    deactivate ui
+end
+
+group onClick button "Cancel"
+    user -> ui : click button "Cancel"
+    activate ui
+    user <- ui : Cancel form & go to previous page
+    deactivate ui
+end
+@enduml

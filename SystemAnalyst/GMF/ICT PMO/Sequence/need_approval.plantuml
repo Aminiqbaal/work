@@ -1,0 +1,64 @@
+@startuml PMO IT
+title "Flow Process Need Approval"
+
+actor "Person" as user #Yellow
+boundary "Need Approval Page" as ui
+control "api" as api
+database "DB_PMO_IT" as DB_PMO_IT
+
+autonumber
+user -> ui : Click Menu "Need Approval"
+activate ui
+ui -> api : Request data
+deactivate ui
+activate api
+api -> DB_PMO_IT : Get data
+note left of DB_PMO_IT
+Get field (
+    "request_type"
+) from table "m_request_type"
+
+Get field (
+    "projectTitle",
+    "ictNumber",
+    "status",
+    "priority",
+    "picName",
+    "picUnit"
+) from table "request_project"
+
+Get field (
+    "project_type"
+) from table "project_type"
+
+filter by role
+if role user (dinas) = dinas of request_project table (pic_unit)
+end note
+deactivate api
+activate DB_PMO_IT
+DB_PMO_IT -> api : Response data
+deactivate DB_PMO_IT
+activate api
+api -> ui : Return json
+deactivate api
+activate ui
+ui -> user : Display data
+deactivate ui
+
+group onClick "Search"
+user -> ui : Fill data into field "Search"
+activate ui
+user -> ui : Click "Search" Input
+ui -> ui : Filter Data with \nvalue of input search
+ui -> user : Reload display data
+deactivate ui
+end
+
+group onClick "Detail"
+user -> ui : User click button "Detail"
+activate ui
+ui -> user : Go to Detail Page
+deactivate ui
+end
+
+@enduml
