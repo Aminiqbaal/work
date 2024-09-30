@@ -1,0 +1,218 @@
+{
+  "id": "526b33ba-cc10-4f06-a430-b6cf3bac33a7",
+  "version": "2.0",
+  "name": "sevima",
+  "url": "https://qa.putraprima.id",
+  "tests": [{
+    "id": "4fe206a4-27a9-4e7e-875a-97f44580896a",
+    "name": "faktorial",
+    "commands": [{
+      "id": "bb0c419f-259c-4b73-a4c7-dd140a398f41",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f9f33842-33f5-4944-b73c-c0c30b08e856",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1064x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "04184412-d988-4d0a-8121-f0745edadda0",
+      "comment": "",
+      "command": "click",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8b0468fe-9a2e-4a87-b84d-65261be16336",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-body",
+      "targets": [
+        ["css=.card-body", "css:finder"],
+        ["xpath=//div/div/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3fd711d-fffe-41b2-b856-0d71fc4649ec",
+      "comment": "",
+      "command": "click",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "faa8425e-75a6-4fc5-a530-e9b0f5d26e72",
+      "comment": "",
+      "command": "type",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "1"
+    }, {
+      "id": "bb1a9a66-b9bf-42a0-a9a2-dccf1210b551",
+      "comment": "",
+      "command": "click",
+      "target": "css=.d-flex",
+      "targets": [
+        ["css=.d-flex", "css:finder"],
+        ["xpath=//div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "00101d8a-0c02-4d85-a2f8-5d6330706b16",
+      "comment": "",
+      "command": "click",
+      "target": "id=hitung",
+      "targets": [
+        ["id=hitung", "id"],
+        ["css=#hitung", "css:finder"],
+        ["xpath=//button[@id='hitung']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ad56803-afca-4e4c-b7d6-d5b4f83a44fa",
+      "comment": "",
+      "command": "click",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "162bc2c8-59d6-44d9-8898-a18c708ebfab",
+      "comment": "",
+      "command": "type",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "-0"
+    }, {
+      "id": "3f5510e2-c981-4776-a2f1-0cc9aa978fc5",
+      "comment": "",
+      "command": "click",
+      "target": "id=hitung",
+      "targets": [
+        ["id=hitung", "id"],
+        ["css=#hitung", "css:finder"],
+        ["xpath=//button[@id='hitung']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e9210908-714c-48c8-9c31-5656a7bd0f08",
+      "comment": "",
+      "command": "click",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "586bcf89-0996-4b83-ad87-e2b4c55f489a",
+      "comment": "",
+      "command": "type",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "1,5"
+    }, {
+      "id": "c98e5c6a-6842-4f77-8824-3ec211020d63",
+      "comment": "",
+      "command": "click",
+      "target": "id=hitung",
+      "targets": [
+        ["id=hitung", "id"],
+        ["css=#hitung", "css:finder"],
+        ["xpath=//button[@id='hitung']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d6c208f-8f0c-486f-a238-a114e9b1b576",
+      "comment": "",
+      "command": "click",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2234ef31-a668-40c8-99be-8982da569b21",
+      "comment": "",
+      "command": "type",
+      "target": "id=input",
+      "targets": [
+        ["id=input", "id"],
+        ["name=input", "name"],
+        ["css=#input", "css:finder"],
+        ["xpath=//input[@id='input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "30"
+    }, {
+      "id": "0c98f201-5c56-4ffa-ad3c-2bfcd1ebf315",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "7afb1aa2-37c1-40c6-a4bf-8d9787b169c1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["4fe206a4-27a9-4e7e-875a-97f44580896a"]
+  }],
+  "urls": ["https://qa.putraprima.id/"],
+  "plugins": []
+}
