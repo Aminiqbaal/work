@@ -1,0 +1,98 @@
+@startuml Msisdn Forwarding (Seamless) \nPrepaid Registration
+title MSISDN Forwading - Simplify & TUWL
+
+boundary FrontEnd as fe
+
+box Infrastructure
+participant "Network\nLoad Balancer" as nlb
+end box
+box Microservice #LightBlue
+participant "Activation" as act
+participant "Personal Device" as pd
+participant "Subscription" as subs
+participant "Offer" as offer
+
+end box
+
+participant ESB as esb
+participant "F5\nAPI Gateway" as f5
+
+== Msisdn Forwarding (Seamless) Prepaid Registration ==
+
+activate fe
+fe -> nlb ++: GET /v1/prepaid-registration/seamless/initiate
+nlb -> f5 ++: forward Request
+f5 -> f5 : add enc. msisdn \nAES 128
+f5 -> act ++: GET /v1/prepaid-registration/seamless/initiate
+act -> esb ++: get profile
+esb --> act --: return data
+note over act
+    decrypt msisdn header, to extract the msisdn
+
+    generate signature key
+    generate encr_msisdn
+end note
+act --> f5 --: return \nsignature key\nencrypted_msisdn (from MyOrbit)
+f5 --> nlb --: forward payload
+nlb --> fe --: return payload
+
+alt Prepaid Registration Input Form
+    fe -> act ++: POST /v1/prepaid-registration/seamless/manual
+    act -> esb ++: submit prepaid
+    esb --> act --: ack
+    act --> fe --: success
+else Prepaid Registration autofill from other MSISDN
+    fe -> act ++: GET /v1/prepaid-registration/seamless/generate-otp
+    act -> esb ++: POST /esb/v2/otp/sms/request
+    note over esb
+        ref.
+        2.19 Request OTP V2 (page 177)
+    end note
+    esb --> act --: return OTP token
+    act --> fe --: return OTP token
+
+    fe -> act ++: POST /v1/prepaid-registration/seamless/auto
+    note over fe
+        with OTP token
+    end note
+    act -> esb ++: POST /esb/v2/otp/validation
+    note over esb
+        ref.
+        2.20 Validate OTP V2 (page 183)
+    end note
+    esb --> act --: success
+    alt Validation is Failed
+        act --x fe : return invalid
+    end
+    group #Red WHAT API?
+        act -> esb ++: get profile nik nokk
+        esb --> act --: return data
+    end
+    act -> esb ++: submit prepaid
+    esb --> act --: ack
+    act --> fe --: success
+end
+
+== MSISDN Forwarding ==
+group #LightSalmon ENHANCE
+fe -> pd ++: GET api.myorbit-nlb.id\nv2/validation/seamless? \n//*contoh//
+end
+pd --> fe --: return payload
+
+fe -> subs ++: GET api.myorbit-aws.id \n/v1/quota/seamless
+subs --> fe --: return data
+fe -> offer ++: GET api.myorbit-aws.id \n/v1/categories \n/v1/data-package/{ML}
+offer --> fe --: return data
+
+== Check Prepaid ==
+group #LightGreen NEW
+fe -> act ++ : Status Activation \nGET v1/prepaid-registration-status
+end
+act -> fe --: response prepaid registration
+alt status == Active
+    fe -> fe  : Show page success
+    else status == Inactive
+    fe -> fe : show page "coba lagi"
+end
+
+@enduml

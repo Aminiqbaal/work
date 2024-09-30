@@ -1,0 +1,117 @@
+Method /GET
+
+Endpoint 
+    {{host}}package-lumen/v6/product-categories
+
+
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key:{{API_KEY}}
+    channel:{{CHANNEL}}
+        
+        
+RESP
+{
+    "status": true,
+    "code": "PPC00",
+    "message": true,
+    "error_message": null,
+    "data": [
+        {
+            "type": "ProductCategory",
+            "id": "1529544175",
+            "attributes": {
+                "name": "Di rumah",
+                "slug": "rumah",
+                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png"
+            },
+            "subcategory" : {
+                "type": "SubProductCategory",
+                "id": "123",
+                "attributes": {
+                    "name": "Prabayar",
+                    "slug": "prabayar",
+                    "desc": [
+                        {
+                            "name": "Simpel dengan isi pulsa dan beli paket apapun",
+                            "icon": ""
+                        },
+                        {
+                            "name": "Bisa beli paket dengan pembayaran e-wallet",
+                            "icon": ""
+                        }
+                    ],
+                    "icon": ""
+                }
+            },
+            "subcategory" : {
+                "type": "SubProductCategory",
+                "id": "456",
+                "attributes": {
+                    "name": "Pasca Prabayar",
+                    "slug": "pascaprabayar",
+                    "desc": [
+                        {
+                            "name": "Simpel dengan isi pulsa dan beli paket apapun",
+                            "icon": ""
+                        },
+                        {
+                            "name": "Bisa beli paket dengan pembayaran e-wallet",
+                            "icon": ""
+                        }
+                    ],
+                    "icon": ""
+                }
+            }
+        },
+        {
+            "type": "ProductCategory",
+            "id": "1529544448",
+            "attributes": {
+                "name": "Bepergian",
+                "slug": "bepergian",
+                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-bepergian.png"
+            },
+            "subcategory" : {
+                "type": "SubProductCategory",
+                "id": "123",
+                "attributes": {
+                    "name": "Prabayar",
+                    "slug": "prabayar",
+                    "desc": [
+                        {
+                            "name": "Simpel dengan isi pulsa dan beli paket apapun",
+                            "icon": ""
+                        },
+                        {
+                            "name": "Bisa beli paket dengan pembayaran e-wallet",
+                            "icon": ""
+                        }
+                    ],
+                    "icon": ""
+                }
+            },
+            "subcategory" : {
+                "type": "SubProductCategory",
+                "id": "456",
+                "attributes": {
+                    "name": "Pasca Prabayar",
+                    "slug": "pascaprabayar",
+                    "desc": [
+                        {
+                            "name": "Simpel dengan isi pulsa dan beli paket apapun",
+                            "icon": ""
+                        },
+                        {
+                            "name": "Bisa beli paket dengan pembayaran e-wallet",
+                            "icon": ""
+                        }
+                    ],
+                    "icon": ""
+                }
+            }
+        }
+    ]
+}

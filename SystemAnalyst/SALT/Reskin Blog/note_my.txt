@@ -1,0 +1,7 @@
+1. awb generate dari mana asalnya
+- JNE = stock AWB kayak kupon dikasih JNE ke kita
+- AnterAja = di kasih ketika dibutuhkan
+- Sicepat = dikasih format ke kita ada range
+- paxel = minta awb dulu di kasih ketika dibutuhkan
+2. check coverage done
+3. websocket

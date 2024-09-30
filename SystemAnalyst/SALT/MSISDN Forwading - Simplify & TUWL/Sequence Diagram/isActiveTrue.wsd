@@ -1,0 +1,22 @@
+@startuml Msisdn Forwarding (Seamless) \nPrepaid Registration
+title MSISDN Forwading - Simplify & TUWL
+
+boundary FrontEnd as fe
+
+box Microservice #LightBlue
+participant "Personal Device" as pd
+participant "Subscription" as subs
+participant "Offer" as offer
+
+end box
+
+== TUWL ==
+group #LightSalmon ENHANCE
+    fe -> pd ++: GET api.myorbit-nlb.id\n/ms/personal-device/v2/validation/seamless? \n//*contoh//
+end
+pd --> fe --: return payload
+
+fe -> subs ++: GET api.myorbit-aws.id \n/v1/quota/seamless
+subs --> fe --: return data
+fe -> offer ++: GET api.myorbit-aws.id \n/v1/categories \n/v1/data-package/{ML}
+offer --> fe --: return data

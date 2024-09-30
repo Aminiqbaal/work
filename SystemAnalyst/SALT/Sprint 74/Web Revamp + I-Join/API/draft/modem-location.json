@@ -1,0 +1,27 @@
+Method /POST //new
+Endpoint
+    {{host}}ms-delivery/v1/modem-location
+REQ    
+    Header
+    channel: web
+Body
+{
+    "latitude": "-7.5311779",
+    "longitude": "111.6034702",
+}
+RESP
+{
+    "status": true,
+    "code": 200,
+    "errorMessage": null,
+    "message": "Data found",
+    "data": {
+        "location": {
+            "displayName": "RW 02, Gambir, Jakarta Pusat, DKI Jakarta, 10110, Indonesia",
+            "province": "DKI Jakarta",
+            "city": "TEGAL",
+            "district": "WARUREJO",
+            "zipCode": "65132"
+        }
+    }
+}

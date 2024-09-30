@@ -1,0 +1,35 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/activation/v1/prepaid-registration-status
+REQ
+    Header
+        x-signature-key: {{SIGNATURE_KEY}}
+        x-api-Key: {{API_KEY}}
+RESP
+//listquota
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": [
+      {
+        "name": "Internet",
+        "current_usage": 9.04,
+        "total_usage": 9.54,
+        "unit": "GB",
+        "expired_date": "31 Dec 2030",
+        "has_priority": true,
+        "detail_usage": [
+          {
+            "name": "Internet Home",
+            "current_usage_left": 9.04,
+            "total_usage": 9.54,
+            "unit": "GB",
+            "expired_date": "31 Dec 2030"
+          }
+        ]
+      }
+    ]
+  }

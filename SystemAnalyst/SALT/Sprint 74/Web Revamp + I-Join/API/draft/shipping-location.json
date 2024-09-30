@@ -1,0 +1,25 @@
+Method /POST //new
+Endpoint
+    {{host}}ms-new-delivery/v1/shipping-location
+REQ    
+    Header
+    channel: web
+Body
+{
+    "cartUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+    "latitude": "-7.5311779",
+    "longitude": "111.6034702",
+    "displayName": "RW 02, Gambir, Jakarta Pusat, Daerah Khusus Ibukota Jakarta, 10110, Indonesia"
+}
+RESP
+{
+    "status": true,
+    "code": 200,
+    "errorMessage": null,
+    "message": "Data found",
+    "data": {
+        "latitude": "-7.5311779",
+        "longitude": "111.6034702",
+        "displayName": "RW 02, Gambir, Jakarta Pusat, Daerah Khusus Ibukota Jakarta, 10110, Indonesia"
+    }
+}

@@ -1,0 +1,23 @@
+Method /POST
+Endpoint
+    {{host}}/ms/activation/v1/postpaid-registration/purchase/submit-consent
+REQ    
+    Header
+    channel: web
+    
+Body
+{
+    "token": "ZjEyZjY1NWQwOTNiOWUxMjFmMDMwYjE3Nzg1NDk0YzRlNGZmZmY3NjdiMzQzNmVjNDc5NjFmZTI1ZmQ2YmNlYQ", //from response purchase/auto
+    "isAllowSaveData": true,
+    "isAllowOneBill": true, // false -> if customers doesn't check Allowed OneBill
+    "isSubscribtion" : true,
+}
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Success",
+    "errorMessage": null,
+    "errorData": null,
+    "data": null
+}

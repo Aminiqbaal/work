@@ -1,0 +1,72 @@
+@startuml "I Join - Delivery Enhancement"
+
+title "I Join - Delivery Enhancement"
+
+actor Customer as cust
+boundary "Website\nMyOrbit" as web
+
+box Microservices #LightBlue
+participant Delivery as msDelivery
+participant Order as msOrder
+end box
+
+participant Courier as courier
+
+
+cust -> web ++: fill Personal Information Form
+web -> web : store Personal Info internally in Website
+
+== Create Delivery By Longitude Latitude ==
+...
+cust -> web : Pick a Pin Point Location
+note over web
+    This data will be used for Delivery Destination
+end note
+
+group #LightGreen NEW
+    web -> msDelivery ++: POST Customer Get Deliveries by Long Lat\n/v2/customer-get-deliveries
+end
+note over msDelivery
+    by:
+    - long,
+    - lat
+    - cartUUID
+end note
+msDelivery -> msDelivery : find the nearest
+note over msDelivery
+    1. Do Haversine to find the nearest District (Kecamatan)
+    2. Extract **Destination** from Pinpoint Result
+
+    //* notes://
+    // All delivery with this method//
+    // MIGHT HAVE NOT Kelurahan, PostalCode Data//
+end note
+msDelivery -> courier ++: Get Delivery Costs
+courier --> msDelivery --: return Delivery Costs
+msDelivery --> web --: return List of Deliveries
+
+== Submit Chosen Delivery Option + Personal Information ==
+group #LightGreen NEW
+    web -> msDelivery ++: POST Set Delivery Option + Personal Info\n /v2/set-delivery-option
+end
+note over msDelivery
+    by:
+    - buyerInformation {}
+    - chosenDeliveryOption{}
+    - addressDetail
+    - courierNote
+end note
+msDelivery --> web --: return data
+' activate web
+== Get buyer information Process Order ==
+web -> msOrder ++: POST cart UUID to get buyer information\n/v1/process-order
+note over msOrder
+    by:
+    - cartUUID
+end note
+msOrder --> web --: return data
+
+
+
+
+@enduml

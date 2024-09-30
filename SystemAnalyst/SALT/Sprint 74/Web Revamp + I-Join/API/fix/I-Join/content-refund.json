@@ -1,0 +1,18 @@
+Method /GET
+Endpoint 
+    {{host}}/ms/acontent/v1/content-refund
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        
+    }
+}

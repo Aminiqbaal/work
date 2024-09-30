@@ -1,0 +1,252 @@
+Method /GET
+Endpoint 
+{{host}}ms/product/v1/package-categories?subCategoryType={subCategoryType}&lat={lat}&long={long} // optional hit endpoint ini ketika set lokasi to get price postpaid
+{{host}}ms/product/v1/package-categories?subCategoryType=prepaid
+{{host}}ms/product/v1/package-categories?subCategoryType=postpaid&lat=-7.5311779&long=111.6034702
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "NPC01",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "categories": [
+            {
+                "id": "1529544175",
+                "name": "Di rumah",
+                "slug": "rumah",
+                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                "subCategories": [
+                    {
+                        "id": "1529544175",
+                        "name": "Orbit Prabayar",
+                        "type": "prepaid",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "contents": [
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Internetan sehari-hari praktis pakai sinyal Telkomsel",
+                            },
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Bisa beli paket dengan pembayaran e-wallet",
+                            }
+                        ],
+                        "packageGroups": [
+                            {
+                                "id": "1611271843",
+                                "itemType": "Fantasix",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/fantasix-150-modem-star.png",
+                                "name": "FantaSix 150GB",
+                                "description": "Bonus kuota FantaSix 25GB/6 bulan.",
+                                "productTypeName": "+ Modem Star",
+                                "productType": "Star",
+                                "price": {
+                                    "price": 21000, //can 0 -> free 
+                                    "formattedPrice": "21.000",
+                                    "currency": "Rp."
+                                },
+                                "attributes": [
+                                    {
+                                        "key": "modem-amount",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Pilihan Modem",
+                                        "value": "9 Modem"
+                                    },
+                                    {
+                                        "key": "speed-level",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Kecepatan",
+                                        "value": "15Mbps"
+                                    },
+                                    {
+                                        "key": "multi-user",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Multi Pengguna",
+                                        "value": "32 Perangkat"
+                                    },
+                                    {
+                                        "key": "features",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Fitur",
+                                        "value": [
+                                            {
+                                                "color": "#0000",
+                                                "label": "Basic"
+                                            },
+                                            {
+                                                "color": "#0000",
+                                                "label": "Full"
+                                            },
+                                            {
+                                                "color": "#0000",
+                                                "label": "Lite"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "1529544175",
+                        "name": "Halo Orbit (Pascabayar)",
+                        "type": "postpaid",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "content": [
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Internetan sehari-hari praktis pakai sinyal Telkomsel",
+                            },
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Bisa beli paket dengan pembayaran e-wallet",
+                            }
+                        ],
+                        "packageGroups": [
+                            {
+                                "id": "1611271843",
+                                "itemType": "Fortress",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/fantasix-150-modem-star.png",
+                                "name": "Fortress 150GB",
+                                "description": "Bonus kuota Fortress 25GB/6 bulan.",
+                                "productTypeName": "+ Modem Star",
+                                "productType": "Star",
+                                "price": {
+                                    "price": 21000, //can 0 -> free 
+                                    "formattedPrice": "21.000",
+                                    "currency": "Rp."
+                                },
+                                "attributes": [
+                                    {
+                                        "key": "modem-amount",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Pilihan Modem",
+                                        "value": "9 Modem"
+                                    },
+                                    {
+                                        "key": "speed-level",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Kecepatan",
+                                        "value": "15Mbps"
+                                    },
+                                    {
+                                        "key": "multi-user",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Multi Pengguna",
+                                        "value": "32 Perangkat"
+                                    },
+                                    {
+                                        "key": "features",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Fitur",
+                                        "value": [
+                                            {
+                                                "color": "#0000",
+                                                "label": "Basic"
+                                            },
+                                            {
+                                                "color": "#0000",
+                                                "label": "Full"
+                                            },
+                                            {
+                                                "color": "#0000",
+                                                "label": "Lite"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                ]
+            },
+            {
+                "id": "1529544448",
+                "name": "Bepergian",
+                "slug": "bepergian",
+                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-bepergian.png",
+                "subCategories": [
+                    {
+                        "id": "1529544175",
+                        "name": "Orbit Prabayar",
+                        "type": "prepaid",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "content": [
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Internetan sehari-hari praktis pakai sinyal Telkomsel",
+                            },
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Bisa beli paket dengan pembayaran e-wallet",
+                            }
+                        ],
+                        "packageGroups": [
+                            {
+                                "id": "1611271843",
+                                "itemType": "Fantasix",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/fantasix-150-modem-star.png",
+                                "name": "FantaSix 150GB",
+                                "description": "Bonus kuota FantaSix 25GB/6 bulan.",
+                                "productTypeName": "+ Modem Star",
+                                "productType": "Star",
+                                "price": {
+                                    "price": 21000, //can 0 -> free 
+                                    "formattedPrice": "21.000",
+                                    "currency": "Rp."
+                                },
+                                "attributes": [
+                                    {
+                                        "key": "modem-amount",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Pilihan Modem",
+                                        "value": "9 Modem"
+                                    },
+                                    {
+                                        "key": "speed-level",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Kecepatan",
+                                        "value": "15Mbps"
+                                    },
+                                    {
+                                        "key": "multi-user",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Multi Pengguna",
+                                        "value": "32 Perangkat"
+                                    },
+                                    {
+                                        "key": "features",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Fitur",
+                                        "value": [
+                                            {
+                                                "color": "#0000",
+                                                "label": "Basic"
+                                            },
+                                            {
+                                                "color": "#0000",
+                                                "label": "Full"
+                                            },
+                                            {
+                                                "color": "#0000",
+                                                "label": "Lite"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

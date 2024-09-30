@@ -1,0 +1,18 @@
+@startuml blog
+title "Videos Blog My Orbit"
+actor "Actor" as C
+boundary "FE Web" as FE
+box "Microservices" #LightBlue
+participant "Content" as Content
+end box
+database "Pimcore" as DB
+
+
+C -> FE : click some videos on  "blog.myorbit.id"
+activate FE
+FE -> Content ++ :  list videos by category \nGET /ms/content/v1/blog-video?section{sections}
+Content -> DB ++ : get list data videos
+DB --> Content --: response data videos
+Content --> FE -- : response data videos 
+FE -> C : show data videos
+@enduml

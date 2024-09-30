@@ -1,0 +1,30 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/content/v1/blog-video?
+REQ
+    Header
+        Content-Type:application/json
+        x-localization: {{LANGUAGE}} //bahasa
+RESP
+
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "videoKey": "_w8Tg6QhNIE",
+            "videoTitle": "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDescription" : "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDate":"20 Juli 2022", 
+        },
+        {
+            "videoKey": "_w8Tg6QhNIE",
+            "videoTitle": "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDescription" : "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDate":"20 Juli 2022", 
+        }
+    ]
+}

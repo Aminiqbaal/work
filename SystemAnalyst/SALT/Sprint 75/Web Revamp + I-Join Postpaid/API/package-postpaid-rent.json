@@ -1,0 +1,90 @@
+Method /GET
+Endpoint 
+    {{host}}/ms/product/v1/package-postpaid-rent
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "packages": [
+            {
+                "id": "1611271844",
+                "slug": "rumah",
+                "isOutOfStock":false,
+                "itemType": "Package",
+                "packageType": "MEIG-HKM0130-01-MK-KPK",
+                "packageName": "Orbit Star H2",
+                "productType": "Star",
+                "type": "postpaid",
+                "images": [
+                    {
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image.png",
+                        "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-desktop.png",
+                        "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-mobile.png",
+                    }
+                ],
+                "keyFeatures": [
+                    {
+                        "key": "description-purchase",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "value": "Perangkat modem milik Anda sepenuhnya."
+                    },
+                    {
+                        "key": "livetime-purchase",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "value": "Lebih hemat untuk pemakaian jangka panjang."
+                    },
+                    {
+                        "key": "cost-purchase",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "value": "Biaya berlangganan paket bulanan Halo orbit 150GB Rp 175.000"
+                    },
+                    {
+                        "key": "description-rent",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "value": "Kerusakan modem ditanggung Telkomsel Orbit. Lihat Detail"
+                    },
+                    {
+                        "key": "livetime-rent",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "value": "Lebih fleksibel, tinggal pakai tanpa pembelian di awal."
+                    },
+                    {
+                        "key": "cost-rent",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "value": "Biaya berlangganan paket bulanan Halo orbit 150GB Rp 200.000."
+                    },
+                ],
+                "price": {
+                    "price": 1199000,
+                    "formattedPrice": "1.199.000",
+                    "currency": "Rp."
+                },
+                "priceRent": {
+                    "priceRent":  1000000,
+                    "formattedPriceRent": " 1.000.000",
+                    "currency": "Rp."
+                },
+                "priceStrikethrough": {
+                    "priceStrikethrough": 0,
+                    "formattedPriceStrikethrough": "0",
+                    "currency": "Rp."
+                },
+                "priceRentStrikethrough": {
+                    "priceRentStrikethrough": 0,
+                    "formattedPriceRentStrikethrough": "0",
+                    "currency": "Rp."
+                }
+            }
+        ]
+    }
+}

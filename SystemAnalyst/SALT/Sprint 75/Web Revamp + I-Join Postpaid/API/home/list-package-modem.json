@@ -1,0 +1,269 @@
+Method /GET
+Endpoint 
+    {{host}}ms/product/v1/list-package-modem/{subCategoryId}?sortBy={sortBy}&connectedDevice={connectedDevice}&minPrice{minPrice}&maxPrice{maxPrice}
+    Sort based on : 
+        1. promo (badges)
+        2. terlaris (msorder->soldAmount)
+        3. tebaru (badge)
+        4. harga tertinggi (price)
+        5. harga terendah (price)
+        6. kecepatan tertinggi (keyFeatures-> speed-level)
+    Filter base on
+        1. multi pengguna (keyFeatures-> multi-user)
+        2. feature (keyFeatures-> feature)
+        kisaran harga
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "LPM01",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "packageGroups": {
+            "id": "1611271844",
+            "name": "FantaSix 150GB",
+            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/fantasix-150-modem-star.png",
+            "description": "Bonus kuota FantaSix 25GB/6 bulan.",
+            "packages": [
+                {
+                    "id": "1611271844",
+                    "slug": "rumah",
+                    "isOutOfStock":false,
+                    "itemType": "Package",
+                    "packageType": "MEIG-HKM0130-01-MK-KPK",
+                    "packageName": "Orbit Star G1",
+                    "productType": "Star",
+                    "type": "prepaid",
+                    "images": [
+                        {
+                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image.png",
+                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-desktop.png",
+                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-mobile.png",
+                        }
+                    ],
+                    "keyFeatures": [
+                        {
+                            "key": "speed-level",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Kecepatan",
+                            "value": "15Mbps"
+                        },
+                        {
+                            "key": "multi-user",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Multi Pengguna",
+                            "value": "32 Perangkat"
+                        },
+                        {
+                            "key": "features",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Fitur",
+                            "value": {
+                                "color": "#0000",
+                                "label": "Basic"
+                            },
+                        }
+                    ],
+                    "price": {
+                        "price": 399000,
+                        "formattedPrice": "399.000",
+                        "currency": "Rp."
+                    },
+                    "priceStrikethrough": {
+                        "priceStrikethrough": 0,
+                        "formattedPriceStrikethrough": "0",
+                        "currency": "Rp."
+                    },
+                    "badges": [
+                        {
+                            "id": 0,
+                            "badgeKey": "PROMO",
+                            "label": "PROMO",
+                            "color": "#ff0000"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+
+//postpaid
+{
+    "status": true,
+    "code": "LPM01",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "packageGroups": {
+            "id": "1611271844",
+            "name": "Halo Orbit 150GB",
+            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/fantasix-150-modem-star.png",
+            "description": "BTermasuk 150GB untuk bulan pertama.",
+            "packages": [
+                {
+                    "id": "1611271844",
+                    "slug": "rumah",
+                    "isOutOfStock":false,
+                    "itemType": "Package",
+                    "packageType": "MEIG-HKM0130-01-MK-KPK",
+                    "packageName": "Orbit Star G1",
+                    "productType": "Star",
+                    "type": "postpaid",
+                    "images": [
+                        {
+                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image.png",
+                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-desktop.png",
+                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-mobile.png",
+                        }
+                    ],
+                    "keyFeatures": [
+                        //only show on page choose postpaid rent
+                        {
+                            "key": "description-purchase",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Perangkat modem milik Anda sepenuhnya."
+                        },
+                        {
+                            "key": "livetime-purchase",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Lebih hemat untuk pemakaian jangka panjang."
+                        },
+                        {
+                            "key": "cost-purchase",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Biaya berlangganan paket bulanan Halo orbit 150GB Rp 175.000"
+                        },
+
+                        //detail package-modem
+                        {
+                            "key": "speed-level",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Kecepatan",
+                            "value": "15Mbps"
+                        },
+                        {
+                            "key": "multi-user",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Multi Pengguna",
+                            "value": "32 Perangkat"
+                        },
+                        {
+                            "key": "features",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Fitur",
+                            "value": {
+                                "color": "#0000",
+                                "label": "Basic"
+                            },
+                        }
+                    ],
+                    "price": {
+                        "price": 1199000,
+                        "formattedPrice": "1.199.000",
+                        "currency": "Rp."
+                    },
+                    "priceStrikethrough": {
+                        "priceStrikethrough": 0,
+                        "formattedPriceStrikethrough": "0",
+                        "currency": "Rp."
+                    },
+                    "badges": [
+                        {
+                            "id": 0,
+                            "badgeKey": "PROMO",
+                            "label": "PROMO",
+                            "color": "#ff0000"
+                        }
+                    ]
+                }
+            ],
+            "packagesRent": [
+                {
+                    "id": "1611271844",
+                    "slug": "rumah",
+                    "isOutOfStock":false,
+                    "itemType": "PackageRent",
+                    "packageType": "MEIG-HKM0130-01-MK-KPK",
+                    "packageName": "Orbit Star G1",
+                    "productType": "Star",
+                    "type": "postpaid",
+                    "images": [
+                        {
+                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image.png",
+                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-desktop.png",
+                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-mobile.png",
+                        }
+                    ],
+                    "keyFeatures": [
+                        //only show on page postpaid rent
+                        {
+                            "key": "description-rent",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Kerusakan modem ditanggung Telkomsel Orbit. Lihat Detail"
+                        },
+                        {
+                            "key": "livetime-rent",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Lebih fleksibel, tinggal pakai tanpa pembelian di awal."
+                        },
+                        {
+                            "key": "cost-rent",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Biaya berlangganan paket bulanan Halo orbit 150GB Rp 200.000."
+                        },
+
+                        //detail package-modem
+                        {
+                            "key": "speed-level",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Kecepatan",
+                            "value": "15Mbps"
+                        },
+                        {
+                            "key": "multi-user",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Multi Pengguna",
+                            "value": "32 Perangkat"
+                        },
+                        {
+                            "key": "features",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "title": "Fitur",
+                            "value": {
+                                "color": "#0000",
+                                "label": "Basic"
+                            },
+                        }
+                    ],
+                    "price": {
+                        "priceRent":  1000000,
+                        "formattedPriceRent": " 1.000.000",
+                        "currency": "Rp."
+                    },
+                    "priceStrikethrough": {
+                        "priceStrikethrough": 0,
+                        "formattedPriceStrikethrough": "0",
+                        "currency": "Rp."
+                    },
+                    "badges": [
+                        {
+                            "id": 0,
+                            "badgeKey": "PROMO",
+                            "label": "PROMO",
+                            "color": "#ff0000"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

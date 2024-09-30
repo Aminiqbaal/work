@@ -1,0 +1,111 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/activation/v1/prepaid-registration-status
+REQ
+    Header
+        x-signature-key: {{SIGNATURE_KEY}}
+        x-api-Key: {{API_KEY}}
+RESP
+//special for you 2 endpoint
+{
+  "status": true,
+  "code": "",
+  "message": "Data Found",
+  "error_message": null,
+  "data": [
+      {
+          "type": "PackageOffers",
+          "id": "00063039",
+          "attributes": {
+              "name": "Orbit Extra",
+              "badge": null,
+              "validityDay": "30 Days",
+              "subcategory": "Special For You",
+              "subCategoryDesc": "MAIN_PACKAGE",
+              "terms": "<ol><li>Kuota data yang dapat digunakan untuk mengakses internet melalui jaringan 4G LTE</li><li>Kuota internet dapat digunakan 24 jam sehari</li><li>Kuota internet hanya bisa digunakan melalui perangkat modem Orbit</li><li>Kuota internet hanya bisa digunakan di lokasi tertentu yang masuk ke dalam jaringan Orbit</li><li>Kuota internet berlaku selama 30 hari</li><li>Harga termasuk PPN 11%</li></ol>",
+              "detailDescription": "Paket Telkomsel Orbit berlaku 30 hari dengan Kuota 40 GB",
+              "isHomePackage": false,
+              "isPackageRenewal": true,
+              "isFamilyQuota": false,
+              "packageFlagging": "",
+              "payment": [
+                  "LINKAJA_APP",
+                  "LINKAJA_WCO",
+                  "OVO",
+                  "XENDIT_INVOICES",
+                  "AKULAKU",
+                  "FINNET_CC",
+                  "QRIS",
+                  "GOPAY",
+                  "CREDIT_CARD",
+                  "DANA",
+                  "BALANCE",
+                  "RSSTOCK",
+                  "KREDIVO",
+                  "SHOPEEPAY",
+                  "FINNET_VA",
+                  "OMNICHANNEL",
+                  "RSEMONEY",
+                  "FINNET_WALLET",
+                  "MANDIRI_DD"
+              ],
+              "offerId": {
+                  "id": "00063039",
+                  "code": "ORB",
+                  "businessProduct": "Orbit Extra",
+                  "businessProductId": "ML4_ORB_160100047"
+              },
+              "offerIdPulsa": {
+                  "id": "00063039",
+                  "code": "ORB",
+                  "businessProduct": "Orbit Extra",
+                  "businessProductId": "ML4_ORB_160100047"
+              },
+              "price": {
+                  "price": 70000,
+                  "formattedPrice": "70.000",
+                  "currency": "Rp."
+              },
+              "priceStrikeThrough": null,
+              "quota": {
+                  "quota": "40",
+                  "unit": "GB",
+                  "formattedQuota": "40 GB"
+              },
+              "bonus": [
+                  {
+                      "isShow": true,
+                      "name": "Internet Orbit",
+                      "value": "40 GB",
+                      "icon": "https://s3-preprod.myorbit.id/ms/package-detail/default.png"
+                  },
+                  {
+                      "isShow": true,
+                      "name": "Masa Aktif",
+                      "value": "30 Days",
+                      "icon": "https://s3-preprod.myorbit.id/ms/package-detail/masaAktif.png"
+                  }
+              ],
+              "benefits": [
+                  {
+                      "isShow": true,
+                      "name": "Internet Orbit",
+                      "value": "40 GB",
+                      "icon": "https://s3-preprod.myorbit.id/ms/package-detail/default.png"
+                  },
+                  {
+                      "isShow": true,
+                      "name": "Masa Aktif",
+                      "value": "30 Days",
+                      "icon": "https://s3-preprod.myorbit.id/ms/package-detail/masaAktif.png"
+                  }
+              ],
+              "packageAddOnType": {
+                  "isEntertainment": false,
+                  "basedOn": null
+              }
+          }
+      }
+  ]
+}

@@ -1,0 +1,77 @@
+@startuml "I Join - Advance Prepaid Registration Manual"
+
+title "I Join - Advance Prepaid Registration Manual"
+
+actor Customer as cust
+boundary Website as web
+
+box Microservices #LightBlue
+participant Activation as msActivation
+participant Delivery as msDelivery
+database dbActivation as dbActivation
+end box
+
+queue rabbitMq as rabbitMq
+participant ESB as esb
+participant DPP as dpp
+
+activate web
+
+== Submit NIKNOKK Advance Prepaid Registration ==
+group #LightGreen NEW
+    web -> msActivation ++: POST submit NIKNOKK Advance Prepaid Regis \n/v1/prepaid-registration/purchase/manual
+end
+note over msActivation
+    by:
+    - orderUUID
+    - nik
+    - nokk
+    - isAllowSaveData
+end note
+group CHECK NON DUPLICATE REQUEST
+    msActivation -> dbActivation ++: Query Activation Exists Reservation
+    dbActivation --> msActivation --: return query
+    note over msActivation
+        must only be One Row
+        and its status = REFERENCE_MSISDN_VALIDATED
+    end note
+    alt Prepaid Activation is already Exist
+        msActivation --x web : Error Request Exists
+        note over web
+            Error Prepaid Registration Request
+            is already made
+        end note
+    end
+end
+...
+note over msActivation
+    Activation needs to check Delivery
+    to make sure Outbound Callback hasn't been made
+end note
+group #lightGreen NEW
+    msActivation -> msDelivery ++: GET delivery-packages\n/private/delivery-packages
+end
+note over msDelivery
+    By:
+    - orderUUID
+end note
+msDelivery --> msActivation --: return Delivery Detail
+
+alt #LightGray Delivery has device's MSISDN information
+    note over msActivation
+        Delivery already Outbound
+    end note
+    msActivation -> rabbitMq : PUBLISH \nRequest to Prepaid Regis
+else #White Delivery doesn't have NOT device's MSISDN information
+    group INTEGRATE with DPP
+        msActivation -> dpp ++: Request Tokenize NIK NOKK
+        dpp --> msActivation --: return NIK NOKK Token
+        msActivation -> dbActivation ++: store Tokenized NIK NOKK
+        dbActivation -> msActivation --: return NIK NOKK Token
+    end
+end
+
+msActivation --> web --: response
+
+
+@enduml

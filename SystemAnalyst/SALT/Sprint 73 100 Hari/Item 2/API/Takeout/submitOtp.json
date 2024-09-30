@@ -1,0 +1,30 @@
+Method /POST
+
+Endpoint 
+    {{host}}v1/prepaid-registration/seamless/submit-otp
+REQ
+    Header
+        Content-Type:application/json
+        x-api-Key:{{API_KEY}}
+        //x-enc-msisdn: {{ENCRYPTED MSISDN BASED ON F5 MECHANISM}} ga di tampilin waktu pentest
+    Body
+    {
+        "msisdnReference":"628123456678",
+        "otp": "347612"
+    }
+
+RESP
+{
+    "status": true,
+        "code": "200",
+        "message": "Success",
+        "errorMessage": null,
+        "errorData": null,
+        "data": {
+            "transaction": {
+                "ssid_name" : "Ma*******ya",
+                "nik": "3278********0202"
+            }
+        }
+        
+}

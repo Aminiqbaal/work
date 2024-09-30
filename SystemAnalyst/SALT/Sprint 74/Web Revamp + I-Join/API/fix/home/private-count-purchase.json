@@ -1,0 +1,25 @@
+Method /GET
+Endpoint 
+    {{host}}ms/order/private/count-purchase
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "CP00",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "packages": [
+            {
+                "id": "1611271844",
+                "soldAmount": 2567,
+            }
+        ]
+    }
+}

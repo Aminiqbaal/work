@@ -1,0 +1,22 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/activation/v1/prepaid-registration-status
+REQ
+    Header
+        x-signature-key: {{SIGNATURE_KEY}}
+        x-api-Key: {{API_KEY}}
+RESP
+
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":
+        {
+            "isActive": true, // Customer Profile PENDING or ACTIVE jadi true
+            "orbitReference" : "uuid"
+        }
+    
+}

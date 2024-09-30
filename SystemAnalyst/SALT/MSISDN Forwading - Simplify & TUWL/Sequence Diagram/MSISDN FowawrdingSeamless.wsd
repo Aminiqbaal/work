@@ -1,0 +1,33 @@
+@startuml Msisdn Forwarding (Seamless) \nPrepaid Registration
+title MSISDN Forwading - Simplify & TUWL
+
+boundary FrontEnd as fe
+
+box Infrastructure
+participant "New\nLoadBalancer" as nlb
+end box
+box Microservice #LightBlue
+participant "Activation" as act
+end box
+
+participant ESB as esb
+participant "F5\nAPI Gateway" as f5
+
+== Msisdn Forwarding (Seamless) Prepaid Registration ==
+' ms/activation/v1/activation/prepaid
+activate fe
+fe -> nlb ++: GET /v1/prepaid-registration/seamless/initiate
+nlb -> f5 ++: forward Request
+f5 -> f5 : add enc. msisdn \nAES 128
+f5 -> act ++: GET /v1/prepaid-registration/seamless/initiate
+act -> esb ++: get profile
+esb --> act --: return data
+note over act
+    decrypt msisdn header, to extract the msisdn
+
+    generate signature key
+    generate encr_msisdn
+end note
+act --> f5 --: return \nsignature key\nencrypted_msisdn (from MyOrbit)
+f5 --> nlb --: forward payload
+nlb --> fe --: return payload

@@ -1,0 +1,77 @@
+Method /GET
+Endpoint 
+    {{host}}package-lumen/v6/product-categories
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "PPC00",
+    "message": true,
+    "errorMessage": null,
+    "data": [
+        {
+            "type": "ProductCategory",
+            "id": "1529544175",
+            "name": "Di rumah",
+            "slug": "rumah",
+            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+            "subCategory": {
+                [
+                    {
+                        "type": "ProductSubCategory",
+                        "id": "1529544175",
+                        "name": "Modem Star",
+                        "slug": "modem-star",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "products": [
+                            {
+                                "id": 1611271843,
+                                "itemType": "product",
+                                "name": "Orbit Star G1",
+                                "productType": "Star",
+                                "price": 300000,
+                                "atributes": [
+                                    {
+                                        "key": "speed-level",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Kecepatan",
+                                        "value": "15Mbps"
+                                    },
+                                    {
+                                        "key": "multi-user",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Multi Pengguna",
+                                        "value": "32 Perangkat"
+                                    },
+                                    {
+                                        "key": "features",
+                                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                        "title": "Fitur",
+                                        "value": [
+                                            {
+                                                "color": "0000",
+                                                "label": "Basic"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                ]
+            }
+        },
+        {
+            "type": "ProductCategory",
+            "id": "1529544448",
+            "name": "Bepergian",
+            "slug": "bepergian",
+            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-bepergian.png"
+        }
+    ]
+}

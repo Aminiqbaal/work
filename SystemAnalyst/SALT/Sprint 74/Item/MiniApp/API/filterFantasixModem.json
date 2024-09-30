@@ -1,0 +1,646 @@
+Method /POST
+
+Endpoint 
+    {{host}}package-lumen/v1/products/MiniApp{subCategory_id}
+//Filter based on : 
+// 1. Kuota FantaSix ("productType": "Star")
+// 2. kisaran harga (price)
+// 3. kapasitas modem (package-> device)
+
+REQ
+        Header
+        X-localization: {{LANGUAGE}}
+        Content-Type:application/json
+        x-api-Key: {{API_KEY}}
+        channel: {{CHANNEL}}
+
+    Body
+    {
+        "quotaFantasix": "150GB",
+        "connectedDevice": "32",
+        "minPrice": 300000,
+        "maxPrice": 600000
+   }
+        
+        
+RESP
+
+{
+        "status": true,
+        "code": "200", 
+        "message": "Data found",
+        "errorMessage": null,
+        "data": {
+                "quotaFantasix": [
+                        {
+                                "id": 1611271843,
+                                "itemType": "Fantasix",
+                                "fantasixName": "FantaSix 150GB + Modem Star",
+                                "fantasicDescription": "Bonus kuota FantaSix 25GB/6 bulan.",
+                                "productType": "Star",
+                                "package": [
+                                        {
+                                                "id": 1611271844,
+                                                "itemType": "Package",
+                                                "packageType": "MEIG-HKM0130-01-MK-KPK",
+                                                "packageName": "Orbit Star G1",
+                                                "packageDescription": "Termasuk paket data 150GB (25GB\/30 hari untuk 6 bulan pertama)",
+                                                "productType": "Star", //tambahan
+                                                "offerId": "00050822",
+                                                "offerIdPulsa": "00042786",
+                                                "quota":{
+                                                        "fantasixId":1611271843,
+                                                }, 
+                                                "price": { 
+                                                    "price": 399000,
+                                                    "formattedPrice": "399.000",
+                                                    "currency": "Rp."
+                                                },
+                                                "priceStrikethrough": {
+                                                    "priceStrikethrough": 0,
+                                                    "formattedPriceStrikethrough": "0",
+                                                    "currency": "Rp."
+                                                },
+                                                "validityDay": "30 Hari",
+                                                "discount": {
+                                                    "discount": null,
+                                                    "formattedDiscount": "0",
+                                                    "currency": "Rp."
+                                                },
+                                                "socialProof": {
+                                                    "soldAmount": 2567, 
+                                                    "rating": 4.6        
+                                                },
+                                                "devices": {
+                                                    "deviceIcon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_1.png",
+                                                    "name": "Orbit Star G1",
+                                                    "title": "Spesifikasi Produk",
+                                                    "description": "Modem Nirkabel memberi Anda akses ke Internet prabayar melalui jaringan seluler 4G Telkomsel. Orbit Star cocok untuk Anda dengan keluarga kecil agar dapat terhubung ke internet. Router harus terhubung ke sumber daya.",
+                                                    "technicalSpesificationDocument": "https:\/\/s3.myorbit.id\/pimcore\/TechnicalSpesificationDocument\/Product Spesification - Orbit Star G1.pdf",
+                                                    "length": 150,
+                                                    "width": 115,
+                                                    "height": 40,
+                                                    "weight": 1000,
+                                                "specification": [
+                                                        {"deviceValue": "Up to 15Mbps",
+                                                                        "deviceKey": "Speed Level",
+                                                                        "showHomepage": false,
+                                                                        "ctaText": "",
+                                                                        "ctaUrl": ""
+                                                                },
+                                                                {
+                                                                        "deviceValue": "32 User", //kapasitas pengguna
+                                                                        "deviceKey": "Multi User",
+                                                                        "showHomepage": false,
+                                                                        "ctaText": "",
+                                                                        "ctaUrl": ""
+                                                                }
+                                                        ],
+                                        
+                                    "specificationList": [
+                                        {
+                                            "title": "Termasuk paket data 150GB (25GB/30 hari selama 6 bulan).",
+                                            "description": "",
+                                            "urlName": "Selengkapnya",
+                                            "urlLink": "https://blog.myorbit.id"
+                                       
+                                                                },
+                                        {
+                                            "title": "Kecepatan Internet s/d 150 Mbps",
+                                            "description": "",
+                                            "urlName": "",
+                                            "urlLink": ""
+                                       
+                                                                },
+                                        {
+                                            "title": "Teknologi selular 4x4 MIMO LTE & 5G",
+                                            "description": "(Memungkinkan akses internet lebih cepat dan koneksi lebih stabil)",
+                                            "urlName": "",
+                                            "urlLink": ""
+                                       
+                                                                },
+                                        {
+                                            "title": "Teknologi WiFi 2.4 GHz & 5GHz WiFi ",
+                                            "description": "(Memberikan jangkauan konektivitas yang lebih luas)",
+                                            "urlName": "",
+                                            "urlLink": ""
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front.png",
+                                    "images": [
+                                        {
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_3.png",
+                                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_4.png",
+                                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_5.png"
+                                       
+                                                                },
+                                        {
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_2.png",
+                                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_3.png",
+                                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_4.png"
+                                       
+                                                                },
+                                        {
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear.png",
+                                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear_1.png",
+                                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear_2.png"
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "keyFeatures": [
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Subtract_11.png",
+                                            "feature": "<p>Termasuk paket data 150GB (25GB\/30 hari selama 6 bulan pertama).&nbsp;Syarat &amp; ketentuan berlaku.<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Max. Users_8.png",
+                                            "feature": "<p><strong>Maks. 32&nbsp;<\/strong>perangkat terhubung<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Instalment.png",
+                                            "feature": "<p>Cicilan mulai dari Rp&nbsp;33ribu\/bulan selama 1 tahun<\/p>\n"
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "configurationAppTitle": null,
+                                    "configurationApp": [
+                                        {
+                                            "id": 0,
+                                            "title": "4G",
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/wifi_12.png",
+                                            "showHomepage": false
+                                       
+                                                                },
+                                        {
+                                            "id": 1,
+                                            "title": "\u224815Mbps",
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Combined Shape_8.png",
+                                            "showHomepage": false
+                                       
+                                                                },
+                                        {
+                                            "id": 2,
+                                            "title": "32 Pengguna",
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Max. Users_7.png",
+                                            "showHomepage": false
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "android": false,
+                                    "ios": false,
+                                    "is5GNetwork": false, //filter by jaringan
+                                    "mainFeatures": [
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Rata-rata Kecepatan_3.png",
+                                            "feature": "<p>Rata-rata kecepatan modem hingga 15 Mbps<\/p>\n",
+                                            "description": "<p>Kecepatan internet the real 4G LTE dengan kualitas terbaik milik Telkomsel.<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/wifi_13.png",
+                                            "feature": "<p>Ganti nama &amp; password WiFi melalui aplikasi<\/p>\n",
+                                            "description": "<p>Ubah nama &amp; password WiFi mudah langsung di aplikasi<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/statistic_9.png",
+                                            "feature": "<p>Cek pemakaian paket data secara berkala<\/p>\n",
+                                            "description": "<p>Lihat estimasi pemakaian paket data untuk setiap hari &amp; bulannya.<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-1_3.png",
+                                            "feature": "<p>Lihat estimasi pemakaian paket data untuk setiap hari &amp; bulannya.<\/p>\n",
+                                            "description": "<p>Pasang sendiri modem Orbit dengan mudah melalui panduan dari aplikasi.<\/p>\n"
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "modemFeatures": [
+                                        {
+                                            "id": 1255213036,
+                                            "title": "Atur Wifi",
+                                            "alt": "Anda dapat mengatur nama & password WiFi di aplikasi MyOrbit",
+                                            "key": "ATUR_WIFI",
+                                            "status": true
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213129,
+                                            "title": "Jadwal Pemakaian",
+                                            "alt": "Anda dapat mengatur waktu akses internet untuk tiap pengguna WiFi",
+                                            "key": "JADWAL_PEMAKAIAN",
+                                            "status": false
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213192,
+                                            "title": "Pemasangan Mudah",
+                                            "alt": "Anda dapat memasang modem sendiri dengan panduan aplikasi",
+                                            "key": "PEMASANGAN _MUDAH",
+                                            "status": true
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213236,
+                                            "title": "Statistik Penggunaan",
+                                            "alt": "Lihat penggunaan paket data modem Anda untuk durasi waktu tertentu",
+                                            "key": "STATISTIK_PENGGUNAAN",
+                                            "status": true
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213321,
+                                            "title": "Website Filtering",
+                                            "alt": "Anda dapat membatasi akses situs tertentu untuk pengguna WiFi",
+                                            "key": "WEBSITE_FILTERING",
+                                            "status": false
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213337,
+                                            "title": "WiFi Tamu",
+                                            "alt": "Akses khusus untuk tamu yang ingin menggunakan WiFi rumah Anda",
+                                            "key": "WIFI_TAMU",
+                                            "status": false
+                                       
+                                                                }
+                                   
+                                                        ]
+                                               
+                                                },
+                                                "quota": {
+                                    "quota": 25,
+                                    "unit": "GB"
+                                               
+                                                },
+                                                "quotaDisplay": {
+                                    "quota": 150,
+                                    "unit": "GB"
+                                               
+                                                },
+                                                "preOrder": false,
+                                                "preOrderUltimate": null,
+                                                "preOrderBatch": null,
+                                                "isOutOfStock": false,
+                                                "totalAvailableStock": 80,
+                                                "isNew": true, //sort by terbaru
+                                                "additionalInfoImage": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/atoms-icons-system-installment@3x_4_7.png",
+                                                "additionalInfo": null,
+                                                "packages": {
+                                    "content": {
+                                        "title": "Modem Nirkabel Menggunakan Jaringan 4G Telkomsel",
+                                        "description": "Orbit Star G1 adalah pilihan modem yang tepat bagi Anda dengan kebutuhan yang lebih simpel. Cukup hubungkan modem dan perangkat Anda untuk menikmati layanan Orbit Star G1.",
+                                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_5.png"
+                                   
+                                                        },
+                                    "info": [
+                                        {
+                                            "title": "Termasuk paket data 150GB",
+                                            "description": "25GB\/30 hari selama 6 bulan pertama, syarat & ketentuan berlaku.",
+                                            "urlName": null,
+                                            "urlLink": "",
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Subtract_12.png"
+                                       
+                                                                },
+                                        {
+                                            "title": "Cicilan mulai dari Rp 33.000\/bulan selama 1 tahun",
+                                            "description": null,
+                                            "urlName": null,
+                                            "urlLink": "",
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Instalment_1.png"
+                                       
+                                                                }
+                                   
+                                                        ]
+                                               
+                                                },
+                                                "badges": [] //sort by promo
+                                           
+                                        }
+                                       
+                                ]
+                        },
+                        {
+                                "id": 1611271843,
+                                "itemType": "Fantasix + Modem Pro",
+                                "fantasixName": "FantaSix 150GB",
+                                "fantasicDescription": "Bonus kuota FantaSix 25GB/6 bulan.",
+                                "specification": [
+                                        {
+                                                "deviceValue": "Up to 15Mbps",
+                                                "deviceKey": "Speed Level",
+                                                "showHomepage": false,
+                                                "ctaText": "",
+                                                "ctaUrl": ""
+                                        },
+                                        {
+                                                "deviceValue": "32 User", //kapasitas pengguna
+                                                "deviceKey": "Multi User",
+                                                "showHomepage": false,
+                                                "ctaText": "",
+                                                "ctaUrl": ""
+                                        }
+                                ],
+                                "package": [
+                                        {
+                                                "id": 1611271844,
+                                                "itemType": "Package",
+                                                "packageType": "MEIG-HKM0130-01-MK-KPK",
+                                                "packageName": "Orbit Star G1",
+                                                "packageDescription": "Termasuk paket data 150GB (25GB\/30 hari untuk 6 bulan pertama)",
+                                                "offerId": "00050822",
+                                                "offerIdPulsa": "00042786",
+                                                "price": { //sort by price
+                                    "price": 399000,
+                                    "formattedPrice": "399.000",
+                                    "currency": "Rp."
+                                               
+                                                },
+                                                "priceStrikethrough": {
+                                    "priceStrikethrough": 0,
+                                    "formattedPriceStrikethrough": "0",
+                                    "currency": "Rp."
+                                               
+                                                },
+                                                "validityDay": "30 Hari",
+                                                "discount": {
+                                    "discount": null,
+                                    "formattedDiscount": "0",
+                                    "currency": "Rp."
+                                               
+                                                },
+                                                "socialProof": {
+                                    "soldAmount": 2567, 
+                                    "rating": 4.6 
+                                               
+                                                },
+                                                "devices": {
+                                    "deviceIcon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_1.png",
+                                    "name": "Orbit Star G1",
+                                    "title": "Spesifikasi Produk",
+                                    "description": "Modem Nirkabel memberi Anda akses ke Internet prabayar melalui jaringan seluler 4G Telkomsel. Orbit Star cocok untuk Anda dengan keluarga kecil agar dapat terhubung ke internet. Router harus terhubung ke sumber daya.",
+                                    "technicalSpesificationDocument": "https:\/\/s3.myorbit.id\/pimcore\/TechnicalSpesificationDocument\/Product Spesification - Orbit Star G1.pdf",
+                                    "length": 150,
+                                    "width": 115,
+                                    "height": 40,
+                                    "weight": 1000,
+                                                        "specification": [
+                                                                {
+                                                                        "deviceValue": "Up to 15Mbps",
+                                                                        "deviceKey": "Speed Level",
+                                                                        "showHomepage": false,
+                                                                        "ctaText": "",
+                                                                        "ctaUrl": ""
+                                                                },
+                                                                {
+                                                                        "deviceValue": "32 User", //kapasitas pengguna
+                                                                        "deviceKey": "Multi User",
+                                                                        "showHomepage": false,
+                                                                        "ctaText": "",
+                                                                        "ctaUrl": ""
+                                                                }
+                                                        ],
+                                        
+                                    "specificationList": [
+                                        {
+                                            "title": "Termasuk paket data 150GB (25GB/30 hari selama 6 bulan).",
+                                            "description": "",
+                                            "urlName": "Selengkapnya",
+                                            "urlLink": "https://blog.myorbit.id"
+                                       
+                                                                },
+                                        {
+                                            "title": "Kecepatan Internet s/d 150 Mbps",
+                                            "description": "",
+                                            "urlName": "",
+                                            "urlLink": ""
+                                       
+                                                                },
+                                        {
+                                            "title": "Teknologi selular 4x4 MIMO LTE & 5G",
+                                            "description": "(Memungkinkan akses internet lebih cepat dan koneksi lebih stabil)",
+                                            "urlName": "",
+                                            "urlLink": ""
+                                       
+                                                                },
+                                        {
+                                            "title": "Teknologi WiFi 2.4 GHz & 5GHz WiFi ",
+                                            "description": "(Memberikan jangkauan konektivitas yang lebih luas)",
+                                            "urlName": "",
+                                            "urlLink": ""
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front.png",
+                                    "images": [
+                                        {
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_3.png",
+                                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_4.png",
+                                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_5.png"
+                                       
+                                                                },
+                                        {
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_2.png",
+                                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_3.png",
+                                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_4.png"
+                                       
+                                                                },
+                                        {
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear.png",
+                                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear_1.png",
+                                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear_2.png"
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "keyFeatures": [
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Subtract_11.png",
+                                            "feature": "<p>Termasuk paket data 150GB (25GB\/30 hari selama 6 bulan pertama).&nbsp;Syarat &amp; ketentuan berlaku.<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Max. Users_8.png",
+                                            "feature": "<p><strong>Maks. 32&nbsp;<\/strong>perangkat terhubung<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Instalment.png",
+                                            "feature": "<p>Cicilan mulai dari Rp&nbsp;33ribu\/bulan selama 1 tahun<\/p>\n"
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "configurationAppTitle": null,
+                                    "configurationApp": [
+                                        {
+                                            "id": 0,
+                                            "title": "4G",
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/wifi_12.png",
+                                            "showHomepage": false
+                                       
+                                                                },
+                                        {
+                                            "id": 1,
+                                            "title": "\u224815Mbps",
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Combined Shape_8.png",
+                                            "showHomepage": false
+                                       
+                                                                },
+                                        {
+                                            "id": 2,
+                                            "title": "32 Pengguna",
+                                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Max. Users_7.png",
+                                            "showHomepage": false
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "android": false,
+                                    "ios": false,
+                                    "is5GNetwork": false, //filter by jaringan
+                                    "mainFeatures": [
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Rata-rata Kecepatan_3.png",
+                                            "feature": "<p>Rata-rata kecepatan modem hingga 15 Mbps<\/p>\n",
+                                            "description": "<p>Kecepatan internet the real 4G LTE dengan kualitas terbaik milik Telkomsel.<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/wifi_13.png",
+                                            "feature": "<p>Ganti nama &amp; password WiFi melalui aplikasi<\/p>\n",
+                                            "description": "<p>Ubah nama &amp; password WiFi mudah langsung di aplikasi<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/statistic_9.png",
+                                            "feature": "<p>Cek pemakaian paket data secara berkala<\/p>\n",
+                                            "description": "<p>Lihat estimasi pemakaian paket data untuk setiap hari &amp; bulannya.<\/p>\n"
+                                       
+                                                                },
+                                        {
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-1_3.png",
+                                            "feature": "<p>Lihat estimasi pemakaian paket data untuk setiap hari &amp; bulannya.<\/p>\n",
+                                            "description": "<p>Pasang sendiri modem Orbit dengan mudah melalui panduan dari aplikasi.<\/p>\n"
+                                       
+                                                                }
+                                   
+                                                        ],
+                                    "modemFeatures": [
+                                        {
+                                            "id": 1255213036,
+                                            "title": "Atur Wifi",
+                                            "alt": "Anda dapat mengatur nama & password WiFi di aplikasi MyOrbit",
+                                            "key": "ATUR_WIFI",
+                                            "status": true
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213129,
+                                            "title": "Jadwal Pemakaian",
+                                            "alt": "Anda dapat mengatur waktu akses internet untuk tiap pengguna WiFi",
+                                            "key": "JADWAL_PEMAKAIAN",
+                                            "status": false
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213192,
+                                            "title": "Pemasangan Mudah",
+                                            "alt": "Anda dapat memasang modem sendiri dengan panduan aplikasi",
+                                            "key": "PEMASANGAN _MUDAH",
+                                            "status": true
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213236,
+                                            "title": "Statistik Penggunaan",
+                                            "alt": "Lihat penggunaan paket data modem Anda untuk durasi waktu tertentu",
+                                            "key": "STATISTIK_PENGGUNAAN",
+                                            "status": true
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213321,
+                                            "title": "Website Filtering",
+                                            "alt": "Anda dapat membatasi akses situs tertentu untuk pengguna WiFi",
+                                            "key": "WEBSITE_FILTERING",
+                                            "status": false
+                                       
+                                                                },
+                                        {
+                                            "id": 1255213337,
+                                            "title": "WiFi Tamu",
+                                            "alt": "Akses khusus untuk tamu yang ingin menggunakan WiFi rumah Anda",
+                                            "key": "WIFI_TAMU",
+                                            "status": false
+                                       
+                                                                }
+                                   
+                                                        ]
+                                               
+                                                },
+                                                "quota": {
+                                    "quota": 25,
+                                    "unit": "GB"
+                                               
+                                                },
+                                                "quotaDisplay": {
+                                    "quota": 150,
+                                    "unit": "GB"
+                                               
+                                                },
+                                                "preOrder": false,
+                                                "preOrderUltimate": null,
+                                                "preOrderBatch": null,
+                                                "isOutOfStock": false,
+                                                "totalAvailableStock": 80,
+                                                "isNew": true, //sort by terbaru
+                                                "additionalInfoImage": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/atoms-icons-system-installment@3x_4_7.png",
+                                                "additionalInfo": null,
+                                                "packages": {
+                                    "content": {
+                                        "title": "Modem Nirkabel Menggunakan Jaringan 4G Telkomsel",
+                                        "description": "Orbit Star G1 adalah pilihan modem yang tepat bagi Anda dengan kebutuhan yang lebih simpel. Cukup hubungkan modem dan perangkat Anda untuk menikmati layanan Orbit Star G1.",
+                                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_5.png"
+                                   
+                                                        },
+                                    "info": [
+                                        {
+                                            "title": "Termasuk paket data 150GB",
+                                            "description": "25GB\/30 hari selama 6 bulan pertama, syarat & ketentuan berlaku.",
+                                            "urlName": null,
+                                            "urlLink": "",
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Subtract_12.png"
+                                       
+                                                                },
+                                        {
+                                            "title": "Cicilan mulai dari Rp 33.000\/bulan selama 1 tahun",
+                                            "description": null,
+                                            "urlName": null,
+                                            "urlLink": "",
+                                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Instalment_1.png"
+                                       
+                                                                }
+                                   
+                                                        ]
+                                               
+                                                },
+                                                "badges": [] //sort by promo
+                                           
+                                        }
+                                       
+                                ]
+                        }
+                ]
+           
+        }
+}

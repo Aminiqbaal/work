@@ -1,0 +1,37 @@
+GET
+POST
+DELETE
+
+GET /product
+
+Input parameters:
+- category (string): The category for which to product information (e.g. "Di rumah, Bepergian")
+- version (string): The version of the API to use (e.g. "v1",
+"v2")
+
+Output:
+- product (string): A list of product (e.g. "Orbit Star Z2",
+"Orbit Star G1",
+"Orbit Star A1",
+"Orbit Turbo 5G")
+- detail_product (float): The current detail of product
+
+Example usage:
+
+GET /product?category=Di%20Rumah,%20rumah&version=v2
+
+Output: {
+  "productcategory": "rumah", //atribute
+  "data"  : [ //array of object
+     //object1
+    {
+      "id": "1", //string
+      "name_product": "Orbit Star Z2",
+      "price": "399000",
+      //int, ukuran 4 byte, jangkauan -2,147,483,648 hingga 2,147,483,647
+      "sold": "100",
+      "rate": "4.7",
+      "4G": true // boolean
+    },
+  ]
+}

@@ -1,0 +1,33 @@
+@startuml blog
+title "Blog My Orbit"
+
+actor "Customer" as C
+boundary "FE Web" as FE
+box "Microservices" #LightBlue
+participant "Blog" as Content
+end box
+database "Pimcore" as DB
+
+== Videos ==
+
+C -> FE : open page "blog.myorbit.id"
+activate FE
+group #LightGreen NEW
+FE -> Content ++ :  list videos \nGET /ms/blog/v1/blog-video
+end
+Content -> DB ++ : get list data videos
+DB --> Content --: response data videos
+Content --> FE -- : response data videos
+FE -> C : show data videos
+C -> FE : click on one of the videos
+group #LightGreen NEW
+FE -> Content ++ :  list videos \nGET /ms/blog/v1/blog-video
+end
+Content -> DB ++ : get list data videos
+DB --> Content --: response data videos
+Content --> FE -- : response data videos
+FE -> C : play videos
+C -> FE --: Click button "Kunjungi YouTube Orbit"
+FE -> YouTube_myorbitid --++ : redirect to open link new tab youtube channel "myorbitid"
+YouTube_myorbitid -> C --: show data channel youtube channel "myorbitid"
+@enduml

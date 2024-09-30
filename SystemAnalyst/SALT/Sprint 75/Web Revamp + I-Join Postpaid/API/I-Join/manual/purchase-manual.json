@@ -1,0 +1,23 @@
+Method /POST
+Endpoint 
+    {{host}}/ms/activation/v1/postpaid-registration/purchase/manual
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+    Body
+    {
+        "orderUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+        "nik": "124543560202",
+        "nokk": "6789325369876",
+        "isAllowSaveData": true
+    }
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "errorMessage": null,
+    "errorData": null,
+    "data": null
+}

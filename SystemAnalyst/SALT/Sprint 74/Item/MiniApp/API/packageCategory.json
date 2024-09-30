@@ -1,0 +1,63 @@
+Method /GET
+
+Endpoint 
+    {{host}}package-lumen/v1/product-categories
+
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+        
+        
+RESP
+{
+    "status": true,
+    "code": "PPC00",
+    "message": true,
+    "error_message": null,
+    "data": [
+            {
+                "type": "ProductCategory",
+                "id": "1529544175",
+                "attributes": {
+                    "name": "Di rumah",
+                    "slug": "rumah",
+                    "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png"
+                },
+                "subCategory": {
+                    [
+                        {
+                            "type": "ProductSubCategory",
+                            "id": "1529544175",
+                            "attributes": {
+                                "name": "Prepaid",
+                                "slug": "prepaid",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png"
+                            },
+                        },
+                        {
+                            "type": "ProductSubCategory",
+                            "id": "1529544175",
+                            "attributes": {
+                                "name": "Postpaid",
+                                "slug": "postpaid",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png"
+                            },
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "ProductCategory",
+                "id": "1529544448",
+                "attributes": {
+                    "name": "Bepergian",
+                    "slug": "bepergian",
+                    "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-bepergian.png"
+                }
+            }
+        ]
+    
+}

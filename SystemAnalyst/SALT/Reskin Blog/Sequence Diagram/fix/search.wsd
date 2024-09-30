@@ -1,0 +1,23 @@
+@startuml blog
+title "Blog My Orbit"
+
+
+actor "Customer" as C
+boundary "FE Web" as FE
+box "Microservices" #LightBlue
+participant "Blog" as Content
+end box
+database "Pimcore" as DB
+
+== Search Article ==
+
+C -> FE : Fill topic or keyword on menu "Cari Artikel" and click "Cari"
+activate FE
+group #LightGreen NEW
+FE -> Content ++ :  list article by parameter search \nGET /ms/blog/v1/blog-article?search={search}
+end
+Content -> DB ++: get list data article
+DB --> Content --: response data articles
+Content --> FE -- : response data articles
+FE -> C --: show data articles
+@enduml

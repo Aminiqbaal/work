@@ -1,0 +1,32 @@
+Method /POST //enhance
+Endpoint 
+    {{host}}/ms/new-delivery/v2/set-delivery-option
+REQ
+    Header
+    	channel: web
+    Body
+      {
+        "cartUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+        "buyerInformation": {
+            "name": "asdasd",
+            "phoneNo": "0812312312312",
+            "email": "as@as.casd",
+        },
+        "addressDetail":"Jl. Gatot Subroto No.24-25, RT.2/RW.2",
+        "courierNotes":"Yang ada tulisan Rolex",
+        "deliveries": [
+          {
+            "uuid": "01c44f01-6105-470a-a70c-981e951c936c",
+            "chosenDeliveryOptionId": "7911",
+          }
+        ]
+      }
+RESP
+{
+    "status": true,
+    "code": "CGD000",
+    "message": "Success",
+    "errorMessage": null,
+    "errorData": null,
+    "data": null
+}

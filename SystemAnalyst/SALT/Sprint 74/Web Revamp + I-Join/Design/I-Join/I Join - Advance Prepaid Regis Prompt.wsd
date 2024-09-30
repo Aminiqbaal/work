@@ -1,0 +1,58 @@
+@startuml "I Join - Advance Prepaid Registration #1"
+
+title "I Join - Advance Prepaid Registration #1"
+
+title "I Join - Delivery Enhancement"
+
+actor Customer as cust
+boundary "Website\nMyOrbit" as web
+
+box Microservices #LightBlue
+participant Activation as msActivation
+database Redis as redis
+end box
+
+box Legacy #LightPink
+participant "Old\nMS Device" as msDevice
+end box
+
+participant ESB as esb
+
+activate web
+
+== Auto Fill Phone Number From Super App ==
+alt IF Web opened from SuperApp
+    web -> msActivation ++: GET value from cust param \n/v1/exchange-custparam
+    msActivation --> web --: return msisdn
+end
+
+
+== Check Phone Number for Copy NikNokk Eligibility ==
+group #LightGreen NEW
+    web -> msActivation ++: GET Check Eligibility for Copy NikNOKK\n/v1/check-eligibility/msisdn/{msisdn}
+end
+note over msActivation
+    by:
+    - msisdn
+end note
+web->web:store flag to skip Activation Form
+msActivation -> msDevice ++: GET Product Warehouse \nby msisdn
+    msActivation -> esb ++: GET customer profile \nby msisdn
+    msDevice --> msActivation --: return is Modem or Not
+    esb --> msActivation --: return is Telkomsel & Registered or Not
+
+    msActivation -> redis ++: store to Redis with msisdn Key + orderUUID 
+    redis --> msActivation --: return ack
+note over msActivation
+    All true / **ELIGIBLE**
+    - label "This number.. " will be shown
+    - Customer can auto fill NIK NOKK using buyerInfor.phone
+
+    Any False / **NOT ELIGIBLE**
+    - No label "This number.. "
+    - Customer can MANUALLY fill NIK NOKK
+end note
+msActivation --> web --: return eligibility
+
+
+@enduml

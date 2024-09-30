@@ -1,0 +1,147 @@
+Method /GET  untuk detail list prabayar info
+
+Endpoint 
+    {{host}}/ms-subscription/v2/quota/seamless
+REQ
+    Header
+        Content-Type:application/json
+        x-api-Key:{{API_KEY}}
+        //x-enc-msisdn: {{ENCRYPTED MSISDN BASED ON F5 MECHANISM}} ga di tampilin waktu pentest
+RESP
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "isQuotaExpired" : false,
+        "isQuotaDepleted" : false,
+        "isWillExpired" : true, 
+        "quotas": [
+            {
+                "name": "Internet",
+                "currentUsage": 4.68,
+                "totalUsage": 5.5,
+                "unit": "GB",
+                "expiredDate": "13 Aug 2023",
+                "hasPriority": false,
+                "detailUsage": [
+                    {
+                        "name": "Internet Orbit",
+                        "currentUsageLeft": 4.18,
+                        "totalUsage": 5,
+                        "unit": "GB",
+                        "expiredDate": "10 Aug 2023"
+                    },
+                    {
+                        "name": "Internet Orbit",
+                        "currentUsageLeft": 0.5,
+                        "totalUsage": 0.5,
+                        "unit": "GB",
+                        "expiredDate": "13 Aug 2023"
+                    }
+                ]
+            },
+            {
+                "name": "Multimedia",
+                "currentUsage": 4.68,
+                "totalUsage": 5.5,
+                "unit": "GB",
+                "expiredDate": "13 Aug 2023",
+                "hasPriority": false,
+                "detailUsage": [
+                    {
+                        "name": "Multimedia",
+                        "currentUsageLeft": 4.18,
+                        "totalUsage": 5,
+                        "unit": "GB",
+                        "expiredDate": "10 Aug 2023"
+                    },
+                    {
+                        "name": "Multimedia",
+                        "currentUsageLeft": 0.5,
+                        "totalUsage": 0.5,
+                        "unit": "GB",
+                        "expiredDate": "13 Aug 2023"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "isQuotaExpired" : false,
+        "isQuotaDepleted" : true,
+        "isWillExpired" : false,
+        "quotas": [
+            {
+                "name": "Multimedia",
+                "currentUsage": 4.68,
+                "totalUsage": 5.5,
+                "unit": "GB",
+                "expiredDate": "13 Aug 2023",
+                "hasPriority": false,
+                "detailUsage": [
+                    {
+                        "name": "Multimedia",
+                        "currentUsageLeft": 4.18,
+                        "totalUsage": 5,
+                        "unit": "GB",
+                        "expiredDate": "10 Aug 2023"
+                    },
+                    {
+                        "name": "Multimedia",
+                        "currentUsageLeft": 0.5,
+                        "totalUsage": 0.5,
+                        "unit": "GB",
+                        "expiredDate": "13 Aug 2023"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "isQuotaExpired" : false,
+        "isQuotaDepleted" : true,
+        "isWillExpired" : false,
+        "quotas": [
+            {
+                "name": "Multimedia",
+                "currentUsage": 4.68,
+                "totalUsage": 5.5,
+                "unit": "GB",
+                "expiredDate": "13 Aug 2023",
+                "hasPriority": false,
+                "detailUsage": [
+                    {
+                        "name": "Multimedia",
+                        "currentUsageLeft": 4.18,
+                        "totalUsage": 5,
+                        "unit": "GB",
+                        "expiredDate": "10 Aug 2023"
+                    },
+                    {
+                        "name": "Multimedia",
+                        "currentUsageLeft": 0.5,
+                        "totalUsage": 0.5,
+                        "unit": "GB",
+                        "expiredDate": "13 Aug 2023"
+                    }
+                ]
+            }
+        ]
+    }
+}

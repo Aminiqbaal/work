@@ -1,0 +1,55 @@
+@startuml "I Join - Advance Postpaid Registration Manual"
+
+title "I Join - Advance Postpaid Registration Manual"
+
+actor Customer as cust
+boundary Website as web
+
+box Microservices #LightBlue
+participant Activation as msActivation
+database dbActivation as dbActivation
+end box
+
+participant DPP as dpp
+
+activate web
+cust -> web : upload KTP
+web -> web : generate data KTP by OCR
+note over web
+    by:
+    - nik
+    - placeOfBirth
+    - dateOfBirth
+end note
+web-->cust : show data detail KTP
+
+cust -> web : click CTA "Konfirmasi"
+web --> cust : data activation Halo Orbit \nauto fillexcept NO KK
+
+
+== Submit NIKNOKK Advance Postpaid Registration ==
+group #LightGreen NEW
+    web -> msActivation ++: POST submit NIKNOKK Advance postpaid Regis \n/v1/postpaid-registration/purchase/manual
+end
+note over msActivation
+    by:
+    - orderUUID
+    - nik
+    - nokk
+    - placeOfBirth
+    - dateOfBirth
+    - billingEmail
+    - isAllowSaveData
+    - isSubscribtion
+end note
+group INTEGRATE with DPP
+    msActivation -> dpp ++: Request Tokenize NIK NOKK
+    dpp --> msActivation --: return NIK NOKK Token
+    msActivation -> dbActivation ++: store Tokenized NIK NOKK
+    dbActivation -> msActivation --: return NIK NOKK Token
+end
+
+msActivation --> web --: return response
+
+
+@enduml

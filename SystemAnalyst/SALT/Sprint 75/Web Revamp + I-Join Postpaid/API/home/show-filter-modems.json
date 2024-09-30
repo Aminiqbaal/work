@@ -1,0 +1,91 @@
+Method /GET
+Endpoint 
+    {{host}}ms/config/v1/filter-modems
+    //Filter based on : 
+        // 1. promo (badges)
+        // 2. terlaris (soldAmount)
+        // 3. tebaru (isNew)
+        // 4. harga tertinggi (price)
+        // 5. harga terendah (price)
+        // 6. kecepatan tertinggi (package-> device)
+        // 7. Rating tertinggi (rating)
+        // 8. multi pengguna (package-> device)
+        // kisaran harga
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+RESP
+{
+    "status": true,
+    "code": "CON01",
+    "message": "Data Found",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "filterMenus": [
+            {
+                "filterName": "Urutkan Berdasarkan",
+                "isSingle": true,
+                "data": [
+                    {
+                        "name": "Promo",
+                        "value": "promo"
+                    },
+                    {
+                        "name": "Terlaris",
+                        "value": "terlaris"
+                    },
+                    {
+                        "name": "Terbaru",
+                        "value": "terbaru"
+                    },
+                    {
+                        "name": "Harga Tertinggi",
+                        "value": "harga-tertinggi"
+                    },
+                    {
+                        "name": "Harga Terendah",
+                        "value": "harga-terendah"
+                    },
+                    {
+                        "name": "Kecepatan Tertinggi",
+                        "value": "kecepatan-tertinggi"
+                    }
+                ]
+            },
+            {
+                "filterName": "Multi Pengguna",
+                "isSingle": true,
+                "data": [
+                    {
+                        "name": "32 Perangkat",
+                        "value": "32"
+                    },
+                    {
+                        "name": "64 Perangkat",
+                        "value": "64"
+                    }
+                ]
+            },
+            {
+                "filterName": "Feature",
+                "isSingle": true,
+                "data": [
+                    {
+                        "name": "Basic",
+                        "value": "basic"
+                    },
+                    {
+                        "name": "Full",
+                        "value": "full"
+                    },
+                    {
+                        "name": "Lite",
+                        "value": "lite"
+                    }
+                ]
+            }
+        ]
+    }
+}

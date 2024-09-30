@@ -1,0 +1,21 @@
+Method /POST
+Endpoint 
+    {{host}}/ms/activation/v1/exchange-custparam
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+    Body
+    {
+        "custParam" : "9b6cc727565ea5fe5c0f3fdb254627a5-b65ea1d521c00731d9c8385eab6516cb5016a93ea5d995299685cc5a47d1ab8ff2371820486a8e4f0aa7d9d524973cc8f731f823b61674c2c7e1126b1adcde02bb34a58f6961ce72a6a0838e8fa43917aaa955ad1ee42a4abaef5b6497e5a762"
+    }
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "errorMessage": null,
+    "data": {
+        "msisdn": "6281234567890"
+    }
+}

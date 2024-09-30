@@ -1,0 +1,26 @@
+@startuml blog
+title "User Management"
+actor "Admin" as C
+boundary "FE Web" as FE
+box "Microservices" #LightBlue
+participant "User \nManagement" as User
+database "DB User \nManagement" as DB
+end box
+
+
+== GET LIST USER ==
+C -> FE ++: click menu "User"
+FE -> User ++ :  get list user \nGET v1/list-user
+User -> DB ++ : get list data user
+DB --> User --: response data users
+User --> FE -- : response data users 
+FE -> C --: show data users
+
+== UPDATE USER ==
+C -> FE ++: click menu "save" after \nupdate data user
+FE -> User ++ :  POST update user \nGET v1/list-user?userId={userId}
+User -> DB ++ : update data user
+DB --> User --: response data 
+User --> FE -- : response data
+FE -> C --: data user updated
+@enduml

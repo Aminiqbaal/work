@@ -1,0 +1,66 @@
+@startuml "I Join - Advance Prepaid Activation"
+
+title "I Join - Advance Prepaid Activation"
+
+actor Customer as cust
+boundary Website as web
+
+box Microservices #LightBlue
+participant Activation as msActivation
+end box
+box Legacy #LightPink
+participant "Old\nMS Device" as msDevice
+end box
+
+participant ESB as esb
+
+
+activate web
+...
+note over web
+    Customer has filled Delivery Information
+end note
+
+== Determine Prepaid Registration Journey ==
+group #LightGreen NEW
+    web -> msActivation ++: GET check-eligibility msisdn\n/v1/check-eligibility/msisdn/{msisdn}
+end
+msActivation -> msDevice ++: GET Product Warehouse \nBy msisdn
+msActivation -> esb ++: GET customer profile \nBy msisdn
+msDevice --> msActivation --: return is Modem or Not
+esb --> msActivation --: return is Telkomsel & Registered or Not
+    msActivation --> web --: return eligibility
+
+alt MSISDN is eligible to be Referenced
+    note over web #Black
+        <color #FFF>FOR DETAIL, CHECK</color>
+        <color #FFF><size:20>Advance Prepaid Regis </size></color>
+        <color #FFF><size:20>Autofill JOURNEY</size></color>
+    end note
+else #LightPink MSISDN is NOT eligible to be Referenced
+    note over web #Black
+        <color #FFF><size:20>Advance Prepaid Regis </size></color>
+        <color #FFF><size:20>Manual Input JOURNEY</size></color>
+    end note
+
+end
+
+== Prompt to Advance Purchase Prepaid Regis==
+group #LightGreen NEW
+    web -> msActivation ++: GET Purchase Prepaid Regis by OrderUUID\n/v1/prepaid-registration/purchase/status
+end
+note over msActivation
+    by:
+    - orderUUID
+end note
+msActivation --> web --: return Prepaid Regis status
+
+
+note over web
+    If Registration Exists, show Download MyTsel
+
+    If Registration Doesnt exist, prompt Prepaid Registration
+end note
+
+
+@enduml

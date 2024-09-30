@@ -1,0 +1,58 @@
+@startuml Msisdn Forwarding (Seamless) \nPrepaid Registration
+title MSISDN Forwading - Simplify & TUWL
+
+boundary FrontEnd as fe
+
+box Microservice #LightBlue
+participant "Activation" as act
+end box
+
+participant ESB as esb
+
+== PREPAID REGISTRATION MANUAL ==
+fe -> act ++: POST /v1/prepaid-registration/seamless/manual
+act -> esb ++: submit prepaid
+esb --> act --: ack
+act --> fe --: success
+
+== PREPAID REGISTRATION AUTO ==
+fe -> act ++: GET /v1/prepaid-registration/seamless/generate-otp
+act -> esb ++: POST /esb/v2/otp/sms/request
+note over esb
+    ref.
+    2.19 Request OTP V2 (page 177)
+end note
+esb --> act --: return OTP token
+act --> fe --: return OTP token
+
+fe -> act ++: POST /v1/prepaid-registration/seamless/auto
+note over fe
+    with OTP token
+end note
+act -> esb ++: POST /esb/v2/otp/validation
+note over esb
+    ref.
+    2.20 Validate OTP V2 (page 183)
+end note
+esb --> act --: success
+alt Validation is Failed
+    act --x fe : return invalid
+end
+group #Red WHAT API?
+    act -> esb ++: get profile nik nokk
+    esb --> act --: return data
+end
+act -> esb ++: submit prepaid
+esb --> act --: ack
+act --> fe --: success
+== Check Prepaid ==
+
+group #LightGreen NEW
+    fe -> act ++ : Status Activation \nGET /ms/activation/v1/prepaid-registration-status
+end
+act -> fe --: response prepaid registration
+alt status == Active
+    fe -> fe  : Show page success
+else status == Inactive
+    fe -> fe : show page "coba lagi"
+end

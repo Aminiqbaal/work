@@ -1,0 +1,73 @@
+Method /GET
+
+Endpoint 
+    {{host}}ms/config/v1/filter-modems
+
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+        
+RESP
+{
+    "status": true, 
+    "code": "CON01",
+    "message": "Data Found",
+    "error_message": null,
+    "data": [
+        {
+            "filter_name": "Urutkan Berdasarkan",
+            "is_single": true,
+            "data": [
+                {
+                    "name": "Promo",
+                    "value": "promo"
+                },
+                {
+                    "name": "Terlaris",
+                    "value": "terlaris"
+                },
+                {
+                    "name": "Terbaru",
+                    "value": "terbaru"
+                },
+                {
+                    "name": "Harga Tertinggi",
+                    "value": "harga-tertinggi"
+                },
+                {
+                    "name": "Harga Terendah",
+                    "value": "harga-terendah"
+                },
+                {
+                    "name": "Kecepatan Tertinggi",
+                    "value": "kecepatan-tertinggi"
+                },
+                {
+                    "name": "Rating Tertinggi",
+                    "value": "rating-tertinggi"
+                }
+                
+            ]
+        },
+        {
+            "filter_name": "Jumlah Perangkat Terhubung",
+            "is_single": true,
+            "data": [
+                {
+                    "name": "1-5 Perangkat",
+                    "value": "1,5"
+                },
+                {
+                    "name": "6-10 Perangkat",
+                    "value": "6,10"
+                },
+                {
+                    "name": "> 10 Perangkat",
+                    "value": "11,64"
+                }
+                
+            ]
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+cara dapetin nomor orbit dari mana?
+
+GGSN (Surrounding) -> dicolok dengan F5 (Sistem Telkomsel)
+
+tuwl diawal api di up ke v2 enhance
+
+
+Grooming offline
+- now syarat TUWL harus ada member device (akun orbit)

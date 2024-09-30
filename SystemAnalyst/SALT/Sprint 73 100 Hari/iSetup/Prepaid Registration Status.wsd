@@ -1,0 +1,29 @@
+@startuml show orbit number
+title Prepaid Registration Status
+
+actor "Customer" as customer
+boundary "Front End" as fe
+box Microservice #LightBlue
+participant "Activation" as msActivation
+database "DB\nActivation" as dbActivation
+end box
+
+customer -> fe ++: Fill registration use NIK & NOKK 
+group #LightGreen NEW
+fe -> msActivation ++ : Get data activation nik nokk \nGET v1/prepaid-registration/seamless/status
+end
+msActivation -> dbActivation ++: get data activation
+
+dbActivation --> msActivation --: return data activation
+msActivation --> fe --: response
+fe -> customer : Show page registration success
+alt isActive == true
+    fe -> fe  : Success
+    fe -> customer : Show page registration success
+    else isActive == false
+    fe -> fe : Pending
+    fe -> customer : Show page "Modem is still \nin registration process"
+    customer -> fe : Click CTA "Retry"
+    deactivate fe
+end
+@enduml

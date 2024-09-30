@@ -1,0 +1,87 @@
+Method /GET
+Endpoint 
+    {{host}}package-lumen/private/get-packages
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "GAP00",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "packages": [
+            {
+                "id": 1611271844,
+                "itemType": "Package",
+                "packageType": "MEIG-HKM0130-01-MK-KPK",
+                "packageName": "Orbit Star G1",
+                "packageDescription": "Termasuk paket data 150GB (25GB\/30 hari untuk 6 bulan pertama)",
+                "offerId": "00050822",
+                "offerIdPulsa": "00042786",
+                "price": {
+                    "price": 399000,
+                    "formattedPrice": "399.000",
+                    "currency": "Rp."
+                },
+                "priceStrikethrough": {
+                    "priceStrikethrough": 0,
+                    "formattedPriceStrikethrough": "0",
+                    "currency": "Rp."
+                },
+                "validityDay": "30 Hari",
+                "discount": {
+                    "discount": null,
+                    "formattedDiscount": "0",
+                    "currency": "Rp."
+                },
+                
+                "quota": {
+                    "quota": 25,
+                    "unit": "GB"
+                },
+                "quotaDisplay": {
+                    "quota": 150,
+                    "unit": "GB"
+                },
+                "preOrder": false,
+                "preOrderUltimate": null,
+                "preOrderBatch": null,
+                "isOutOfStock": false,
+                "totalAvailableStock": 80,
+                "isNew": true,
+                "additionalInfoImage": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/atoms-icons-system-installment@3x_4_7.png",
+                "additionalInfo": null,
+                "packages": {
+                    "content": {
+                        "title": "Modem Nirkabel Menggunakan Jaringan 4G Telkomsel",
+                        "description": "Orbit Star G1 adalah pilihan modem yang tepat bagi Anda dengan kebutuhan yang lebih simpel. Cukup hubungkan modem dan perangkat Anda untuk menikmati layanan Orbit Star G1.",
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_5.png"
+                    },
+                    "info": [
+                        {
+                            "title": "Termasuk paket data 150GB",
+                            "description": "25GB\/30 hari selama 6 bulan pertama, syarat & ketentuan berlaku.",
+                            "urlName": null,
+                            "urlLink": "",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Subtract_12.png"
+                        },
+                        {
+                            "title": "Cicilan mulai dari Rp 33.000\/bulan selama 1 tahun",
+                            "description": null,
+                            "urlName": null,
+                            "urlLink": "",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Instalment_1.png"
+                        }
+                    ]
+                },
+                "badges": []
+            }
+        ]
+    }
+}

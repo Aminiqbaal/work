@@ -1,0 +1,36 @@
+@startuml OTP
+title "Registration Orbit"
+
+
+actor "Customer" as customer
+boundary "Front End" as fe
+box "Microservices" #LightBlue
+participant "Activation" as MsActivation
+database "Activation" as dbMsActivation
+end box
+participant "ESB" as esb
+
+
+customer -> fe ++ : input telkomsel number and click "Confirm"
+fe -> MsActivation ++ : Post otp \nPOST v1/prepaid-registration/seamless/generate-otp
+MsActivation -> esb ++: POST /esb/vw/otp/sms/request
+esb --> MsActivation --: return otp
+MsActivation --> fe --: return otp
+fe --> customer --: show notification otp 
+
+customer -> fe ++: Input OTP and click "Lanjutkan"
+group #LightGreen NEW
+fe -> MsActivation ++ : Prepaid Registration \nPOST v1/prepaid-registration/seamless/submit-otp
+end
+MsActivation -> dbMsActivation ++ : post prepaid registration otp
+dbMsActivation --> MsActivation -- : response prepaid registration otp
+MsActivation --> fe --: response prepaid registration otp
+fe -> customer --: show name and No KK (masking)
+
+customer -> fe ++: fill checklist and click "Lanjutkan"
+fe -> MsActivation ++ : Preparid Registration \nPOST v1/prepaid-registration/seamless/auto
+MsActivation -> esb ++ : POST /esb/v2/otp/validation
+esb --> MsActivation -- : success
+MsActivation --> fe -- : success
+fe --> customer -- : show status prepaid registration
+@enduml

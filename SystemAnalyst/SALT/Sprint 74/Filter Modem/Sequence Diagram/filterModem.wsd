@@ -1,0 +1,38 @@
+@startuml blog
+title "Filter Modem MyOrbit"
+
+
+actor "Customer" as C
+boundary "FE Web" as FE
+' box "Microservices" #LightBlue
+' participant "MS Config" as Config
+' database "Config" as DBPConfig
+' end box
+
+box "BAU" #LightPink
+participant "package-lumen" as Package
+end box
+database "Pimcore" as DBPimcore
+
+' == Show Menu Filter Modem ==
+
+' C -> FE : Click button filter on modem
+' activate FE
+' group #LightGreen NEW
+' FE -> Config ++ : show menu filter \nGET /ms/config/v1/filter-modems
+' end
+' Config -> DBPConfig ++ : get filter config
+' DBPConfig -> Config -- : response filter config
+' Config -> FE --: show filter config
+' FE -> C --: show filter config
+
+== Filter Modem ==
+C -> FE ++: Click button Apply
+group #LightGreen NEW
+FE -> Package ++ : filter modem \n POST /v1/products/{category_id}
+end
+Package -> DBPimcore ++: get list modem
+DBPimcore --> Package --: response  list modem
+Package --> FE -- : response list modem
+FE -> C --: show list modem
+@enduml

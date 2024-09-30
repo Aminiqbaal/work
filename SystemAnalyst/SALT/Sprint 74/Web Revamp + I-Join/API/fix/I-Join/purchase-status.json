@@ -1,0 +1,22 @@
+Method /POST
+Endpoint 
+    {{host}}/ms/activation/v1/prepaid-registration/purchase/status
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+    Body
+    {
+        "orderUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+    }
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "isRegistrationExists":true
+    }
+}

@@ -1,0 +1,13 @@
+@startuml class coba
+!function txthighlight($text)
+!return "<font color=blue>" + $text + "</font>"
+!endfunction
+
+class "SomeClass" as x {
+  + Member2: Does txthighlight("blue") and txthighlight("blue") Stuff
+}
+
+class "SomeClass" as x1 {
+  + Member2: Does txthighlight("blue") and txthighlight("blue") Stuff
+}
+@enduml

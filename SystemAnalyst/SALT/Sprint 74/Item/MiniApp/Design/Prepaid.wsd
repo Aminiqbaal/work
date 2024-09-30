@@ -1,0 +1,118 @@
+@startuml Checkout
+title Purchase Prepaid
+
+actor customer as cust
+boundary "SuperApp" as superApp
+boundary "MiniApp" as miniApp
+box MicroServices #LightBlue
+participant "Order" as msOrder
+participant "Cart" as msCart
+participant "Delivery" as msDelivery
+participant "Activation" as msActivation
+participant "Config" as Config
+database "Config" as DBPConfig
+
+end box
+box BAU #LightPink
+participant "Payment" as bauPayment
+database "Invoice" as invoice
+participant "package-lumen" as Package
+end box
+database "Pimcore" as DBPimcore
+participant "Elisa" as elisa
+participant "ESB" as ESB
+
+== List Package ==
+cust-> superApp ++: open superApp
+superApp->miniApp--++: purchase modem
+group #LightGreen NEW
+    miniApp -> Package ++ : show package category\nGET /v1/product-categories\nshow package \n GET /v1/product-categories/{subCategory_id}
+end
+Package -> DBPimcore ++: get list modem & product-categories
+DBPimcore --> Package --: return data
+Package --> miniApp -- : response list modem
+miniApp -> cust --: show list modem
+
+== Show Menu Filter ==
+
+cust -> miniApp ++: Click button filter
+group #LightGreen NEW
+    miniApp -> Config ++ : show menu filter \nGET /v1/filter-modems/miniapp
+end
+Config -> DBPConfig ++ : get menu filter
+DBPConfig --> Config -- : return data
+Config --> miniApp --: return data
+miniApp -> cust --: show menu filter
+
+== Filter Modem ==
+cust -> miniApp ++: Click button Apply
+group #LightGreen NEW
+    miniApp -> Package ++ : filter modem\n POST /v1/products/{subCategory_id}
+end
+Package -> DBPimcore ++: get list modem & product-categories
+DBPimcore --> Package --: return data
+Package --> miniApp -- : response list modem
+miniApp -> cust --: show list modem  
+
+alt CTA Detail Modem
+    cust->miniApp++: choose modem \n& CTA Detail
+    group #LightGreen NEW
+    miniApp->Package++: get detail modem\n POST /v6/products/{subCategory_id}
+    end
+    Package->DBPimcore++: get detail modem
+    DBPimcore->Package--:return data
+    Package-->miniApp--:return data
+    miniApp->cust--: show detail modem
+else CTA Pilih/Beli
+' == Purchase Prepaid ==
+    note right cust
+        if cust click CTA "Beli" on page detail modem then it will enter the case "CTA Pilih/Beli"
+    end note
+    alt Pilih/Beli
+        cust->miniApp ++: CTA "Pilih/Beli"
+            note over miniApp
+               cust param get from superApp
+            end note
+            miniApp->msActivation++ :exchange cust param to msisdn\nv1/exchange-custparam
+            msActivation-->miniApp --: return data
+            miniApp -> msDelivery ++: GET destination\nv1/shipment/destination
+            msDelivery --> miniApp -- : return destination
+            miniApp->msDelivery++: GET customer delivery\nv1/customer-get-deliveries
+            msDelivery-->miniApp--:return customer delivery
+        == activation ==
+        alt Telkomsel Number
+            miniApp-> msActivation++: Request OTP & submit MSISDN \nv1/prepaid-registration/seamless/generate-otp
+            msActivation->ESB++: Request OTP & submit MSISDN
+            ESB-->msActivation--: return data
+            msActivation-->miniApp--: return data
+            miniApp->msActivation++: Submit OTP & get masking nik nokk\nv1/prepaid-registration/seamless/auto
+            msActivation->ESB ++: submit OTP & get masking nik nokk
+            ESB -> msActivation --: return data
+            msActivation-->miniApp--: return data
+        else Other
+            miniApp->msActivation++:POST NIK NOKK
+            msActivation->ESB++:registration NIK NOKK
+            ESB-->msActivation--: return data
+            msActivation-->miniApp--: return data
+        end
+        == payment ==
+        miniApp->bauPayment++:list payment\nGET v1/payment-methods
+        bauPayment->msOrder--: get amount\nGET private/detail-order
+        msOrder-->bauPayment--++:return amount
+        bauPayment-->miniApp--: return payment list
+        miniApp->bauPayment++:Choose payment method\nPOST v1/payment/instant-modem\norderUUID\npaymentMethod
+        bauPayment->msOrder++:create invoice\nGET Order with UUID
+        msOrder-->bauPayment--: return Order
+        bauPayment->invoice++: insert invoice data
+        invoice-->bauPayment--: success
+        bauPayment->elisa++: POST initiate payment
+        elisa-->bauPayment--: return payload
+        bauPayment->miniApp--:return payload
+        miniApp->cust--:payment success
+    else Batal
+        cust->miniApp : CTA "Batal"
+        miniApp->cust--: show page "detail modem" \nor "dashboard"
+
+    end
+end
+@enduml

@@ -1,0 +1,118 @@
+Method /GET
+
+Endpoint 
+    {{host}}ms/config/v2/filter-modems/miniapp
+
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+        
+RESP
+{
+    "status": true,
+    "code": "CON01",
+    "message": "Data Found",
+    "error_message": null,
+    "data": [
+        {
+            "filterName": "Urutkan Berdasarkan",
+            "isSingle": true,
+            "data": [
+                {
+                    "name": "Promo",
+                    "value": "promo"
+                },
+                {
+                    "name": "Terlaris",
+                    "value": "terlaris"
+                },
+                {
+                    "name": "Terbaru",
+                    "value": "terbaru"
+                },
+                {
+                    "name": "Harga Tertinggi",
+                    "value": "harga-tertinggi"
+                },
+                {
+                    "name": "Harga Terendah",
+                    "value": "harga-terendah"
+                },
+                {
+                    "name": "Kecepatan Tertinggi",
+                    "value": "kecepatan-tertinggi"
+                },
+                {
+                    "name": "Rating Tertinggi",
+                    "value": "rating-tertinggi"
+                }
+            ]
+        },
+        {
+            "filter_name": "Pilihan Cepat",
+            "is_single": true,
+            "data": [
+                {
+                    "name": "Rp300.000-Rp500.000",
+                    "value": "promo"
+                },
+                {
+                    "name": "Rp500.000-Rp700.000",
+                    "value": "terlaris"
+                },
+                {
+                    "name": "Rp700.000-Rp1.500.000",
+                    "value": "terbaru"
+                },
+                {
+                    "name": ">Rp1.500.000",
+                    "value": "harga-tertinggi"
+                },
+                {
+                    "name": "Harga Terendah",
+                    "value": "harga-terendah"
+                },
+                {
+                    "name": "Kecepatan Tertinggi",
+                    "value": "kecepatan-tertinggi"
+                },
+                {
+                    "name": "Rating Tertinggi",
+                    "value": "rating-tertinggi"
+                }
+                
+            ]
+        },
+        {
+            "filter_name": "Multi Pengguna",
+            "is_single": true,
+            "data": [
+                {
+                    "name": "32 Perangkat",
+                    "value": "32"
+                },
+                {
+                    "name": "64 Perangkat",
+                    "value": "64"
+                }
+                
+            ]
+        },
+        {
+            "filter_name": "Feature",
+            "is_single": true,
+            "data": [
+                {
+                    "name": "Basic",
+                    "value": "basic"
+                },
+                {
+                    "name": "Full",
+                    "value": "full"
+                }
+                
+            ]
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+@startuml blog
+title "Filter Modem MyOrbit"
+
+
+actor "Customer" as C
+boundary "FE Web" as FE
+box "Microservices" #LightBlue
+participant "Config" as Config
+database "Config" as DBPConfig
+end box
+
+== Show Menu Filter Modem ==
+
+C -> FE : Click button filter
+activate FE
+group #LightGreen NEW
+FE -> Config ++ : show menu filter \nGET /v1/filter-modems
+end
+Config -> DBPConfig ++ : get menu filter
+DBPConfig -> Config -- : response menu filter
+Config -> FE --: show menu filter
+FE -> C --: show menu filter
+
+@enduml

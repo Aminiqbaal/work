@@ -1,0 +1,20 @@
+@startuml Checkout
+title Revamp Homepage-Summary
+
+actor customer as cust
+boundary "FE\nWEB" as fe
+box Microservices #LightBlue
+participant "Product" as Product
+participant "Device" as Device
+end box
+box BAU #LightPink
+participant "pacakge-lumen" as bauPackage
+end box
+
+cust->fe--++: open menu "Paket"
+group #LightGreen NEW
+    fe -> Product ++ : GET list package category\n/v1/package-categories
+end
+Product --> fe -- : response data
+fe -> cust --: show package category
+@enduml

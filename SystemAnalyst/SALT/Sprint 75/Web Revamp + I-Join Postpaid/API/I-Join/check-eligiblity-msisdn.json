@@ -1,0 +1,19 @@
+Method /GET
+Endpoint 
+    {{host}}/ms/activation/v1/check-eligibility/msisdn/{msisdn}
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "isEligible": true, 
+        "isEligibleOneBill": true 
+    }
+}

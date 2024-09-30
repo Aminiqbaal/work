@@ -1,0 +1,144 @@
+@startuml Checkout
+title MiniApp Purchase Postpaid
+
+actor customer as cust
+boundary "SuperApp" as feSA
+boundary "MiniApp" as fe
+box MicroServices #LightBlue
+participant "Order" as msOrder
+participant "Cart" as msCart
+participant "Delivery" as msDelivery
+participant "Activation" as msActivation
+participant "home-coverage" as msHomeCoverage
+participant "Config" as Config
+database "Config" as DBPConfig
+
+end box
+box BAU #LightPink
+participant "Payment" as bauPayment
+participant "package-lumen" as Package
+database "Invoice" as invoice
+end box
+database "Pimcore" as DBPimcore
+participant "Elisa" as elisa
+participant "ESB" as ESB
+
+== List Package ==
+cust-> feSA ++: open superApp
+feSA->fe--++: purchase modem
+group #LightSalmon ENHANCE
+    fe -> Package ++ : show package \n GET /v6/product-categories/{subCategory_id}
+end
+Package -> DBPimcore ++: get list modem
+DBPimcore --> Package --: return data
+Package --> fe -- : response list modem
+fe -> cust --: show list modem
+
+== Pilih Alamat Modem Dipasang ==
+
+cust-> fe++: set location
+fe -> msHomeCoverage ++: GET homebase location\n/v1/set-homebase-location
+msHomeCoverage --> fe -- : return Delivery
+fe->cust--: show pin location
+
+== Show Menu Filter ==
+
+cust -> fe ++: Click button filter
+group #LightGreen NEW
+    fe -> Config ++ : show menu filter \nGET /v1/filter-modems
+end
+Config -> DBPConfig ++ : get menu filter
+DBPConfig --> Config -- : return data
+Config --> fe --: return data
+fe -> cust --: show menu filter
+
+== Filter Modem ==
+cust -> fe ++: Click button Apply
+group #LightGreen NEW
+    fe -> Package ++ : filter modem \n POST /v1/products/{subCategory_id}
+end
+Package -> DBPimcore ++: get list modem
+DBPimcore --> Package --: return data
+Package --> fe -- : response list modem
+fe -> cust --: show list modem
+
+' == Purchase Postpaid ==
+alt CTA Detail Modem
+    cust->fe++: choose modem \n& CTA Detail
+    fe->Package++: get detail modem
+    Package->DBPimcore++: get detail modem
+    DBPimcore->Package--:return data
+    Package-->fe--:return data
+    fe->cust--: show detail modem
+else CTA Pilih
+== add product to cart ==
+    cust->fe++: choose modem \n& CTA Pilih
+    fe -> msCart ++: POST /v1/add-product-to-cart
+    msCart --> fe--: return Cart
+    fe->cust --: show pop up "Anda yakin ingin \nmembeli Orbit Star H1 (termasuk\nkuotaFortress 405GB)?"
+    alt Ya, Beli
+        cust->fe ++: CTA "Ya, Beli"
+        fe->msOrder++:get order
+        msOrder -> msDelivery ++: GET destination\nv1/shipment/destination\n\nGET deliveries\n/v1/customer-get-deliveries
+        msDelivery --> msOrder -- : return Delivery
+        msOrder --> fe : return Delivery
+        == activation ==
+        alt Telkomsel Halo Number
+            msOrder-> msActivation++: Request OTP \nv1/prepaid-registration/seamless/generate-otp
+            msActivation-->msOrder: return data
+            msOrder->msActivation: Submit OTP\nv1/prepaid-registration/seamless/auto
+            msActivation-->msOrder: return data
+            msOrder --> fe  : return data
+            msOrder->msActivation: Get NIK NOKK
+            msActivation->ESB++ : get NIK NOKK
+            ESB-->msActivation --: return data
+            msActivation-->msOrder--: return data
+            msOrder --> fe : ACK
+        else Other
+            msOrder->msActivation++: Scan OCR & POST NIK NOKK
+            msActivation->ESB++ : POST NIK NOKK
+            ESB-->msActivation --: return data
+            msActivation-->msOrder--: return data
+            msOrder --> fe : ACK
+        end
+        
+        note over msOrder
+        ORDER ID has SAME VALUE
+        WITH CART ID
+        end note
+
+        == Checkout ==
+        activate fe
+        fe -> msOrder : POST createOrderFromCart \n(cartID)
+        msOrder -> msCart ++: GET getCartByCartID \n(cartID)
+        msOrder -> msDelivery ++: GET getDeliveriesByOrderID \n(cartID)
+        msCart --> msOrder -- : return Cart
+        msDelivery --> msOrder -- : return Delivery[ ]
+        msOrder --> fe --: ACK
+
+        note over msOrder
+            icon di halaman order
+            utk buyer info, bisa diubah lgsg
+            utk sisanya akan redirect ke corresponding page
+        end note
+
+        == Payment ==
+        fe->bauPayment++:list payment\nGET v1/payment-methods
+        bauPayment->msOrder--: get amount\nGET private/detail-order
+        msOrder-->bauPayment--++:return amount
+        bauPayment-->fe--: return payment list
+        fe->bauPayment++:Choose payment method\nPOST v1/payment/instant-modem\norderUUID\npaymentMethod
+        bauPayment->msOrder++:create invoice\nGET Order with UUID
+        msOrder-->bauPayment--: return Order
+        bauPayment->invoice++: insert invoice data
+        invoice-->bauPayment--: success
+        bauPayment->elisa++: POST initiate payment
+        elisa-->bauPayment--: return payload
+        bauPayment->fe--:return payload
+        fe->cust--:payment success
+    else Batal
+        cust->fe ++: CTA "Batal"
+        fe->cust--: show page "detail modem" \nor "dashboard"
+    end
+end
+@enduml

@@ -1,0 +1,35 @@
+3 sistem
+
+Scenario 1
+A : A manggil sistem B, expect B yang dipanggil akan diproses A lanjutan, lalu panggil C
+B
+C
+
+Scenario 2
+
+A : jalan panggil B & C dengan syarat tidak menunggu salah satunya selesai, namun siapa yang paling lama
+
+
+
+12/12/2023
+AWB : Airway bill atau AWB adalah sebuah surat muatan udara
+ACK : acknowledge, tanda bukti
+
+Method API
+- POST digunakan untuk membuat sumber daya baru.
+- PUT digunakan untuk mengganti sumber daya yang ada dengan versi terbaru.
+- DELETE digunakan untuk menghapus data dari database.
+- GET digunakan untuk mengambil data di server.
+
+DBMS = database management system
+ORM = object relation management
+CRM core relation management
+CRMBE = system surrounding tsel => dukcapil
+
+pimcore = ORM(DBMS(DB))
+
+
+ketika customer datang, dan pesan steak sama noodles
+steak habis, stok daging habis harus nunggu 5 menit
+
+clue = synchronus dan asyn

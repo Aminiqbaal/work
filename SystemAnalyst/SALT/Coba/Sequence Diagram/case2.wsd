@@ -1,0 +1,40 @@
+@startuml case2
+actor "Customers" as C
+boundary "Waiter " as S
+boundary "Chef1" as C1
+boundary "Chef2" as C2
+boundary "Warehouse" as W
+
+C -> S++ : request noodles & steak
+S -> C2++: give me steak
+C2 --> S-- : steak is not available at the moment
+S -> C : steak is not available at the moment, but you \ncan wait a while while I check the stock first.
+C -> S : but I want to eat steak
+S -> W ++ : talk about stock meat
+W --> S : response ack
+deactivate S
+deactivate W
+W -> S: is meat available?
+activate S
+S -> C : now, steak already be ordered
+C --> S : response ack
+S -> W ++: give meat to Chef2
+W -> C2 --++ : give a meat
+S -> C2: give me steak
+C2 --> S : response ack
+deactivate S
+C2 -> C2 : cooking steak
+S -> C1++: give me noodles
+activate S
+C1 -> S-- : here you have noodles
+S -> C : reserve noodles
+C2 --> S--: here you have steak
+S -> C : reserve steak
+S ->> S++ #005500: compute usage
+deactivate S
+S -> C : give the list payment note
+C --> S-- : payment
+deactivate S
+
+
+@enduml

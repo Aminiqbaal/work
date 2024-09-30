@@ -1,0 +1,53 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/content/v1/blog-article?sortby={sortby}&search={search}&tagby={tagby}
+    // sort by
+    // 1. Terbaru = createdAt
+    // 2. Terpilih = isSticky 
+    // 3. Trending = watch
+REQ
+    Header
+        Content-Type:application/json
+        x-localization: {{LANGUAGE}} //bahasa
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data": [
+        {
+            "id": "1",
+            "images": "article1.jpg",
+            "keywords": "aplikasi download video instagram, aplikasi untuk download video di instagram, aplikasi download video di instagram", //search article
+            "description": "Rekomendasi aplikasi download video Instagram di Android ini dapat memudahkan kamu untuk download video di Instagram reels ataupun IG story.", //excerpt diganti highlight
+            "topics": [
+                "Promo",
+                "Internet"
+            ],
+            "slug" : "panduan-aturan-new-normal",
+            "content" : "isi content",
+            "title": "Cara Foto Produk Makanan Aesthetic agar Jualan Laris",
+            "date": "25 August 2023",
+            "likeAmount": "48",
+            "watchAmount": "52003",
+        },
+        {
+            "id": "2",
+            "images": "article1.jpg",
+            "keywords": "aplikasi download video instagram, aplikasi untuk download video di instagram, aplikasi download video di instagram", //search article
+            "description": "Rekomendasi aplikasi download video Instagram di Android ini dapat memudahkan kamu untuk download video di Instagram reels ataupun IG story.", //excerpt diganti highlight
+            "topics": [
+                "Promo",
+                "Internet"
+            ],
+            "slug" : "panduan-aturan-new-normal",
+            "content" : "isi content",
+            "title": "Cara Foto Produk Makanan Aesthetic agar Jualan Laris",
+            "date": "25 August 2023",
+            "likeAmount": "48",
+            "watchAmount": "52003",
+        }
+    ]
+}

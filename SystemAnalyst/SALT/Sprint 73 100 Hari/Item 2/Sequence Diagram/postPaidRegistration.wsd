@@ -1,0 +1,30 @@
+@startuml
+title Postpaid Registration
+
+actor Customer as customer
+boundary FrontEnd as fe
+
+
+box Microservice #LightBlue
+participant "Activation" as msActivation
+end box
+participant ESB as esb
+
+customer -> fe ++: SIM Card Registration
+fe-> msActivation ++: GET Prepaid Registration\n/v1/prepaid-registration/seamless/initiate
+msActivation -> esb ++ : get profile
+esb --> msActivation -- : return data profile
+alt eligbile prepaid registration
+    msActivation -> msActivation : Create Orbit reference
+end
+msActivation --> fe --: return data
+alt isActive == true
+    fe -> customer : show page "MISDN Forwarding TUWL"
+else isActive == false
+    alt msisdnType == POSTPAID
+        fe -> customer : Journey Postpaid "WEC"
+    else msisdnType == PREPAID
+        fe -> customer --: show page "Prepaid Registration"
+    end
+end
+@enduml

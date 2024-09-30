@@ -1,0 +1,21 @@
+Method /GET
+Endpoint 
+    {{host}}/ms/delivery/private/delivery-packages
+REQ
+    Header
+    Content-Type:application/json 
+    //mime type
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "sku": "P-ZTE-K10-WHITE",
+        "name": "ORBIT STAR Z2",
+        "imei": "861555060540508",
+        "msisdn": "628231301121"
+    }
+}

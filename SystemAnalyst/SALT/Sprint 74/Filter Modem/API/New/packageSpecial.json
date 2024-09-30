@@ -1,0 +1,117 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/offer/v1/package-special
+
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key:{{API_KEY}}
+    channel:web
+    x-enc-msisdn: {{ENCRYPTED MSISDN BASED ON F5 MECHANISM}} 
+
+RESP
+{
+    "code": 200,
+    "data": [
+        {
+            "type": "SpecialForYou",
+            "id": "00050506",
+            "attributes": {
+                "name": "Orbit Deals",
+                "badge": {
+                    "key": "Reccomend 1",
+                    "icon": "",
+                    "label": ""
+                },
+                "validityDay": "30 Days",
+                "subcategory": "Home",
+                "subCategoryDesc": "ORBIT_HOME",
+                "terms": "<ol><li>Kuota data yang dapat digunakan untuk mengakses internet melalui jaringan 4G LTE<\/li><li>Kuota internet dapat digunakan 24 jam sehari<\/li><li>Kuota internet hanya bisa digunakan melalui perangkat modem Orbit<\/li><li>Kuota internet hanya bisa digunakan di lokasi tertentu yang masuk ke dalam jaringan Orbit<\/li><li>Kuota internet berlaku selama 7 hari<\/li><li>Harga termasuk PPN 11%<\/li><li>Untuk info lebih detail bisa diakses di link <a href=\"https:\/\/tsel.me\/hargapaketdata\">tsel.me\/hargapaketdata<\/a><\/li><\/ol>",
+                "detailDescription": "Paket Telkomsel Orbit berlaku 30 hari dengan kuota 10 GB",
+                "isHomePackage": true, // true | false based on home package from esb AttributeOffer.subCategoryDesc
+                "isPackageRenewal": false, // true | false based on api package renewal (one click)
+                "isFamilyQuota": false, // true | false based on ProductPackage.name
+                "packageFlagging": "NETFLIX",
+                "payment": [
+                    "BILING"
+                ],
+                "offerId": {
+                    "id": "00050565",
+                    "code": "ORB",
+                    "businessProduct": "Internet Orbit 10 GB",
+                    "businessProductId": "ML4_ORB_1112"
+                },
+                "offerIdPulsa": {
+                    "id": "00050565",
+                    "code": "ORB",
+                    "businessProduct": "Internet Orbit 10 GB",
+                    "businessProductId": "ML4_ORB_1112"
+                },
+                "price": {
+                    "price": 31000,
+                    "formattedPrice": "31.000",
+                    "currency": "Rp."
+                },
+                "priceStrikeThrough": { // null
+                    "price": 20000,
+                    "formattedPrice": "20.000",
+                    "currency": "Rp."
+                },
+                "quota": {
+                    "quota": "10",
+                    "unit": "GB",
+                    "formattedQuota": "10 GB"
+                },
+                "bonus": [ // for detail package in FE, data based on DetailPackage, if null then detail package in FE will empty (decision when day 0 with tower)
+                    {
+                        "isShow": true,
+                        "name":"Voice",
+                        "value": "5000 Menit",
+                        "icon": "https://s3-preprod.myorbit.id/ms/package-offer/voice.png",
+                    },
+                    {
+                        "isShow": true,
+                        "name":"SMS",
+                        "value": "500 SMS",
+                        "icon": "https://s3-preprod.myorbit.id/ms/package-offer/sms.png",
+                    },
+                    {
+                        "isShow": true,
+                        "name":"Masa Aktif",
+                        "value": "30 Hari",
+                        "icon": "https://s3-preprod.myorbit.id/ms/package-offer/masa-aktif.png",
+                    }
+                ],
+                "benefits": [
+                    {
+                        "isShow": true,
+                        "name": "Internet Orbit",
+                        "value": "160 GB",
+                        "icon": "https://s3-preprod.myorbit.id/ms/package-detail/default.png"
+                    },
+                    {
+                        "isShow": true,
+                        "name": "Telkomsel POIN",
+                        "value": "21 POIN",
+                        "icon": "https://s3-preprod.myorbit.id/ms/package-detail/telkomselPoin.png"
+                    },
+                    {
+                        "isShow": true,
+                        "name": "Masa Aktif",
+                        "value": "30 Days",
+                        "icon": "https://s3-preprod.myorbit.id/ms/package-detail/masaAktif.png"
+                    }
+                ],
+                "packageAddOnType": {
+                    "isEntertainment": false, // true | false based on ProductPackage.name, changes wording from entertainment to multimedia
+                    "basedOn": null
+                }
+            }
+        }
+    ],
+    "error_message": null,
+    "message": "Data found",
+    "status": true
+}

@@ -1,0 +1,64 @@
+Method /GET
+Endpoint 
+    {{host}}/ms/content/v1/blog-video?category={categories}
+REQ
+    Header
+        channel: {{CHANNEL}} //device
+        Content-Type:application/json
+        x-api-Key: {{API_KEY}}
+        x-localization: {{LANGUAGE}} //bahasa
+RESP
+category=new
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "videoKey": "_w8Tg6QhNIE",
+            "videoTitle": "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoSource": "https://www.youtube.com/watch?v=xPAmofeSiDY",
+            "videoDescription" : "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDate":"20 Juli 2022",
+            "topic" : ["Promo", "Internet"],
+            "channel": "myorbitid |10:46" 
+        },
+        {
+            "videoKey": "tIe915cYn4A",
+            "videoTitle": "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoSource": "https://www.youtube.com/watch?v=xPAmofeSiDY",
+            "videoDescription" : "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDate":"20 Juli 2022",
+            "topic" : ["Promo"],
+            "channel": "myorbitid |10:46" 
+        },
+    ]
+}
+category=other
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "videoKey": "_w8Tg6QhNIE",
+            "videoTitle": "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoSource": "https://www.youtube.com/watch?v=xPAmofeSiDY",
+            "videoDescription" : "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDate":"20 Juli 2022",
+            "topic" : ["Promo"],
+            "channel": "myorbitid|10:46" 
+        },
+        {
+            "videoKey": "tIe915cYn4A",
+            "videoTitle": "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoSource": "https://www.youtube.com/watch?v=xPAmofeSiDY",
+            "videoDescription" : "Telkomsel Orbit - Cara Aktivasi serta Penggunaan Fitur",
+            "videoDate":"20 Juli 2022",
+            "topic" : ["Promo"],
+            "channel": "myorbitid|10:46" 
+        }
+    ]
+}

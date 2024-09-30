@@ -1,0 +1,12 @@
+Domain {
+    Blog My Orbit  
+}
+
+Domain Service (Boundary COntext) {
+    Content
+}
+
+Entity {
+    1. Article
+    2. Video
+}

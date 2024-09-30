@@ -1,0 +1,35 @@
+WA dan SMS hal baru (b# (didapatkan dari update profile my orbit))
+Step 1
+
+Trigger {
+    1.SIM Expired ketika apa? Masa tenggang/aktif/expired (surrounding)
+    2. Promo ketika apa? Baru dibuat/masa atau kuota promo mau habis
+    3. Quota depleted itu apa?
+}
+
+response {
+    1. Quota Deplecated = Quota yang habis baru dikasih notif ke user
+    2. SIM Card Expired = base on masa aktif atau masa tenggang atau gabisa dipake
+    3. Promo / Campaign Orbit = 
+        a. WA -> blast lewat thirtd party pakai WA Bisnis Robocall (masih ditanyakan decission Tsel)
+        b. SMS Gateway b# -> bisa pakai nomer tsel dan non tsel 
+}
+
+
+Step 2 check existing {
+    email (sudah ada)
+    -> email (lupa tadi)
+        - Email masih ditanyakan ke product
+        - udah ditanyakan ke tim QA dan response nya 
+    -> APP (firebase)
+        1. didapatkan dari register/login my orbit dengan menggunakan email
+        2. didapatkan dari update profile my orbit (add email di profile orbit)
+        3. didapatkan dari pembelian modem Online Purchase saat user isi data diri
+}
+
+Step 3 Create sequence
+
+
+
+surrounding = sistem yang di telkomsel tapi diluar my orbit
+ 

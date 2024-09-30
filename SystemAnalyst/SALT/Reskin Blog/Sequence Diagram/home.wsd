@@ -1,0 +1,30 @@
+@startuml blog
+title "Blog My Orbit"
+actor "Actor" as C
+boundary "FE Web" as FE
+box "Microservices" #LightBlue
+participant "Content" as Content
+end box
+database "Pimcore" as DB
+
+
+C -> FE : open page "blog.myorbit.id"
+activate FE
+FE -> Content ++ :  list videos by category \nGET /ms/content/v1/blog-video?section{sections}\n& list article by category \nGET /ms/content/v1/blog-article?section{sections}
+Content -> DB ++ : get list data videos & article
+DB --> Content --: response data videos & articles
+Content --> FE -- : response data videos & articles 
+FE -> C : show data videos & articles
+@enduml
+
+C -> FE : open page "blog.myorbit.id"
+activate FE
+FE -> Content ++ :  list videos by category \nGET /ms/content/v1/blog-video?section{sections}
+Content -> DB ++ : get list data videos
+DB --> Content : response data videos
+Content --> FE -- : response data videos
+FE -> Content ++ :  list article by category \nGET /ms/content/v1/blog-article?section{sections}
+Content -> DB : get list data article
+DB --> Content --: response data articles
+Content --> FE -- : response data articles
+FE -> C --: show data videos & articles

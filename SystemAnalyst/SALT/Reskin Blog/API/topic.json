@@ -1,0 +1,22 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/content/v1/blog-topic?
+REQ
+    Header
+        Content-Type:application/json
+        x-localization: {{LANGUAGE}} //bahasa
+RESP
+
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "name": "produktivitas",
+            "slug": "produktivitas"
+        },
+    ]
+}

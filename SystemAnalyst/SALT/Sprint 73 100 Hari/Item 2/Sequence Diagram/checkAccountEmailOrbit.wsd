@@ -1,0 +1,23 @@
+@startuml show orbit number
+title Check Account By Email or Orbit Number
+
+actor "Customer" as customer
+boundary "Front End" as fe
+box Microservice #LightBlue
+participant "PersonalDevice" as msPersonalDevice
+database "DB\nPersonalDevice" as dbPersonalDevice
+end box
+
+customer -> fe ++ : Select the method "Orbit \nAccount" to see quota details
+fe -> customer : Show pop up \n"Enter Your Orbit Acount"
+customer -> fe: Fill orbit account using \nemail or phone number 
+group #LightGreen NEW
+fe -> msPersonalDevice ++ : Get data personal device \nGET v1/check-account/seamless
+end
+msPersonalDevice -> dbPersonalDevice ++: get data personal device \nby Orbit Account
+
+dbPersonalDevice --> msPersonalDevice --: return data personal device
+msPersonalDevice --> fe --: response
+fe -> customer -- : show data personal device
+
+@enduml

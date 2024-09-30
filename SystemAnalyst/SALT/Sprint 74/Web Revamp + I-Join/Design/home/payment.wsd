@@ -1,0 +1,27 @@
+@startuml Checkout
+title I Join - Advance Prepaid Regis Status
+
+actor customer as cust
+boundary "FE\nWEB" as web
+box Microcervices #LightBlue
+participant "Payment" as Payment
+participant "Activation" as Activation
+end box
+
+cust->web++: Customers payment order
+web -> Payment ++ : payment order process
+Payment --> web -- : response data
+group #LightGreen NEW
+    web->Activation++: GET Purchase Status\n/v1/prepaid-registration/purchase/status
+end
+Activation-->web--: response data
+web -> web : check flag Skip Activation
+alt if Skip Activation == true
+    web -> cust : show page "payment success"
+
+else if Skip Activation == false
+    web -> cust --: redirect to Prepaid Registration Flow
+
+end
+
+@enduml

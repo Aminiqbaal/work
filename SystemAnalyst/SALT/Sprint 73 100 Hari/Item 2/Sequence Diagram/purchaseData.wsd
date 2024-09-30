@@ -1,0 +1,39 @@
+@startuml
+title Purchasing Data Package
+
+boundary FrontEnd as fe
+
+box Infrastructure
+participant "Load Balancer" as nlb
+end box
+box Microservice #LightBlue
+participant "Personal Device" as pd
+participant "Subscription" as subs
+participant "Offer" as offer
+end box
+
+participant F5 as f5
+
+
+fe -> nlb ++: GET api.myorbit-nlb.id\n/ms/personal-device/v1/validation/seamless? \n//*contoh//
+nlb -> f5 ++: forward Request
+f5 -> f5 :  
+f5 -> pd ++: GET v1/validation/seamless
+note over pd
+    decrypt msisdn header, to extract the msisdn
+
+    generate signature key
+    generate encr_msisdn
+
+    //ref: /ms/personal-device/v1/validation/tuwl?//
+end note
+pd --> f5 --: return \nsignature key\nencrypted_msisdn (from MyOrbit)
+f5 --> nlb --: forward payload
+nlb --> fe --: return payload
+
+fe -> subs ++: GET api.myorbit-aws.id \n/v1/quota/seamless
+subs --> fe --: return data
+fe -> offer ++: GET api.myorbit-aws.id \n/v1/categories \n/v1/data-package/{ML}\nv1/package-special
+offer --> fe --: return data
+
+@enduml

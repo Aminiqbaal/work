@@ -1,0 +1,18 @@
+@startuml blog
+title "Articles Blog My Orbit"
+actor "Actor" as C
+boundary "FE Web" as FE
+box "Microservices" #LightBlue
+participant "Content" as Content
+end box
+database "Pimcore" as DB
+
+
+C -> FE : click some article on "blog.myorbit.id"
+activate FE
+FE -> Content ++ :  list article by category \nGET /ms/content/v1/blog-article?section{sections}
+Content -> DB ++ : get list data article
+DB --> Content --: response data articles
+Content --> FE -- : response data articles 
+FE -> C : show data articles
+@enduml

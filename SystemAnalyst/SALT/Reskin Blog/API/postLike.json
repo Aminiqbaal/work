@@ -1,0 +1,20 @@
+Method /POST
+
+Endpoint 
+    {{host}}/ms/content/v1/blog-postlike?
+REQ
+    Header
+        Content-Type:application/json
+        x-localization: {{LANGUAGE}} //bahasa
+    Body
+        idArticle = id
+        isLike = false
+
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data": null
+}

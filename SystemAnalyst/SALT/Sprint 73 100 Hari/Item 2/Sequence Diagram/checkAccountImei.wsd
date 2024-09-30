@@ -1,0 +1,20 @@
+@startuml show orbit number
+title Check Account By IMEI
+
+actor "Customer" as customer
+boundary "Front End" as fe
+box Microservice #LightBlue
+participant "Device" as msDevice
+database "DB\nDevice" as dbDevice
+end box
+
+
+customer -> fe ++ : Select the method "Enter modem \nIMEI number" to see quota details
+group #LightGreen NEW
+    fe -> msDevice ++ : Get data device \nGET v1/check-imei/seamless/{imei}
+end
+msDevice -> dbDevice ++: get data device by IMEI
+dbDevice --> msDevice --: return data device
+msDevice --> fe --: response
+fe -> customer -- : show data device
+@enduml

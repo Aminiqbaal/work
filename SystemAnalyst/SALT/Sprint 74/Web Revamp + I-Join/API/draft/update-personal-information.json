@@ -1,0 +1,25 @@
+Method /PUT
+Endpoint 
+    {{host}}/ms/new-delivey/v1/personal-information
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+RESP
+{
+    "status": true,
+    "code": "UPI01",
+    "errorMessage": null,
+    "message": "Data found",
+    "errorData": null,
+    "data": {
+        "cartUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+        "buyerInformation": {
+            "name": "asdasd",
+            "phoneNo": "0812312312312",
+            "email": "as@as.casd",
+        },
+        "addressDetail": "RT.2/RW.2, Karet Semanggi, Setiabudi, South Jakarta City, Jakarta 12930",
+        "courierNote": "Yang ada tulisan Rolex",
+    }
+}

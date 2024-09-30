@@ -1,0 +1,12 @@
+@startuml  case1
+
+system1 -> system2 ++ : Call system and get data
+activate system1
+system2 --> system1 -- : response data
+system1 -> system1 : process the data
+system1 -> system3 ++ : Call system
+system3 --> system1 -- : response ack
+deactivate system1
+system3 -> system1 : sent data (callback)
+
+@enduml

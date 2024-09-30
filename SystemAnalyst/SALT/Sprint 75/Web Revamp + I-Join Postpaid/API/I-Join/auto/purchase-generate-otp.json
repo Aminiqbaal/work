@@ -1,0 +1,19 @@
+Method /POST
+Endpoint
+    {{host}}/ms/activation/v1/postpaid-registration/purchase/generate-otp
+REQ    
+    Header
+    channel: web
+Body
+{
+    "orderUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c"
+}
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "Success",
+    "errorMessage": null,
+    "errorData": null,
+    "data": null
+}

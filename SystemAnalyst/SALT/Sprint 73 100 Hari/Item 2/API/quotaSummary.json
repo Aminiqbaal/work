@@ -1,0 +1,65 @@
+Method /GET buat dapat list quota di dashboard prabayar info
+
+Endpoint 
+    {{host}}/ms-subscription/v1/quota/summary/seamless
+REQ
+    Header
+        Content-Type:application/json
+        x-api-Key:{{API_KEY}}
+        //x-enc-msisdn: {{ENCRYPTED MSISDN BASED ON F5 MECHANISM}} ga di tampilin waktu pentest
+
+RESP
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "isQuotaExpired" : false,
+        "isQuotaDepleted" : false,
+        "quotas": [
+            {
+                "name": "Internet",
+                "remainingPercentage" : 50,
+            },
+            {
+                "name": "Multimedia",
+                "remainingPercentage" : 50,
+            }
+        ]
+    }
+}
+
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "isQuotaExpired" : false,
+        "isQuotaDepleted" : true,
+        "quotas": [
+            {
+                "name": "Multimedia",
+                "remainingPercentage" : 50,
+            }
+        ]
+    }
+}
+
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "isQuotaExpired" : true,
+        "isQuotaDepleted" : true,
+        "quotas": [
+            {
+                "name": "Multimedia",
+                "remainingPercentage" : 50,
+            }
+        ]
+    }
+}

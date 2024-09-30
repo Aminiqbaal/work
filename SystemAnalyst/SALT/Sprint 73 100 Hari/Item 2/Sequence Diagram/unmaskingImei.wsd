@@ -1,0 +1,25 @@
+@startuml show orbit number
+title Unmasking IMEI
+
+actor "Customer" as customer
+boundary "Front End" as fe
+box Microservice #LightBlue
+participant "Device" as msDevice
+end box
+box BAU #LightPink
+database "DB\nPimcore" as dbPimcore
+end box
+
+
+
+customer -> fe ++ : Click icon "eye" at Orbit Number
+group #LightGreen NEW
+fe -> msDevice ++ : Get device \nGET v1/unmasking-msisdn?imei={imei}
+end
+msDevice -> dbPimcore ++: query msisdn IMEI
+
+dbPimcore --> msDevice --: return query result
+msDevice --> fe --: response
+fe -> customer -- : show Orbit Number
+
+@enduml

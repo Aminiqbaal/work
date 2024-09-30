@@ -1,0 +1,110 @@
+Method /GET
+Endpoint 
+    {{host}}package-lumen/v1/package-categories/?lat={lat}&long={long} // hit endpoint ini ketika set modem dipasang
+    {{host}}package-lumen/v1/package-categories/
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "PPC00",
+    "message": true,
+    "errorMessage": null,
+    "data": [
+        {
+            "type": "ProductCategory",
+            "id": "1529544175",
+            "name": "Paket rumah",
+            "slug": "rumah",
+            "productSubcategory": [
+                {
+                    "name": "Orbit Prabayar",
+                    "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                    "products": [
+                        {
+                            "id": 1611271843,
+                            "itemType": "fantasix",
+                            "name": "fantasix 150GB",
+                            "description": "Bonus kuota Fantasix 150GB",
+                            "productType": "star",
+                            "icon": "FantaSix.jpg",
+                            "price": 300000, //can 0 == free
+                            "atributes": [
+                                {
+                                    "key": "description",
+                                    "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                    "value": "Paket bonus setiap pembelian Orbit Prabayar baru."
+                                },
+                                {
+                                    "key": "quotas",
+                                    "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                    "value": "Kuota 150GB - 200GB"
+                                },
+                                {
+                                    "key": "active-period",
+                                    "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                    "value": "Masa aktif 30 hari - 6 bulan"
+                                },
+                            ]
+                        },
+                    ]
+                }
+            ],
+        },
+        {
+            "type": "ProductCategory",
+            "id": "1529544448",
+            "name": "Bepergian",
+            "slug": "bepergian",
+            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-bepergian.png",
+            "products": [
+                {
+                    "id": 1611271843,
+                    "itemType": "fantasix",
+                    "icon": "FantaSix",
+                    "productType":"star",
+                    "price": {
+                        "price": 21000, //can 0 -> free 
+                        "formattedPrice": "21.000",
+                        "currency": "Rp."
+                    },
+                    "atributes": [
+                        {
+                            "title": "Pilihan Modem",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "9 modem"
+                        },
+                        {
+                            "title": "Kecepatan",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "15 Mbps"
+                        },
+                        {
+                            "title": "Multi Pengguna",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "32 Perangkat"
+                        },
+                    ],
+                    "feature": {
+                        "title": "Fitur",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "type": [
+                            {
+                                "color": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "label": "Basic"
+                            },
+                            {
+                                "color": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "label": "Full"
+                            }
+                        ]
+                    }
+                },
+            ]
+        }
+    ]
+}

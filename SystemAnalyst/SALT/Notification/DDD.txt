@@ -1,0 +1,16 @@
+Domain {
+    Notifications Orbit    
+}
+
+Domain Service (Boundary COntext) {
+    Notifications WA
+    Notifications SMS
+    Notifications APP
+    Notifications Email
+}
+
+Entity {
+    1. Quota Deplecated = Quota yang habis baru dikasih notif ke user
+    2. SIM Card Expired = base on masa aktif atau masa tenggang atau gabisa dipake
+    3. Promo / Campaign Orbit = admin bakal blast lewat thirtd party pakai WA Bisnis Robocall (masih ditanyakan decission Solution Architect Tsel) dan SMS via dashboard
+}

@@ -1,0 +1,56 @@
+Method /GET
+
+Endpoint 
+    {{host}}ms/config/v2/filter-modems
+
+REQ
+    Header
+    X-localization:{{LANGUAGE}}
+    Content-Type:application/json
+        
+RESP
+{
+    "status": true,
+    "code": "CON01",
+    "message": "Data Found",
+    "error_message": null,
+    "data": [
+        {
+            "filter_name": "Kuota Fantasix",
+            "is_single": true,
+            "data": [
+                {
+                    "name": "150GB",
+                    "value": "150GB"
+                },
+                {
+                    "name": "200GB",
+                    "value": "200GB"
+                }                
+            ]
+        },
+        {
+            "filter_name": "Multi Pengguna",
+            "is_single": true,
+            "data": [
+                {
+                    "name": "10 Perangkat",
+                    "value": "10"
+                },
+                {
+                    "name": "16 Perangkat",
+                    "value": "16"
+                },
+                {
+                    "name": "32 Perangkat",
+                    "value": "32"
+                },
+                {
+                    "name": "64 Perangkat",
+                    "value": "64"
+                }
+                
+            ]
+        }
+    ]
+}

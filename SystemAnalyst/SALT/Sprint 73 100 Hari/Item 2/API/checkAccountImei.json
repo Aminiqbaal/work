@@ -1,0 +1,19 @@
+Method /GET verifikasi imei untuk lihat detail kuota
+
+Endpoint 
+    {{host}}/ms-device/v1/check-imei/seamless/{imei}
+REQ
+    Header
+        Content-Type:application/json
+        x-api-Key:{{API_KEY}}
+        //x-enc-msisdn: {{ENCRYPTED MSISDN BASED ON F5 MECHANISM}} ga di tampilin waktu pentest
+RESP
+{
+    "status": true,
+    "code": 200,
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "isValid" : true
+    }
+}

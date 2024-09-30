@@ -1,0 +1,16 @@
+@startuml Checkout
+title Revamp Homepage
+
+actor customer as cust
+boundary "FE\nWEB" as fe
+box Microcervices #LightBlue
+participant "Content" as Content
+end box
+
+cust->fe--++: open menu "Paket"
+group #LightGreen NEW
+    fe -> Content ++: GET list data package \n/v1/data-packages-content
+end
+Content --> fe -- : response data
+fe -> cust --: show list data package
+@enduml

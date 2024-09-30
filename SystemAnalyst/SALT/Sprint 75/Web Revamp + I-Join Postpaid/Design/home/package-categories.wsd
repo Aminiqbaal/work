@@ -1,0 +1,20 @@
+@startuml Checkout
+title Revamp Homepage-Package Category
+
+actor customer as cust
+boundary "FE\nWEB" as fe
+box Microservices #LightBlue
+participant "Product" as Product
+
+
+cust->fe--++: open menu "Paket"
+alt Sub Category Type == prepaid
+    fe -> Product ++ : GET list package category\n/v1/package-categories?subCategoryType=prepaid
+else Sub Category Type == postpaid
+    fe -> Product : GET list package category\n/v1/package-categories?subCategoryType=postpaid&lat={lat}&long={long}
+end
+Product --> fe -- : response data
+fe -> cust --: show package category
+
+
+@enduml

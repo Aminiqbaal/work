@@ -1,0 +1,137 @@
+Method /GET //NEW
+Endpoint 
+//    product non filter
+{{host}}package-lumen/v1/products/{subCategory_id}
+//    process filter
+//    {{host}}package-lumen/v1/products/{subCategory_id}?filterSort={filterSort}&speedLevel={speedLevel}&connectedDevice={connectedDevice}&minPrice={minPrice}&maxPrice={maxPrice}
+   //Filter based on : 
+   // 1. promo (badges)
+   // 2. terlaris (soldAmount)
+   // 3. tebaru (isNew)
+   // 4. harga tertinggi (price)
+   // 5. harga terendah (price)
+   // 6. kecepatan tertinggi (package-> device)
+   // 7. Rating tertinggi (rating)
+   // 8. multi pengguna (package-> device)
+   // kisaran harga
+
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "200", //response body
+    "message": "Data found",
+    "errorMessage": null,
+    "data": {
+        "packageGroup": [
+            {
+                "id": 1611271843,
+                "itemType": "Fantasix",
+                "name": "FantaSix 150GB",
+                "productTypeName": "+ Modem Star",
+                "productType": "Star",
+                "content": [
+                    {},
+                    {
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "description": "Internetan sehari-hari praktis pakai sinyal Telkomsel",
+                    },
+                    {
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "description": "Bisa beli paket dengan pembayaran e-wallet",
+                    },
+                    {
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "description": "Bisa beli paket dengan pembayaran e-wallet",
+                    }
+                ],
+                "atributes": [
+                    {
+                        "key": "modem-amount",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "title": "Pilihan Modem",
+                        "value": "9 Modem"
+                    },
+                    {
+                        "key": "speed-level",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "title": "Kecepatan",
+                        "value": "15Mbps"
+                    },
+                    {
+                        "key": "multi-user",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "title": "Multi Pengguna",
+                        "value": "32 Perangkat"
+                    },
+                    {
+                        "key": "features",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "title": "Fitur",
+                        "value": [
+                            {
+                                "color": "0000",
+                                "label": "Basic"
+                            },
+                            {
+                                "color": "0000",
+                                "label": "Full"
+                            }
+                        ]
+                    }
+                ],
+                "package": [
+                    {
+                        "id": 1611271844,
+                        "itemType": "Package",
+                        "packageType": "MEIG-HKM0130-01-MK-KPK",
+                        "packageName": "Orbit Star G1",
+                        "productType": "Star",
+                        "atributes": [
+                            {
+                                "key": "speed-level",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "title": "Kecepatan",
+                                "value": "15Mbps"
+                            },
+                            {
+                                "key": "multi-user",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "title": "Multi Pengguna",
+                                "value": "32 Perangkat"
+                            },
+                            {
+                                "key": "features",
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "title": "Fitur",
+                                "value": {
+                                    "color": "0000",
+                                    "label": "Basic"
+                                },
+                            }
+                        ],
+                        "quota": {
+                            "fantasixId": 1611271843,
+                        },
+                        "price": {
+                            "price": 399000,
+                            "formattedPrice": "399.000",
+                            "currency": "Rp."
+                        },
+                        "priceStrikethrough": {
+                            "priceStrikethrough": 0,
+                            "formattedPriceStrikethrough": "0",
+                            "currency": "Rp."
+                        },
+                        "badges": [] //sort by promo
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+@startuml Checkout
+title Revamp Homepage
+
+actor customer as cust
+boundary "FE\nWEB" as fe
+box Microcervices #LightBlue
+participant "Config" as Config
+end box
+
+cust->fe++: click CTA "Filter"
+group #LightGreen NEW
+    fe -> Config ++ : GET menu filter\n/v1/filter-modems
+end
+Config --> fe -- : response data
+fe -> cust --: show menu filter
+@enduml

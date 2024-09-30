@@ -1,0 +1,172 @@
+Method /GET
+Endpoint 
+    {{host}}ms/device/private/filter-device?connectedDevice={connectedDevice}&feature={feature}&speed={speed}
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "FM00",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "devices": [
+            {
+                "slug": "rumah",
+                "deviceIcon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_1.png",
+                "name": "Orbit Star G1",
+                "title": "Spesifikasi Produk",
+                "description": "Modem Nirkabel memberi Anda akses ke Internet prabayar melalui jaringan seluler 4G Telkomsel. Orbit Star cocok untuk Anda dengan keluarga kecil agar dapat terhubung ke internet. Router harus terhubung ke sumber daya.",
+                "technicalSpesificationDocument": "https:\/\/s3.myorbit.id\/pimcore\/TechnicalSpesificationDocument\/Product Spesification - Orbit Star G1.pdf",
+                "length": 150,
+                "width": 115,
+                "height": 40,
+                "weight": 1000,
+                "specification": [
+                    {
+                        "deviceKey": "string",
+                        "deviceValue": "string",
+                        "showHomePage": "string"
+                    }
+                ],
+                "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front.png",
+                "images": [
+                    {
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_3.png",
+                        "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_4.png",
+                        "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - front_5.png"
+                    },
+                    {
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_2.png",
+                        "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_3.png",
+                        "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - side_4.png"
+                    },
+                    {
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear.png",
+                        "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear_1.png",
+                        "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Star G1 - rear_2.png"
+                    }
+                ],
+                "keyFeatures": [
+                    {
+                        "key": "speed-level",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "title": "Kecepatan",
+                        "value": "15Mbps"
+                    },
+                    {
+                        "key": "multi-user",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "title": "Multi Pengguna",
+                        "value": "32 Perangkat"
+                    },
+                    {
+                        "key": "features",
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                        "title": "Fitur",
+                        "value": {
+                            "color": "#0000",
+                            "label": "Basic"
+                        },
+                    }
+                ],
+                "configurationAppTitle": null,
+                "configurationApp": [
+                    {
+                        "id": 0,
+                        "title": "4G",
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/wifi_12.png",
+                        "showHomepage": false
+                    },
+                    {
+                        "id": 1,
+                        "title": "\u224815Mbps",
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Combined Shape_8.png",
+                        "showHomepage": false
+                    },
+                    {
+                        "id": 2,
+                        "title": "32 Pengguna",
+                        "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Max. Users_7.png",
+                        "showHomepage": false
+                    }
+                ],
+                "android": false,
+                "ios": false,
+                "is5GNetwork": false,
+                "mainFeatures": [
+                    {
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/Rata-rata Kecepatan_3.png",
+                        "feature": "<p>Rata-rata kecepatan modem hingga 15 Mbps<\/p>\n",
+                        "description": "<p>Kecepatan internet the real 4G LTE dengan kualitas terbaik milik Telkomsel.<\/p>\n"
+                    },
+                    {
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/wifi_13.png",
+                        "feature": "<p>Ganti nama &amp; password WiFi melalui aplikasi<\/p>\n",
+                        "description": "<p>Ubah nama &amp; password WiFi mudah langsung di aplikasi<\/p>\n"
+                    },
+                    {
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/statistic_9.png",
+                        "feature": "<p>Cek pemakaian paket data secara berkala<\/p>\n",
+                        "description": "<p>Lihat estimasi pemakaian paket data untuk setiap hari &amp; bulannya.<\/p>\n"
+                    },
+                    {
+                        "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-1_3.png",
+                        "feature": "<p>Lihat estimasi pemakaian paket data untuk setiap hari &amp; bulannya.<\/p>\n",
+                        "description": "<p>Pasang sendiri modem Orbit dengan mudah melalui panduan dari aplikasi.<\/p>\n"
+                    }
+                ],
+                "modemFeatures": [
+                    {
+                        "id": 1255213036,
+                        "title": "Atur Wifi",
+                        "alt": "Anda dapat mengatur nama & password WiFi di aplikasi MyOrbit",
+                        "key": "ATUR_WIFI",
+                        "status": true
+                    },
+                    {
+                        "id": 1255213129,
+                        "title": "Jadwal Pemakaian",
+                        "alt": "Anda dapat mengatur waktu akses internet untuk tiap pengguna WiFi",
+                        "key": "JADWAL_PEMAKAIAN",
+                        "status": false
+                    },
+                    {
+                        "id": 1255213192,
+                        "title": "Pemasangan Mudah",
+                        "alt": "Anda dapat memasang modem sendiri dengan panduan aplikasi",
+                        "key": "PEMASANGAN _MUDAH",
+                        "status": true
+                    },
+                    {
+                        "id": 1255213236,
+                        "title": "Statistik Penggunaan",
+                        "alt": "Lihat penggunaan paket data modem Anda untuk durasi waktu tertentu",
+                        "key": "STATISTIK_PENGGUNAAN",
+                        "status": true
+                    },
+                    {
+                        "id": 1255213321,
+                        "title": "Website Filtering",
+                        "alt": "Anda dapat membatasi akses situs tertentu untuk pengguna WiFi",
+                        "key": "WEBSITE_FILTERING",
+                        "status": false
+                    },
+                    {
+                        "id": 1255213337,
+                        "title": "WiFi Tamu",
+                        "alt": "Akses khusus untuk tamu yang ingin menggunakan WiFi rumah Anda",
+                        "key": "WIFI_TAMU",
+                        "status": false
+                    }
+                ]
+            },
+        ]
+        
+    }
+}

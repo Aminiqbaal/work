@@ -1,0 +1,48 @@
+@startuml
+set separator none
+package BringEasyOrbitregistrationWithoutLimitationNikNokk {
+    class Cart {
+        - POST /v1/add-product-to-cart
+        - POST /v1/check-money-guarantee-for-whole-cart
+        - POST /v1/change-cart-item
+        - POST /update-the-whole-cart
+    }
+    class Delivery{
+        - POST /v1/customer-get-deliveries
+        - POST /v1/set-delivery-option
+        - GET /v1/free-shipment
+    }
+    class Activation{
+        - GET v1/prepaid-registration/seamless/initiate
+    }
+    class Order {
+        - POST /v1/process-order
+        - POST /v1/add-promo
+        - POST /v1/delete-promo
+        - POST /v1/validate-promo-codes
+        - POST /v1/finalize-order
+        - POST /v1/apply-promos
+    }
+    class NewPromo {
+        - POST /v1/voucher-list-package
+        - POST /v1/voucher-list-order
+        - POST /v1/check-promo
+    }
+}
+package BuyAndAddFilterModem(MiniApp){
+    class Config {
+        - GET v1/filter-modems
+    }
+    class BAUPackageLumen {
+        - POST /v1/products/{category_id}
+    }
+    class msNewNotification{
+        - POST /private/notifications
+    }
+}
+' package TrackingStatus {
+'     class NewDelivery{
+'         - tracking-states
+'     }
+' }
+@enduml

@@ -1,0 +1,114 @@
+@startuml "I Join - Advance Postpaid Registration Autofill"
+
+title "I Join - Advance Postpaid Registration Autofill"
+
+actor Customer as cust
+boundary Website as web
+
+box Microservices #LightBlue
+participant Activation as msActivation
+database dbActivation as dbActivation
+end box
+
+box Legacy #LightPink
+participant "Old\nMS Device" as msDevice
+end box
+
+participant ESB as esb
+participant DPP as dpp
+database Redis as redis
+
+
+activate web
+
+== Generate OTP Advance Postpaid Regis Autofill ==
+group #LightGreen NEW
+    web -> msActivation ++: POST Request to Generate OTP\n/v1/postpaid-registration/purchase/generate-otp
+end
+note over msActivation
+    REQ:
+    - orderUUID
+end note
+msActivation->esb++:get cust profile by msisdn
+esb-->msActivation--:ack
+alt cust profile have NIK NOKK
+    msActivation->esb++: create otp
+    esb-->msActivation--: ack
+    msActivation->redis++:store cust profile
+    redis-->msActivation--:ack
+else ust profile haven't NIK NOKK
+    msActivation->esb!!: create otp
+end
+msActivation --> web --: return ack
+note over web
+    limit counter msisdn 10 times
+    check dari msisdn yang
+    digenerate di BE
+end note
+
+== Submit OTP Advance Postpaid Regis Autofill ==
+group #LightGreen NEW
+    web -> msActivation ++: POST submit OTP for Advance Potpaid Regis\n/v1/postpaid-registration/purchase/auto
+end
+note over msActivation
+    REQ:
+    - orderUUID
+    - msisdn
+end note
+msActivation -> esb++: validate otp
+msActivation->redis++:validate customer profile
+esb --> msActivation--: return data
+redis-->msActivation--: success
+msActivation --> web --: return response
+note over web
+    RESP:
+    - token
+    - masked name, nik, and nokk
+    - isEligibleOneBill
+end note
+
+
+== Submit Personal Consent ==
+group #LightGreen NEW
+    web -> msActivation ++: POST submit Consent \n/v1/postpaid-registration/purchase/submit-consent
+end
+
+alt IF isEligibleOneBill == true
+    note over msActivation
+        REQ:
+        - token
+        - isAllowSaveData
+        - isSubscribtion
+        - isAllowOneBill
+    end note
+else IF isEligibleOneBill == false
+    note over msActivation
+        REQ:
+        - token
+        - isAllowSaveData
+        - isSubscribtion
+    end note
+end
+group CHECK TOKEN VALIDITY
+    msActivation -> msActivation : decrypt Token from Web
+    msActivation->redis++: get NIK NOKK
+    note over redis
+        by <order_uuid>-<msisdn>
+    end note
+    redis-->msActivation--: return NIK NOKK
+    alt Not Found in Redis
+        msActivation --x web : Error Request Token Invalid
+    end
+end
+group INTEGRATE with DPP
+    msActivation -> dpp ++: Request Tokenize NIK NOKK
+    dpp --> msActivation --: return NIK NOKK Token
+    msActivation -> dbActivation ++: store Tokenized NIK NOKK
+    dbActivation -> msActivation --: return NIK NOKK Token
+end
+
+msActivation --> web --: response
+note over web
+    limit KTP untuk 3 kartu SIM Tsel
+end note
+@enduml

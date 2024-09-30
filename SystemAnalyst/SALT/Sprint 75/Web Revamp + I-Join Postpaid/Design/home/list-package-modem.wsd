@@ -1,0 +1,93 @@
+@startuml Get Package List with Filter
+title "Get Package List with Filter"
+
+actor Customer as cust
+
+boundary Web  as web
+
+
+
+box Microservice #LightBlue
+participant "Product" as msProduct
+participant Device as msDevice
+participant Order as msOrder
+end box
+box PHP #LightPink
+participant "BAU\nPackage" as bauPackage
+end box
+database Redis as redis
+
+
+cust -> web ++: Open Package Detail Page
+group #LightGreen NEW
+    web -> msProduct ++: /v1/list-package-modem/{subCategoryId}
+end
+note over msProduct
+    **FILTER IN PACKAGE DOMAIN:**
+    **subCategoryID: p123-PRO, ** // FANTASIX 150GB Orbit Pro //
+    **price,**
+
+    FILTER IN ORDER DOMAIN:
+    [SORTING] terlaris,
+
+    FILTER IN DEVICE DOMAIN:
+    homeMobility: HOME,
+    filterData {
+    connectedDevice: 32,
+    feture: basic
+    speed : 15Mbps
+    }
+end note
+'to get all order by last month
+group #LightGreen NEW
+    msProduct -> msOrder ++: GET Top Purchase Order\n/private/count-purchase
+end
+note over msOrder
+    ALL order for last month
+    Sort By AGG Count PackageID
+end note
+msOrder --> msProduct --: return arrayOfTopPurchasePackageIDs[]
+msProduct->redis++: caching order last month by PackageId every month and year
+redis-->msProduct--: return data
+' activate web
+' activate msProduct
+group #LightGreen NEW
+    msProduct -> bauPackage ++: GET all package by packageId \n/private/get-packages
+end
+note over bauPackage
+    get all the packages that
+    you want By PackageID
+end note
+bauPackage --> msProduct --: return arrayOfAllPacakgeIDs[]
+msProduct->redis++: caching packages by \npackageId every 1 day
+redis-->msProduct--: return data
+group #LightGreen NEW
+    msProduct -> msDevice ++: GET List deviceID by filter \n/private/filter?connectedDevice={connectedDevice}&features={features}
+end
+note over msDevice
+    connectedDevice: 32,
+    feature: basic
+    speed: 15Mbps
+end note
+msDevice --> msProduct --: return Array of deviceIDs[]
+
+
+loop for each deviceID in Response
+    msProduct -> msProduct : find all packages by deviceID
+    note over msProduct
+        cross check:
+        - arrayPackages[]
+        - arrayOfDeviceId[]
+    end note
+end
+
+msProduct --> web --: return all packages found
+
+== choose postpaid services ==
+...
+cust->web : click CTA "beli"
+group #LightGreen NEW
+    web->msProduct ++: GET postpaid services \n/v1/package-postpaid-services/{subCategoryId}
+end
+msProduct-->web--: return data
+@enduml

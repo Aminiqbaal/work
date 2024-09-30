@@ -1,0 +1,141 @@
+Method /POST //enhance
+Endpoint 
+    {{host}}/ms/new-delivery/v2/customer-get-deliveries
+REQ
+    Header
+    	channel: web
+    Body
+    {
+        "cartUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+        "latitude": "-7.5311779",
+        "longitude": "111.6034702",
+        "postalCode": "1128"
+    }
+RESP
+{
+    "status": true,
+    "code": "CGD000",
+    "message": "Success",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "deliveries": [
+            {
+                "uuid": "01c44f01-6105-470a-a70c-981e951c936c",
+                "products": [
+                    {
+                        "id": 1539608045,
+                        "product_type": "ZTE-MF920US-BLACK",
+                        "product_name": "Orbit MiFi Z1 Black",
+                        "image": "https://s3.myorbit.id/ms/device/1680669275811549767-Image.jpg",
+                        "price": {
+                            "price": 699000,
+                            "formattedPrice": "699.000",
+                            "currency": "Rp"
+                        },
+                        "priceStrikethrough": {
+                            "price": 729000,
+                            "formattedPrice": "729.000",
+                            "currency": "Rp"
+                        },
+                        "quotaDisplay": {
+                            "quota": 15,
+                            "unit": "GB"
+                        },
+                        "qty": 1,
+                        "sku": "P-ZTE-MF920US-BLACK",
+                        "item_type": "PACKAGE"
+                    }
+                ],
+                "origin": {
+                    "id": 1684,
+                    "type": "WAREHOUSE",
+                    "name": "MDS ONLINE",
+                    "province": "DKI JAKARTA",
+                    "city": "JAKARTA PUSAT",
+                    "district": "-",
+                    "subdistrict": "-",
+                    "address": "-"
+                },
+                "deliveryOptions": [
+                    {
+                        "shipmentServiceCategory": "Regular",
+                        "shipmentMethod": [
+                            {
+                                "isRecommended": false,
+                                "id": 7911,
+                                "name": "REG",
+                                "shipmentCode": "REG",
+                                "shipmentMethodCategory": "ANTERAJA",
+                                "image": "https://s3.myorbit.id/ms/delivery-shipment-method/1676432333158389878-ShipmentMethod.png",
+                                "shipmentCost": {
+                                    "cost": 23600,
+                                    "formattedcost": "23.600",
+                                    "currency": "Rp"
+                                },
+                                "discount": {
+                                    "cost": 23600,
+                                    "formattedcost": "23.600",
+                                    "currency": "Rp"
+                                },
+                                "insurance": {
+                                    "cost": 1400,
+                                    "formattedcost": "1.400",
+                                    "currency": "Rp"
+                                },
+                                "shipmentTotalCost": {
+                                    "cost": 1400,
+                                    "formattedcost": "1.400",
+                                    "currency": "Rp"
+                                },
+                                "grandTotal": {
+                                    "cost": 1400, //price product + shipmenetTotalCost
+                                    "formattedcost": "1.400",
+                                    "currency": "Rp"
+                                },
+                                "arrivalEstimation": {
+                                    "from": 2,
+                                    "to": 4,
+                                    "uom": "Day"
+                                }
+                            },
+                            {
+                                "isRecommended": false,
+                                "id": 7912,
+                                "name": "REG",
+                                "shipmentCode": "REG23",
+                                "shipmentMethodCategory": "JNE",
+                                "image": "https://s3.myorbit.id/ms/delivery-shipment-method/1676431972760612882-ShipmentMethod.png",
+                                "shipmentCost": {
+                                    "cost": 23000,
+                                    "formattedcost": "23.000",
+                                    "currency": "Rp"
+                                },
+                                "discount": {
+                                    "cost": 23000,
+                                    "formattedcost": "23.000",
+                                    "currency": "Rp"
+                                },
+                                "insurance": {
+                                    "cost": 1400,
+                                    "formattedcost": "1.400",
+                                    "currency": "Rp"
+                                },
+                                "shipmentTotalCost": {
+                                    "cost": 1400,
+                                    "formattedcost": "1.400",
+                                    "currency": "Rp"
+                                },
+                                "arrivalEstimation": {
+                                    "from": 3,
+                                    "to": 4,
+                                    "uom": "D"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

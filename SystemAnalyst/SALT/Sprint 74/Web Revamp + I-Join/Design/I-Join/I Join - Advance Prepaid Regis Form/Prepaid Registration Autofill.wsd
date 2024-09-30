@@ -1,0 +1,182 @@
+@startuml "I Join - Advance Prepaid Registration Autofill"
+
+title "I Join - Advance Prepaid Registration Autofill"
+
+actor Customer as cust
+boundary Website as web
+
+box Microservices #LightBlue
+participant Order as msOrder
+participant Delivery as msDelivery
+participant Activation as msActivation
+database "DB\nActivation" as dbActivation
+database Redis as redis
+queue "RabbitMQ" as rabbitMq
+end box
+
+box Legacy #LightPink
+participant "Old\nMS Device" as msDevice
+end box
+
+participant ESB as esb
+participant DPP as dpp
+
+
+activate web
+
+== 1. Generate OTP Advance Prepaid Regis Autofill ==
+group #LightGreen NEW
+    web -> msActivation ++: POST Request to Generate OTP\n/v1/prepaid-registration/purchase/generate-otp
+end
+note over msActivation
+    REQ:
+    - orderUUID
+end note
+msActivation->msOrder++: check data orderUUID
+msOrder->msActivation--: response data order by orderUUID
+note over msActivation
+    msisdn = **msisdn_buyer_information**
+    comes from order
+end note
+msActivation->esb++:get cust profile by msisdn
+esb-->msActivation--: return NIK NOKK
+alt cust profile has NIK NOKK
+    msActivation->esb++: create otp
+    esb-->msActivation--: ack
+    msActivation->redis++:store cust profile
+    note over redis
+        key: <order_uuid>-<msisdn>
+        value: nik, nok
+    end note
+    redis-->msActivation--:ack
+else Cust profile doesn't have NIK NOKK
+    msActivation->esb!!: create otp
+end
+
+
+msActivation --> web --: return ack
+
+
+
+
+
+
+
+== 2. Submit OTP Advance Prepaid Regis Autofill ==
+group #LightGreen NEW
+    web -> msActivation ++: POST submit OTP for Advance Prepaid Regis\n/v1/prepaid-registration/purchase/auto
+end
+note over msActivation
+    REQ:
+    - orderUUID
+    - otp
+end note
+msActivation -> dbActivation ++: get Activation \nby OrderUUI
+dbActivation --> msActivation --: return Activation Data
+note over msActivation
+    must only be One Row
+    and its status = CREATED
+end note
+alt Not Found in Activation OR Status NOT CREATED
+    msActivation --x web : Error Activation
+end
+msActivation -> esb++: validate otp
+esb --> msActivation--: return otp validation
+msActivation->redis++: get NIK NOKK
+note over redis
+    by <order_uuid>-<msisdn>
+end note
+redis-->msActivation--: return NIK NOKK
+msActivation -> msActivation : Generate Encyrpted Token
+note over msActivation
+    via existing IV Key Mechanism
+    <order_uuid>-<msisdn>
+end note
+msActivation --> web --: return response
+note over web
+    RESP:
+    - token
+    - masked name, nik, and nokk
+end note
+note over web
+    limit counter msisdn 10 times
+    check dari msisdn yang
+    digenerate di BE
+end note
+
+
+
+
+
+
+
+
+== 3. Submit Personal Consent ==
+group #LightGreen NEW
+    web -> msActivation ++: POST submit Consent \n/v1/prepaid-registration/purchase/submit-consent
+end
+note over msActivation
+    REQ:
+    - token
+    - isAllowSaveData
+    - orderUUID
+end note
+...
+group CHECK TOKEN VALIDITY
+    msActivation -> msActivation : decrypt Token from Web
+    msActivation->redis++: get NIK NOKK
+    note over redis
+        by <order_uuid>-<msisdn>
+    end note
+    redis-->msActivation--: return NIK NOKK
+    alt Not Found in Redis
+        msActivation --x web : Error Request Token Invalid
+    end
+end
+...
+group CHECK NON DUPLICATE REQUEST
+    msActivation -> dbActivation ++: Query Activation Exists Reservation
+    dbActivation --> msActivation --: return query
+    note over msActivation
+        must only be One Row
+        and its status = REFERENCE_MSISDN_VALIDATED
+    end note
+    alt Prepaid Activation is already Exist
+        msActivation --x web : Error Request Exists
+        note over web
+            Error Prepaid Registration Request
+            is already made
+        end note
+    end
+end
+...
+note over msActivation
+    Activation needs to check Delivery
+    to make sure Outbound Callback hasn't been made
+end note
+group #lightGreen NEW
+    msActivation -> msDelivery ++: GET delivery-packages\n/private/delivery-packages
+end
+note over msDelivery
+    By:
+    - orderUUID
+end note
+msDelivery --> msActivation --: return Delivery Detail
+
+alt #LightGray Delivery has device's MSISDN information
+    note over msActivation
+        Delivery already Outbound
+    end note
+    msActivation -> rabbitMq : PUBLISH \nRequest to Prepaid Regis
+else #White Delivery doesn't have NOT device's MSISDN information
+    group INTEGRATE with DPP
+        msActivation -> dpp ++: Request Tokenize NIK NOKK
+        dpp --> msActivation --: return NIK NOKK Token
+        msActivation -> dbActivation ++: store Tokenized NIK NOKK
+        dbActivation -> msActivation --: return NIK NOKK Token
+    end
+end
+
+msActivation --> web --: response
+
+@enduml

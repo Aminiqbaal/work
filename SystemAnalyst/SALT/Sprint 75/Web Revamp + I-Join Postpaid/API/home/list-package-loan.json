@@ -1,0 +1,117 @@
+Method /GET
+Endpoint 
+    {{host}}ms/product/v1/list-package-loan/{subCategoryId}
+REQ
+    Header
+    X-localization: {{LANGUAGE}}
+    Content-Type:application/json
+    x-api-Key: {{API_KEY}}
+    channel: {{CHANNEL}}
+RESP
+{
+    "status": true,
+    "code": "LPL01",
+    "message": true,
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "packageGroups": {
+            "id": "1611271844",
+            "name": "FantaSix 150GB",
+            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/fantasix-150-modem-star.png",
+            "description": "Bonus kuota FantaSix 25GB/6 bulan.",
+            "packages": [
+                {
+                    "id": "1611271844",
+                    "slug": "rumah",
+                    "isOutOfStock":false,
+                    "itemType": "Package",
+                    "category": "purchase",
+                    "packageType": "MEIG-HKM0130-01-MK-KPK",
+                    "packageName": "Orbit Star H2",
+                    "productType": "Star",
+                    "type": "postpaid",
+                    "images": [
+                        {
+                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image.png",
+                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-desktop.png",
+                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-mobile.png",
+                        }
+                    ],
+                    "keyFeatures": [
+                        {
+                            "key": "description",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Pembelian termasuk perangkat milik Anda sepenuhnya."
+                        },
+                        {
+                            "key": "detail",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Pemeliharaan perangkat ada di tangan Anda."
+                        },
+                        {
+                            "key": "cost",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Biaya berlangganan paket bulanan Halo orbit 150GB Rp 175.000."
+                        }
+                    ],
+                    "price": {
+                        "price": 1199000,
+                        "formattedPrice": "1.199.000",
+                        "currency": "Rp."
+                    },
+                    "priceStrikethrough": {
+                        "priceStrikethrough": 0,
+                        "formattedPriceStrikethrough": "0",
+                        "currency": "Rp."
+                    }
+                },
+                {
+                    "id": "1611271844",
+                    "slug": "rumah",
+                    "isOutOfStock":false,
+                    "itemType": "Package",
+                    "category": "rent",
+                    "packageType": "MEIG-HKM0130-01-MK-KPK",
+                    "packageName": "Orbit Star H2",
+                    "productType": "Star",
+                    "type": "postpaid",
+                    "images": [
+                        {
+                            "image": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image.png",
+                            "imageDesktop": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-desktop.png",
+                            "imageMobile": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/image-mobile.png",
+                        }
+                    ],
+                    "keyFeatures": [
+                        {
+                            "key": "description",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Penyewaan praktis dengan kontrak."
+                        },
+                        {
+                            "key": "detail",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Lebih hemat tinggal pakai tanpa pembelian di awal."
+                        },
+                        {
+                            "key": "cost",
+                            "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                            "value": "Biaya berlangganan paket bulanan Halo orbit 150GB Rp 200.000."
+                        }
+                    ],
+                    "price": {
+                        "price": 1000000,
+                        "formattedPrice": "1.000.000",
+                        "currency": "Rp."
+                    },
+                    "priceStrikethrough": {
+                        "priceStrikethrough": 0,
+                        "formattedPriceStrikethrough": "0",
+                        "currency": "Rp."
+                    }
+                },
+            ]
+        }
+    }
+}

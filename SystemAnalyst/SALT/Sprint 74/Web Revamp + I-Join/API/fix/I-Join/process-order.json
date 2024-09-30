@@ -1,0 +1,71 @@
+Method /POST
+Endpoint
+    {{host}}/ms/order/v2/process-order
+REQ
+    Header
+    channel: web
+    Body
+  {
+    "cartUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+    "buyerInformation": {
+      "name": "asdasd",
+      "phoneNo": "0812312312312",
+      "email": "as@as.casd",
+    },
+  }
+RESP
+{
+  "status": true,
+  "code": "success",
+  "message": "",
+  "errorMessage": null,
+  "data": {
+    "buyerInformation": {
+      "name": "asdasd",
+      "phoneNo": "0812312312312",
+      "email": "as@as.casd",
+    },
+    "canAddPromo": true,
+    "invoice": {
+      "orderUUID": "071eede1-d9d3-4252-b2a4-b1251c8cbb5c",
+      "orderID": 836,
+      "products": [
+        {
+          "packageName": "Orbit MiFi Z1 Black",
+          "quantity": 1,
+          "price": {
+            "price": 699000,
+            "formattedPrice": "699.000",
+            "currency": "Rp"
+          }
+        }
+      ],
+      "deliveries": [
+        {
+          "cost": {
+            "cost": 23600,
+            "formattedCost": "23.600",
+            "currency": "Rp"
+          },
+          "discount": {
+            "discount": 23600,
+            "formattedDiscount": "23.600",
+            "currency": "Rp"
+          },
+          "insurance": {
+            "insurance": 1400,
+            "formattedInsurance": "1.400",
+            "currency": "Rp"
+          }
+        }
+      ],
+      "grandTotal": {
+        "price": 700400,
+        "formattedPrice": "700.400",
+        "currency": "Rp"
+      },
+      "orderNumber": "237202090277333"
+    },
+    "promos": []
+  }
+}

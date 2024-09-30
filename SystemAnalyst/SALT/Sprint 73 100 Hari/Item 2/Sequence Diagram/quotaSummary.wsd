@@ -1,0 +1,24 @@
+@startuml show orbit number
+title Quota Summary
+
+actor "Customer" as customer
+boundary "Front End" as fe
+box Microservice #LightBlue
+participant "Subscription" as msSubscription
+database "DB\nSubscription" as dbSubscription
+end box
+
+
+
+
+customer -> fe ++ : Click menu quota at page \n"MSISDN Forwarding"
+group #LightGreen NEW
+fe -> msSubscription ++ : Get list quota \nGET v1/quota/summary/seamless
+end
+msSubscription -> dbSubscription ++: get list quota
+
+dbSubscription --> msSubscription --: return list quota
+msSubscription --> fe --: response
+fe -> customer -- : show list quota
+
+@enduml

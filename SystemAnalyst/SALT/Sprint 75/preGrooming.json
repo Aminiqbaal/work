@@ -1,0 +1,31 @@
+1. Notification ke myTsel -> cari trigger di existing kalau gaada nanti discuss ke Tower {(Mas Rifky)
+        Trigger Notifikasi{
+            Event depleted quota
+            Event remaining subscription mau habis
+            Event quota sharing, ada paket anggota yg mau habis
+            Event PAYU penggunaan di atas limit
+        }
+    }
+
+
+2. Buy and Add filter modem {
+    berdasarkan prabayar dan pascabayar, karena beli yang postpaid sudah bisa di online 
+    perlu cari list modem postpaid ada apa aja
+
+    
+    }
+
+3. Tracking {
+    ada di existing minta retest dari QA -> https://www.myorbit.id/lacak-pengiriman
+    }
+4. Auto apply voucher{
+    hanya untuk modem tertentu, gabisa buat all modem
+    }
+5. Bring Easy Orbit registration (without limitation NIK NOK) in purchase journey, plug & play after Orbit modem arrives, prepaid and postpaid, include HWA BYOD {
+    Registrasi saat pembelian modem, jadi pas udah sampe modemnya ditangan user bisa langsung dipake
+    endpoint 
+    1. 
+    }
+6. 	Notification Orbit via B# using SMS, and WA business by Robocall { (Mas Rifky)
+    masih nunggu robocallnya dari telkomsel udah ready atau belum
+    }

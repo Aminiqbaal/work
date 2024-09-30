@@ -1,0 +1,78 @@
+Method /GET //new
+Endpoint
+    {{host}}ms-content/v1/data-packages-content
+RESP
+{
+    "status": true,
+    "code": "DPS01",
+    "message": "Success",
+    "errorMessage": null,
+    "errorData": null,
+    "data": {
+        "productCategories": [
+            {
+                "id": "1529544175",
+                "name": "Paket rumah",
+                "slug": "rumah",
+                "products": [
+                    {
+                        "id": "1611271843",
+                        "subcategoryDesc": "orbit-deals",
+                        "name": "Orbit Deals",
+                        "atributes": [
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Paket bonus setiap pembelian Orbit Prabayar baru."
+                            },
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Masa aktif 30 hari - 6 bulan"
+                            },
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Kuota 150GB - 200GB"
+                            },
+                        ],
+                        "price": {
+                            "price": 21000, //can 0 -> free 
+                            "formattedPrice": "21.000",
+                            "currency": "Rp."
+                        },
+                    }
+                ]
+            },
+            {
+                "id": "1529544175",
+                "name": "Bepergian",
+                "slug": "bepergian",
+                "products": [
+                    {
+                        "id": 1611271843,
+                        "subcategoryDesc": "orbit-deals",
+                        "name": "Orbit Deals",
+                        "atributes": [
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Paket bonus setiap pembelian Orbit Prabayar baru."
+                            },
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Masa aktif 30 hari - 6 bulan"
+                            },
+                            {
+                                "icon": "https:\/\/s3-prod.myorbit.id\/pimcore\/_default_upload_bucket\/icon-dirumah.png",
+                                "description": "Kuota 150GB - 200GB"
+                            },
+                        ],
+                        "price": {
+                            "price": 21000, //can 0 -> free 
+                            "formattedPrice": "21.000",
+                            "currency": "Rp."
+                        },
+                    }
+                ]
+            }
+        ]
+    },
+    "pagination": null
+}

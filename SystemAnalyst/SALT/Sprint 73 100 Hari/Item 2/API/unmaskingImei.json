@@ -1,0 +1,20 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/device/v1/unmasking-msisdn?imei={imei}
+REQ
+    Header
+        Content-Type:application/json
+        x-api-Key:{{API_KEY}}
+        //x-enc-msisdn: {{ENCRYPTED MSISDN BASED ON F5 MECHANISM}} ga di tampilin waktu pentest
+    
+RESP
+{
+    "status": true,
+    "code": "200",
+    "message": "message.success",
+    "errorMessage": null,
+    "data": {
+        "msisdn": "6281381195512"
+    }
+}

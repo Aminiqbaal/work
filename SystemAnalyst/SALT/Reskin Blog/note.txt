@@ -1,0 +1,13 @@
+untuk like dan watch 
+    - disimpan di db
+    - gabisa di edit via pimcore
+
+
+url yang lama dialihkan ke yang baru
+
+
+sort by
+    1. Terbaru = createdAt
+    2. Terpilih = isSticky 
+    3. Trending = watch
+banner

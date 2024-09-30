@@ -1,0 +1,92 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/content/v1/blog-article?category{categories}
+
+REQ
+    Header
+        channel: {{CHANNEL}} //device
+        Content-Type:application/json
+        x-api-Key: {{API_KEY}}
+        x-localization: {{LANGUAGE}} //bahasa
+        
+    // Request Parameters:
+    //     - Topic : ["Promo", "Internet", "WiFi", "Paket Data", "Modem", "Aktivasi"]
+RESP
+
+category=banner
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "id": "1",
+            "images": "article1.jpg",
+            "topic" : ["Promo", "Internet"],
+            "content": "html",
+            "title": "Cara Foto Produk Makanan Aesthetic agar Jualan Laris",
+            "date": "25 August 2020",
+            "likeAmount": "48",
+            "watchAmount": "22003"
+        },
+    ]
+}
+
+category=terbaru
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "id": "1",
+            "images": "article1.jpg",
+            "topic" : ["Promo", "Internet"],
+            "title": "Cara Foto Produk Makanan Aesthetic agar Jualan Laris",
+            "date": "25 August 2020",
+            "likeAmount": "48",
+            "watchAmount": "22003" 
+        },
+    ]
+}
+
+category=trending
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "id": "1",
+            "images": "article1.jpg",
+            "topic" : ["Promo", "Internet"],
+            "title": "Cara Foto Produk Makanan Aesthetic agar Jualan Laris",
+            "date": "25 August 2020",
+            "likeAmount": "48",
+            "watchAmount": "22003" 
+        },
+    ]
+}
+
+category=terpilih
+{
+    "status": true,
+    "code": "200",
+    "message": "Data found",
+    "error_message": null,
+    "data":[
+        {
+            "id": "1",
+            "images": "article1.jpg",
+            "topic" : ["Promo", "Internet"],
+            "title": "Cara Foto Produk Makanan Aesthetic agar Jualan Laris",
+            "date": "25 August 2020",
+            "likeAmount": "48",
+            "watchAmount": "22003" 
+        },
+    ]
+}

@@ -1,0 +1,51 @@
+@startuml Checkout
+title Purchase Prepaid
+
+actor customer as cust
+boundary "FE\nWEB" as fe
+box MicroServices #LightBlue
+participant "Cart" as msCart
+participant "Config" as Config
+
+end box
+box BAU #LightPink
+participant "package-lumen" as Package
+end box
+
+cust->fe--++: open menu "Paket"
+group #LightGreen NEW
+    fe -> Package ++: GET list data package \n/v1/data-packages-content
+end
+Package --> fe -- : response data
+fe -> cust --: show list data package
+
+cust->fe--++: open menu "Paket"
+group #LightGreen NEW
+    fe -> Package ++ : GET list package category\n/v1/package-categories
+end
+Package --> fe -- : response data
+fe -> cust --: show package category
+
+cust->fe--++: open menu "Paket"
+group #LightGreen NEW
+fe -> Package ++ : GET package modem\n/v1/list-package-modem/{subCategoryId}
+end
+Package --> fe -- : response data
+fe -> cust --: show list package modem
+
+cust->fe--++: click CTA "Filter"
+group #LightGreen NEW
+fe -> Config ++ : GET menu filter\n/v1/filter-modems
+end
+Config --> fe -- : response data
+fe -> cust --: show menu filter
+
+cust->fe--++: choose one\nto get detail modem
+fe-> Package ++: GET detail modem\n/v5/product-categories/{category_id}
+Package-->fe--:response data
+fe -> cust --: show detail product
+cust->fe++: click CTA Pilih
+fe -> msCart ++: POST /v1/add-product-to-cart
+msCart --> fe--: return Cart
+fe->cust--: Journey I-Join
+    @enduml

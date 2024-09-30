@@ -1,0 +1,60 @@
+Method /GET
+
+Endpoint 
+    {{host}}/ms/personal-device/v1/validation/seamless
+REQ
+    Header
+        x-signature-key: {{SIGNATURE_KEY}}
+        x-api-Key: {{API_KEY}}
+RESP
+//listquota
+{
+        "status": true,
+        "code": "MVS04",
+        "message": null,
+        "error_message": "Number is postpaid",
+        "errorData": {
+            "errorTitle": "Nomor Anda Postpaid",
+            "errorDesc": "Silahkan ganti modem anda"
+        },
+        "data": null
+}
+
+
+//success
+{
+    "status": true,
+    "code": "MVS01",
+    "message": "Data found",
+    "error_message": null,
+    "errorData": null,
+    "data": {
+       "type": "MemberDevice",
+       "id": 1351343043,
+       "attributes": {
+          "is_eligible_home": true,
+          "ssid": "", //add
+          "name": "te**",
+          "msisdn": "081234567890",
+          "is_member": true
+       }
+    }
+ }
+// havent account
+ {
+    "status": true,
+    "code": "MVS08",
+    "message": "Data found",
+    "error_message": null,
+    "errorData": null,
+    "data": {
+       "type": "MemberDevice",
+       "id": null,
+       "attributes": {
+          "is_eligible_home": false,
+          "name": null,
+          "msisdn": "************345",
+          "is_member": false
+       }
+    }
+ }
