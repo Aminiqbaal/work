@@ -1,0 +1,200 @@
+<mxfile host="65bd71144e">
+    <diagram id="DLAeuiqvXSNl_rrN7Gbu" name="Page-1">
+        <mxGraphModel dx="731" dy="1132" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;div&gt;PO-STO&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="930" y="600" width="1150" height="1140" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;SCM Transportasi Laut&lt;/span&gt;" style="swimlane;whiteSpace=wrap;html=1;" parent="2" vertex="1">
+                    <mxGeometry y="24" width="460" height="1116" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="edgeStyle=none;html=1;" parent="3" source="5" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="243" y="129" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="5" value="Start" style="ellipse;whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry x="229" y="60" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="edgeStyle=none;html=1;" parent="3" source="7" target="8" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="243" y="260" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="Create Laycan" style="whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry x="229" y="169" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Data Laycan&lt;/span&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="3" vertex="1">
+                    <mxGeometry x="229" y="256" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Data Laycan&amp;nbsp;&lt;div&gt;Update&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="3" vertex="1">
+                    <mxGeometry x="229" y="586" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Update Data" style="whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry x="230.5" y="486" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Data Laycan&amp;nbsp;&lt;div&gt;Revise&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="3" vertex="1">
+                    <mxGeometry x="230.5" y="392" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=none;html=1;" parent="3" source="10" target="9" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="edgeStyle=none;html=1;" parent="3" source="11" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" style="edgeStyle=none;html=1;" parent="3" source="16" target="32" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="438" y="959" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Entry Ekspeditur&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry x="229" y="779.0000000000002" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" style="edgeStyle=none;html=1;" parent="3" source="32" target="33" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="34" vertex="1" connectable="0">
+                    <mxGeometry x="-0.1997" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="68" value="No" style="edgeStyle=none;html=1;" parent="3" source="32" target="67" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="Is there&lt;div&gt;a PO?&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry x="249" y="879" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="SPM Ekspeditur" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="3" vertex="1">
+                    <mxGeometry x="230.5" y="1009" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" style="edgeStyle=none;html=1;" parent="3" source="67" target="69" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="Assign PO" style="rounded=0;whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry x="63.00000000000023" y="889" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="72" style="edgeStyle=none;html=1;" parent="3" source="69" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="37" y="1029"/>
+                            <mxPoint x="37" y="809"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="69" value="Data Laycan PO" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="3" vertex="1">
+                    <mxGeometry x="63" y="999" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" style="edgeStyle=none;html=1;" parent="3" source="85" target="16" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="85" value="Data Laycan Approved" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="3" vertex="1">
+                    <mxGeometry x="230.5" y="686" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=none;html=1;" parent="2" source="24" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="27" vertex="1" connectable="0">
+                    <mxGeometry x="-0.2472" y="-1" relative="1" as="geometry">
+                        <mxPoint x="43" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" style="edgeStyle=none;html=1;" parent="2" source="9" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="140" y="640"/>
+                            <mxPoint x="140" y="360"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="BUP" style="swimlane;whiteSpace=wrap;html=1;" parent="2" vertex="1">
+                    <mxGeometry x="460" y="24" width="255" height="1116" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" style="edgeStyle=none;html=1;" parent="17" source="19" target="21" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Data Laycan" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="17" vertex="1">
+                    <mxGeometry x="40" y="196" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="edgeStyle=none;html=1;" parent="17" source="21" target="24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Approve Laycan" style="rounded=0;whiteSpace=wrap;html=1;" parent="17" vertex="1">
+                    <mxGeometry x="40" y="302" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" style="edgeStyle=none;html=1;" parent="17" source="24" target="25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="22" vertex="1" connectable="0">
+                    <mxGeometry x="-0.2233" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="is Approve?" style="rhombus;whiteSpace=wrap;html=1;rounded=0;" parent="17" vertex="1">
+                    <mxGeometry x="60" y="381" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Data Laycan Approved" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="17" vertex="1">
+                    <mxGeometry x="40" y="508" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="Agen" style="swimlane;whiteSpace=wrap;html=1;" parent="2" vertex="1">
+                    <mxGeometry x="715" y="24" width="235" height="1116" as="geometry"/>
+                </mxCell>
+                <mxCell id="73" style="edgeStyle=none;html=1;" parent="31" source="74" target="76" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="Data Laycan Approved" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="31" vertex="1">
+                    <mxGeometry x="75" y="508" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="75" style="edgeStyle=none;html=1;" parent="31" source="76" target="78" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="Update PKKB" style="rounded=0;whiteSpace=wrap;html=1;" parent="31" vertex="1">
+                    <mxGeometry x="75" y="607" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="78" value="PKKB" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="31" vertex="1">
+                    <mxGeometry x="75" y="707" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" style="edgeStyle=none;html=1;" parent="2" source="8" target="19" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="430" y="310"/>
+                            <mxPoint x="430" y="250"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="84" style="edgeStyle=none;html=1;" parent="2" source="25" target="74" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" style="edgeStyle=none;html=1;" parent="2" source="25" target="85" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="560" y="740"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="88" value="Menara" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="2">
+                    <mxGeometry x="950" y="24" width="200" height="1116" as="geometry"/>
+                </mxCell>
+                <mxCell id="82" value="End" style="ellipse;whiteSpace=wrap;html=1;" parent="88" vertex="1">
+                    <mxGeometry x="40" y="897" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="81" value="ATA/NOR" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="88" vertex="1">
+                    <mxGeometry x="40" y="807" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" value="Update ATA/NOR" style="whiteSpace=wrap;html=1;" parent="88" vertex="1">
+                    <mxGeometry x="40" y="707" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="83" style="edgeStyle=none;html=1;" parent="88" source="81" target="82" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="79" style="edgeStyle=none;html=1;" parent="88" source="80" target="81" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="77" value="" style="edgeStyle=none;html=1;" parent="2" source="78" target="80" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

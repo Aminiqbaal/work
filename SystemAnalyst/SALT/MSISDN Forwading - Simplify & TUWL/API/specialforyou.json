@@ -12,7 +12,7 @@ RESP
   "status": true,
   "code": "",
   "message": "Data Found",
-  "error_message": null,
+  "errorMessage": null,
   "data": [
       {
           "type": "PackageOffers",
